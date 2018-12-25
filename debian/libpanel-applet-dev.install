@@ -1,0 +1,3 @@
+usr/include
+usr/lib/libpanel-applet*.so
+usr/lib/*/pkgconfig
