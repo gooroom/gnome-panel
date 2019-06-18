@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Migrating LibBonobo menus to GAction: Panel Applet Reference Manual</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<link rel="home" href="index.html" title="Panel Applet Reference Manual">
+<link rel="up" href="port-gnome2.dbus.html" title="Porting to a D-Bus-based Applet">
+<link rel="prev" href="port-gnome2.dbus.remove-libbonobo-factory.html" title="Removing LibBonobo factory">
+<link rel="next" href="ch10.html" title="Porting Applets from Panel Applet Library 4.0">
+<meta name="generator" content="GTK-Doc V1.28.1 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts"></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="port-gnome2.dbus.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="port-gnome2.dbus.remove-libbonobo-factory.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="ch10.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="port-gnome2.dbus.migrate-menus-to-gaction"></a>Migrating LibBonobo menus to GAction</h2></div></div></div>
+<p>
+                During GNOME 2 days the context menu of the applet was based on the <code class="constant">BonoboUiVerb</code>
+                class. These old menu verb definitions have been removed and should be replaced by
+                the <span class="type">GAction</span> interface family of objects.
+
+                </p>
+<div class="note"><p>
+                        Previous versions of this migration guide suggested to migrate to the family of
+                        <span class="type">GtkActionGroup</span> classes. Since Gtk+ 3.10 these are deprecated and with the
+                        change of the Panel Applet Library API to version 5.0 the <code class="function">panel_applet_setup_menu</code>
+                        family of functions now accept the <span class="type">GActionGroup</span> interface and its related classes.
+                    </p></div>
+<p>
+            </p>
+
+            If the applet that is being ports had a context menu then it should contain code that looks similar to the
+            following listing:
+
+            <div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">static</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="usertype">BonoboUIVerb</span><span class="normal"> show_desktop_menu_verbs </span><span class="symbol">[]</span><span class="normal"> </span><span class="symbol">=</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">    </span><span class="function">BONOBO_UI_UNSAFE_VERB</span><span class="normal"> </span><span class="symbol">(</span><span class="string">"ShowDesktopPreferences"</span><span class="symbol">,</span><span class="normal"> display_preferences_dialog</span><span class="symbol">),</span>
+<span class="normal">    </span><span class="function">BONOBO_UI_UNSAFE_VERB</span><span class="normal"> </span><span class="symbol">(</span><span class="string">"ShowDesktopAbout"</span><span class="symbol">,</span><span class="normal">       display_about_dialog</span><span class="symbol">),</span>
+<span class="normal">    BONOBO_UI_VERB_END</span>
+<span class="cbracket">}</span><span class="symbol">;</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+            The new code instead looks like this:
+
+            <div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">static</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="usertype">GActionEntry</span><span class="normal"> menu_actions</span><span class="symbol">[]</span><span class="normal"> </span><span class="symbol">=</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">    </span><span class="cbracket">{</span><span class="normal"> </span><span class="string">"preferences"</span><span class="symbol">,</span><span class="normal"> display_preferences_dialog </span><span class="cbracket">}</span><span class="symbol">,</span>
+<span class="normal">    </span><span class="cbracket">{</span><span class="normal"> </span><span class="string">"about"</span><span class="symbol">,</span><span class="normal">       display_about_dialog </span><span class="cbracket">}</span>
+<span class="cbracket">}</span><span class="symbol">;</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+            This change also means that the callbacks must be changed to match the GAction API:
+
+            Old callback looked like this:
+            <div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
+<span class="function">display_preferences_dialog</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">BonoboUIComponent</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">uic</span><span class="symbol">,</span>
+<span class="normal">                            </span><span class="usertype">gpointer</span><span class="normal">          </span><span class="symbol">*</span><span class="normal">user_data</span><span class="symbol">,</span>
+<span class="normal">                            </span><span class="keyword">const</span><span class="normal"> </span><span class="usertype">gchar</span><span class="normal">       </span><span class="symbol">*</span><span class="normal">verbname</span><span class="symbol">)</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+            The new version should have the following signature:
+            <div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
+<span class="function">display_preferences_dialog</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">GSimpleAction</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">action</span><span class="symbol">,</span>
+<span class="normal">                            </span><span class="usertype">GVariant</span><span class="normal">      </span><span class="symbol">*</span><span class="normal">parameter</span><span class="symbol">,</span>
+<span class="normal">                            </span><span class="usertype">gpointer</span><span class="normal">       user_data</span><span class="symbol">)</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+                Additionally you should use GtkBuilder to define a GMenuModel in XML and use the
+                <code class="function">panel_applet_setup_menu</code> family of functions to setup the menu. See
+                <a class="link" href="getting-started.context-menu.html" title="Using a Context Menu">Using a context menu</a> for more details.
+                For more information about using the GMenu and GAction APIs please refer to the GIO Reference
+                Manual.
+            </p>
+</div>
+<div class="footer">
+<hr>Generated by GTK-Doc V1.28.1</div>
+</body>
+</html>

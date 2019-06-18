@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/gnome/gnome-panel/theme">
+    <file alias="Adwaita/gnome-panel.css">../data/theme/Adwaita/gnome-panel.css</file>
+    <file alias="Adwaita/gnome-panel-dark.css">../data/theme/Adwaita/gnome-panel-dark.css</file>
+    <file alias="HighContrast/gnome-panel.css">../data/theme/HighContrast/gnome-panel.css</file>
+    <file alias="HighContrast/gnome-panel-dark.css">../data/theme/HighContrast/gnome-panel-dark.css</file>
+    <file alias="common.css">../data/theme/common.css</file>
+    <file alias="fallback.css">../data/theme/fallback.css</file>
+  </gresource>
+  <gresource prefix="/org/gnome/panel">
+    <file compressed="true">gp-properties-dialog.ui</file>
+    <file compressed="true">panel-addto-dialog.ui</file>
+    <file compressed="true">panel-run-dialog.ui</file>
+  </gresource>
+</gresources>

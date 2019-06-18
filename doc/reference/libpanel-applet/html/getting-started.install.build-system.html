@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Build system: Panel Applet Reference Manual</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<link rel="home" href="index.html" title="Panel Applet Reference Manual">
+<link rel="up" href="getting-started.install.html" title="Applet Registration, Installation and Build System">
+<link rel="prev" href="getting-started.in-out-process.html" title="Out-of-Process vs In-Process">
+<link rel="next" href="getting-started.integration.html" title="Proper Integration with the Panel">
+<meta name="generator" content="GTK-Doc V1.28.1 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts"></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="getting-started.install.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="getting-started.in-out-process.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="getting-started.integration.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="getting-started.install.build-system"></a>Build system</h2></div></div></div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="id-1.3.7.7.2"></a>Configure</h3></div></div></div>
+<p>
+                   In <code class="constant">configure.ac</code> a variable should be defined that contains the location
+                   where the .panel-applet files are installed.
+
+                   You can fetch this directory during <code class="constant">configure</code> with the following code:
+               </p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal">LIBPANEL_APPLET_DIR</span><span class="symbol">=</span><span class="normal">`$PKG_CONFIG </span><span class="symbol">--</span><span class="normal">variable</span><span class="symbol">=</span><span class="usertype">libpanel_applet_dir</span><span class="normal"> libpanel</span><span class="symbol">-</span><span class="normal">applet`</span>
+<span class="function">AC_SUBST</span><span class="symbol">(</span><span class="normal">LIBPANEL_APPLET_DIR</span><span class="symbol">)</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="id-1.3.7.7.3"></a>Makefiles</h3></div></div></div>
+
+               A typical Makefile for that is used to build and install an applet contains the following declarations:
+               <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem"><p>A rule to install the <code class="constant">.panel-applet</code> file.</p></li>
+<li class="listitem"><p>A rule to install the D-Bus service file if the applet is an out process applet.</p></li>
+<li class="listitem"><p>The <code class="constant">.panel-applet</code> file and the D-Bus <code class="constant">.service</code> file
+                       are added to EXTRA_DIST and CLEANFILES.</p></li>
+</ul></div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="id-1.3.7.7.3.3"></a>Installing the Panel Applet File</h4></div></div></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal">appletdir       </span><span class="symbol">=</span><span class="normal"> $</span><span class="symbol">(</span><span class="normal">LIBPANEL_APPLET_DIR</span><span class="symbol">)</span>
+<span class="normal">applet_in_files </span><span class="symbol">=</span><span class="normal"> org</span><span class="symbol">.</span><span class="normal">gnome</span><span class="symbol">.</span><span class="normal">HelloWorld</span><span class="symbol">.</span><span class="normal">panel</span><span class="symbol">-</span><span class="normal">applet</span><span class="symbol">.</span><span class="normal">in</span>
+<span class="normal">applet_DATA     </span><span class="symbol">=</span><span class="normal"> $</span><span class="symbol">(</span><span class="normal">applet_in_files</span><span class="symbol">:.</span><span class="normal">panel</span><span class="symbol">-</span><span class="normal">applet</span><span class="symbol">.</span><span class="normal">in</span><span class="symbol">=.</span><span class="normal">panel</span><span class="symbol">-</span><span class="normal">applet</span><span class="symbol">)</span>
+
+<span class="normal">$</span><span class="symbol">(</span><span class="normal">applet_in_files</span><span class="symbol">):</span><span class="normal"> $</span><span class="symbol">(</span><span class="normal">applet_in_files</span><span class="symbol">).</span><span class="normal">in Makefile</span>
+<span class="normal">    $</span><span class="symbol">(</span><span class="normal">AM_V_GEN</span><span class="symbol">)</span><span class="normal">sed </span><span class="symbol">\</span>
+<span class="normal">    </span><span class="symbol">-</span><span class="normal">e </span><span class="string">"s|</span><span class="specialchar">\@</span><span class="string">LIBEXECDIR</span><span class="specialchar">\@</span><span class="string">|$(libexecdir)|"</span><span class="normal"> </span><span class="symbol">\</span>
+<span class="normal">    </span><span class="symbol">-</span><span class="normal">e </span><span class="string">"s|</span><span class="specialchar">\@</span><span class="string">VERSION</span><span class="specialchar">\@</span><span class="string">|$(PACKAGE_VERSION)|"</span><span class="normal"> </span><span class="symbol">\</span>
+<span class="normal">    $</span><span class="symbol">&lt;</span><span class="normal"> </span><span class="symbol">&gt;</span><span class="normal"> $@</span>
+
+<span class="symbol">%.</span><span class="normal">panel</span><span class="symbol">-</span><span class="normal">applet</span><span class="symbol">:</span><span class="normal"> </span><span class="symbol">%.</span><span class="normal">panel</span><span class="symbol">-</span><span class="normal">applet</span><span class="symbol">.</span><span class="normal">in </span><span class="symbol">\</span>
+<span class="normal">                $</span><span class="symbol">(</span><span class="normal">INTLTOOL_MERGE</span><span class="symbol">)</span><span class="normal"> $</span><span class="symbol">(</span><span class="normal">wildcard $</span><span class="symbol">(</span><span class="normal">top_srcdir</span><span class="symbol">)/</span><span class="normal">po</span><span class="comment">/*po) ; \</span>
+<span class="comment">                $(INTLTOOL_MERGE) $(top_srcdir)/po $&lt; $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="id-1.3.7.7.3.4"></a>Installing the D-Bus service file</h4></div></div></div>
+<p>To install the service file the following rule can be placed in the applets Makefile:</p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal">servicedir       </span><span class="symbol">=</span><span class="normal"> $</span><span class="symbol">(</span><span class="normal">datadir</span><span class="symbol">)/</span><span class="normal">dbus</span><span class="symbol">-</span><span class="number">1</span><span class="symbol">/</span><span class="normal">services</span>
+<span class="normal">service_in_files </span><span class="symbol">=</span><span class="normal"> org</span><span class="symbol">.</span><span class="normal">gnome</span><span class="symbol">.</span><span class="normal">panel</span><span class="symbol">.</span><span class="normal">applet</span><span class="symbol">.</span><span class="normal">HelloWorldFactory</span><span class="symbol">.</span><span class="normal">service</span><span class="symbol">.</span><span class="normal">in</span>
+<span class="normal">service_DATA     </span><span class="symbol">=</span><span class="normal"> $</span><span class="symbol">(</span><span class="normal">service_in_files</span><span class="symbol">:.</span><span class="normal">service</span><span class="symbol">.</span><span class="normal">in</span><span class="symbol">=.</span><span class="normal">service</span><span class="symbol">)</span>
+
+<span class="normal">org</span><span class="symbol">.</span><span class="normal">gnome</span><span class="symbol">.</span><span class="normal">panel</span><span class="symbol">.</span><span class="normal">applet</span><span class="symbol">.</span><span class="normal">HelloWorldFactory</span><span class="symbol">.</span><span class="normal">service</span><span class="symbol">:</span><span class="normal"> $</span><span class="symbol">(</span><span class="normal">service_in_files</span><span class="symbol">)</span>
+<span class="normal">    $</span><span class="symbol">(</span><span class="normal">AM_V_GEN</span><span class="symbol">)</span><span class="normal"> sed </span><span class="symbol">-</span><span class="normal">e </span><span class="string">"s|</span><span class="specialchar">\@</span><span class="string">LOCATION</span><span class="specialchar">\@</span><span class="string">|$(APPLET_LOCATION)|"</span><span class="normal"> $</span><span class="symbol">&lt;</span><span class="normal"> </span><span class="symbol">&gt;</span><span class="normal"> $@</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+<div class="sect3">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="id-1.3.7.7.3.5"></a>Distribution and Cleanup</h4></div></div></div>
+<p>Add panel-applet .in.in and service file to EXTRA_DIST and $(applet_DATA) $(applet_DATA).in to CLEANFILES</p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal">EXTRA_DIST </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">\</span>
+<span class="normal">    GNOME_MixerApplet</span><span class="symbol">.</span><span class="normal">panel</span><span class="symbol">-</span><span class="normal">applet</span><span class="symbol">.</span><span class="normal">in</span><span class="symbol">.</span><span class="normal">in </span><span class="symbol">\</span>
+<span class="normal">    $</span><span class="symbol">(</span><span class="normal">service_in_files</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">\</span>
+<span class="normal">    $</span><span class="symbol">(</span><span class="normal">ui_DATA</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">\</span>
+<span class="normal">    $</span><span class="symbol">(</span><span class="normal">schemas_in_files</span><span class="symbol">)</span>
+
+<span class="normal">CLEANFILES </span><span class="symbol">=</span><span class="normal"> $</span><span class="symbol">(</span><span class="normal">applet_DATA</span><span class="symbol">)</span><span class="normal"> $</span><span class="symbol">(</span><span class="normal">applet_DATA</span><span class="symbol">).</span><span class="normal">in $</span><span class="symbol">(</span><span class="normal">service_DATA</span><span class="symbol">)</span><span class="normal"> $</span><span class="symbol">(</span><span class="normal">schemas_DATA</span><span class="symbol">)</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>Generated by GTK-Doc V1.28.1</div>
+</body>
+</html>

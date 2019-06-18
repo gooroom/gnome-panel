@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<book xmlns="http://www.devhelp.net/book" title="Panel Applet Reference Manual" link="index.html" author="" name="libpanel-applet" version="2" language="c" online="https://developer.gnome.org/libpanel-applet/unstable/">
+  <chapters>
+    <sub name="Panel Applet Library Overview" link="overview.html"/>
+    <sub name="Getting Started with the Panel Applet library" link="getting-started.html">
+      <sub name="Introduction" link="getting-started.intro.html"/>
+      <sub name="Concepts" link="getting-started.concepts.html">
+        <sub name="Applet Registration" link="getting-started.concepts.html#id-1.3.3.4"/>
+        <sub name="Applet Instances" link="getting-started.concepts.applet-instances.html"/>
+      </sub>
+      <sub name="Hello World Example" link="getting-started.example.html"/>
+      <sub name="Using a Context Menu" link="getting-started.context-menu.html">
+        <sub name="Guidelines for Context Menu" link="getting-started.context-menu.html#getting-started.context-menu.content"/>
+        <sub name="Setting Up the Menu" link="getting-started.context-menu.setup.html"/>
+      </sub>
+      <sub name="Settings" link="getting-started.settings.html">
+        <sub name="Per Instance Settings" link="getting-started.settings.html#getting-started.settings.per-instance"/>
+      </sub>
+      <sub name="Applet Registration, Installation and Build System" link="getting-started.install.html">
+        <sub name="Panel Applet File Syntax" link="getting-started.install.html#getting-started.install.panel-applet"/>
+        <sub name="Out-of-Process vs In-Process" link="getting-started.in-out-process.html"/>
+        <sub name="Build system" link="getting-started.install.build-system.html"/>
+      </sub>
+      <sub name="Proper Integration with the Panel" link="getting-started.integration.html"/>
+      <sub name="Writing an applet in languages other than C" link="getting-started.introspection.html"/>
+    </sub>
+    <sub name="Porting older Applets" link="port-gnome2.html">
+      <sub name="Porting to a D-Bus-based Applet" link="port-gnome2.dbus.html">
+        <sub name="Introduction" link="port-gnome2.dbus.html#port-gnome2.dbus.introduction"/>
+        <sub name="Removing LibBonobo factory" link="port-gnome2.dbus.remove-libbonobo-factory.html"/>
+        <sub name="Migrating LibBonobo menus to GAction" link="port-gnome2.dbus.migrate-menus-to-gaction.html"/>
+      </sub>
+      <sub name="Porting Applets from Panel Applet Library 4.0" link="ch10.html"/>
+    </sub>
+    <sub name="API Reference" link="reference.html">
+      <sub name="Panel Applet" link="libpanel-applet-Panel-Applet.html"/>
+      <sub name="Panel Applet Factory" link="libpanel-applet-Panel-Applet-Factory.html"/>
+    </sub>
+    <sub name="Object Hierarchy" link="object-tree.html"/>
+    <sub name="API Index" link="api-index-full.html"/>
+    <sub name="Index of deprecated API" link="deprecated-api-index.html"/>
+    <sub name="Index of new symbols in 3.4" link="api-index-3-4.html"/>
+    <sub name="Index of new symbols in 3.18" link="api-index-3-18.html"/>
+    <sub name="Index of new symbols in 3.22" link="api-index-3-22.html"/>
+    <sub name="Annotation Glossary" link="annotation-glossary.html"/>
+  </chapters>
+  <functions>
+    <keyword type="function" name="panel_applet_get_orient ()" link="libpanel-applet-Panel-Applet.html#panel-applet-get-orient"/>
+    <keyword type="function" name="panel_applet_get_gtk_orientation ()" link="libpanel-applet-Panel-Applet.html#panel-applet-get-gtk-orientation" since="3.18"/>
+    <keyword type="function" name="panel_applet_add_text_class ()" link="libpanel-applet-Panel-Applet.html#panel-applet-add-text-class" since="3.22"/>
+    <keyword type="function" name="panel_applet_set_size_hints ()" link="libpanel-applet-Panel-Applet.html#panel-applet-set-size-hints"/>
+    <keyword type="function" name="panel_applet_get_flags ()" link="libpanel-applet-Panel-Applet.html#panel-applet-get-flags"/>
+    <keyword type="function" name="panel_applet_set_flags ()" link="libpanel-applet-Panel-Applet.html#panel-applet-set-flags"/>
+    <keyword type="function" name="panel_applet_get_locked_down ()" link="libpanel-applet-Panel-Applet.html#panel-applet-get-locked-down"/>
+    <keyword type="function" name="panel_applet_settings_new ()" link="libpanel-applet-Panel-Applet.html#panel-applet-settings-new"/>
+    <keyword type="function" name="panel_applet_request_focus ()" link="libpanel-applet-Panel-Applet.html#panel-applet-request-focus"/>
+    <keyword type="function" name="panel_applet_setup_menu ()" link="libpanel-applet-Panel-Applet.html#panel-applet-setup-menu"/>
+    <keyword type="function" name="panel_applet_setup_menu_from_file ()" link="libpanel-applet-Panel-Applet.html#panel-applet-setup-menu-from-file"/>
+    <keyword type="function" name="panel_applet_setup_menu_from_resource ()" link="libpanel-applet-Panel-Applet.html#panel-applet-setup-menu-from-resource" since="3.4"/>
+    <keyword type="struct" name="struct PanelApplet" link="libpanel-applet-Panel-Applet.html#PanelApplet-struct"/>
+    <keyword type="enum" name="enum PanelAppletOrient" link="libpanel-applet-Panel-Applet.html#PanelAppletOrient"/>
+    <keyword type="macro" name="PANEL_APPLET_ORIENT_FIRST" link="libpanel-applet-Panel-Applet.html#PANEL-APPLET-ORIENT-FIRST:CAPS"/>
+    <keyword type="macro" name="PANEL_APPLET_ORIENT_LAST" link="libpanel-applet-Panel-Applet.html#PANEL-APPLET-ORIENT-LAST:CAPS"/>
+    <keyword type="enum" name="enum PanelAppletFlags" link="libpanel-applet-Panel-Applet.html#PanelAppletFlags"/>
+    <keyword type="macro" name="PANEL_APPLET_FLAGS_ALL" link="libpanel-applet-Panel-Applet.html#PANEL-APPLET-FLAGS-ALL:CAPS"/>
+    <keyword type="property" name="The “closure” property" link="libpanel-applet-Panel-Applet.html#PanelApplet--closure"/>
+    <keyword type="property" name="The “connection” property" link="libpanel-applet-Panel-Applet.html#PanelApplet--connection"/>
+    <keyword type="property" name="The “flags” property" link="libpanel-applet-Panel-Applet.html#PanelApplet--flags"/>
+    <keyword type="property" name="The “id” property" link="libpanel-applet-Panel-Applet.html#PanelApplet--id"/>
+    <keyword type="property" name="The “locked-down” property" link="libpanel-applet-Panel-Applet.html#PanelApplet--locked-down"/>
+    <keyword type="property" name="The “orient” property" link="libpanel-applet-Panel-Applet.html#PanelApplet--orient"/>
+    <keyword type="property" name="The “settings-path” property" link="libpanel-applet-Panel-Applet.html#PanelApplet--settings-path"/>
+    <keyword type="property" name="The “size-hints” property" link="libpanel-applet-Panel-Applet.html#PanelApplet--size-hints"/>
+    <keyword type="signal" name="The “change-orient” signal" link="libpanel-applet-Panel-Applet.html#PanelApplet-change-orient"/>
+    <keyword type="function" name="PanelAppletFactoryCallback ()" link="libpanel-applet-Panel-Applet-Factory.html#PanelAppletFactoryCallback"/>
+    <keyword type="macro" name="PANEL_APPLET_IN_PROCESS_FACTORY()" link="libpanel-applet-Panel-Applet-Factory.html#PANEL-APPLET-IN-PROCESS-FACTORY:CAPS"/>
+    <keyword type="constant" name="PANEL_APPLET_ORIENT_UP" link="libpanel-applet-Panel-Applet.html#PANEL-APPLET-ORIENT-UP:CAPS"/>
+    <keyword type="constant" name="PANEL_APPLET_ORIENT_DOWN" link="libpanel-applet-Panel-Applet.html#PANEL-APPLET-ORIENT-DOWN:CAPS"/>
+    <keyword type="constant" name="PANEL_APPLET_ORIENT_LEFT" link="libpanel-applet-Panel-Applet.html#PANEL-APPLET-ORIENT-LEFT:CAPS"/>
+    <keyword type="constant" name="PANEL_APPLET_ORIENT_RIGHT" link="libpanel-applet-Panel-Applet.html#PANEL-APPLET-ORIENT-RIGHT:CAPS"/>
+    <keyword type="constant" name="PANEL_APPLET_FLAGS_NONE" link="libpanel-applet-Panel-Applet.html#PANEL-APPLET-FLAGS-NONE:CAPS"/>
+    <keyword type="constant" name="PANEL_APPLET_EXPAND_MAJOR" link="libpanel-applet-Panel-Applet.html#PANEL-APPLET-EXPAND-MAJOR:CAPS"/>
+    <keyword type="constant" name="PANEL_APPLET_EXPAND_MINOR" link="libpanel-applet-Panel-Applet.html#PANEL-APPLET-EXPAND-MINOR:CAPS"/>
+    <keyword type="constant" name="PANEL_APPLET_HAS_HANDLE" link="libpanel-applet-Panel-Applet.html#PANEL-APPLET-HAS-HANDLE:CAPS"/>
+  </functions>
+</book>

@@ -1,0 +1,2573 @@
+# German gnome-panel translation.
+# Copyright (C) 1998-2004 Free Software Foundation, Inc.
+# This file is distributed under the same license as the gnome-panel package.
+# Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de>, 1998.
+# Matthias Warkus <mawa@iname.com>, 1999-2001.
+# Karl Eichwalder <ke@suse.de>, 2000, 2001.
+# Christian Meyer <chrisime@gnome.org>, 2000-2001.
+# Benedikt Roth <Benedikt.Roth@gmx.net>, 2000-2001.
+# Jörgen Scheibengruber <mfcn@gmx.de>, 2002.
+# Christian Neumair <chris@gnome-de.org>, 2002-2004.
+# Hendrik Richter <hendrikr@gnome.org>, 2004-2007, 2009.
+# Christian Kintner <mail@christian-kintner.de>, 2006.
+# Philipp Kerling <k.philipp@gmail.com>, 2008.
+# Andre Klapper <ak-47@gmx.net>, 2009.
+# Moritz Baumann <flamingmo@online.de>, 2009.
+# Mario Blättermann <mario.blaettermann@gmail.com>, 2009-2012, 2016, 2018.
+# Christian Kirbach <Christian.Kirbach@googlemail.com>, 2009-2011.
+# Wolfgang Stöggl <c72578@yahoo.de>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-panel master\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-panel/issues\n"
+"POT-Creation-Date: 2018-08-28 23:10+0000\n"
+"PO-Revision-Date: 2018-08-31 21:07+0200\n"
+"Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
+"Language-Team: Deutsch <gnome-de@gnome.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.1.1\n"
+
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:5
+msgid "Show date in tooltip"
+msgstr "Datum in Minihilfe anzeigen"
+
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:6
+msgid "If true, show date in a tooltip when the pointer is over the clock."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, wird das Datum in einer Minihilfe "
+"angezeigt, wenn sich die Maus über der Uhr befindet."
+
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:10
+msgid "Show weather in clock"
+msgstr "Das Wetter in der Uhr anzeigen"
+
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:11
+msgid "If true, display a weather icon."
+msgstr "Legt fest, ob ein Wettersymbol angezeigt wird."
+
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:15
+msgid "Show temperature in clock"
+msgstr "Die Temperatur in der Uhr anzeigen"
+
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:16
+msgid "If true, show the temperature next to the weather icon."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, wird die Temperatur neben dem Wettersymbol "
+"angezeigt."
+
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:20
+msgid "Show week numbers in calendar"
+msgstr "Wochennummern im Kalender anzeigen"
+
+# CHECK
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:21
+msgid "If true, show week numbers in the calendar."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, werden die Wochennummern im Kalender "
+"angezeigt."
+
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:25
+msgid "Expand list of appointments"
+msgstr "Liste mit Terminen ausklappen"
+
+# CHECK
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:26
+msgid "If true, expand the list of appointments in the calendar window."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, wird die Liste der Termine im "
+"Kalenderfenster ausgeklappt."
+
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:30
+msgid "Expand list of birthdays"
+msgstr "Liste mit Geburtstagen ausklappen"
+
+# CHECK
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:31
+msgid "If true, expand the list of birthdays in the calendar window."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, wird die Liste der Geburtstage im "
+"Kalenderfenster ausgeklappt."
+
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:35
+msgid "Expand list of tasks"
+msgstr "Liste mit Aufgaben ausklappen"
+
+# CHECK
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:36
+msgid "If true, expand the list of tasks in the calendar window."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, wird die Liste der Aufgaben im "
+"Kalenderfenster ausgeklappt."
+
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:40
+msgid "Expand list of weather information"
+msgstr "Liste mit Wetterinformationen ausklappen"
+
+# CHECK
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:41
+msgid "If true, expand the list of weather information in the calendar window."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, wird die Liste der Wetterinformationen im "
+"Kalenderfenster ausgeklappt."
+
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:45
+msgid "Expand list of locations"
+msgstr "Liste mit Orten ausklappen"
+
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:46
+msgid "If true, expand the list of locations in the calendar window."
+msgstr "Legt fest, ob die Liste der Orte im Kalenderfenster ausgeklappt ist."
+
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:50
+msgid "List of locations"
+msgstr "Liste der Orte"
+
+#: data/org.gnome.gnome-panel.applet.clock.gschema.xml:51
+msgid ""
+"A list of locations to display in the calendar window. Each location is a "
+"tuple of display name, METAR code and coordinates."
+msgstr ""
+"Eine Liste der im Kalenderfenster anzuzeigenden Orte. Jeder Ort ist ein "
+"Datensatz aus Anzeigename, METAR-Code und Koordinaten."
+
+#: data/org.gnome.gnome-panel.applet.fish.gschema.xml:5
+msgid "The fish's name"
+msgstr "Der Name des Fisches"
+
+#: data/org.gnome.gnome-panel.applet.fish.gschema.xml:6
+msgid ""
+"A fish without a name is a pretty dull fish. Bring your fish to life by "
+"naming him."
+msgstr ""
+"Ein namenloser Fisch ist ein ziemlich dämlicher Fisch. Erwecken Sie Ihren "
+"Fisch zum Leben, indem Sie ihm einen Namen geben."
+
+#: data/org.gnome.gnome-panel.applet.fish.gschema.xml:10
+msgid "The fish's animation pixmap"
+msgstr "Die Animations-Pixmap des Fisches"
+
+#: data/org.gnome.gnome-panel.applet.fish.gschema.xml:11
+msgid ""
+"This key specifies the filename of the pixmap which will be used for the "
+"animation displayed in the fish applet relative to the pixmap directory."
+msgstr ""
+"Dieser Schlüssel gibt den Dateinamen der Pixmap an, die für die im Fisch-"
+"Applet angezeigte Animation verwendet wird, und zwar relativ zum Pixmap-"
+"Ordner."
+
+#: data/org.gnome.gnome-panel.applet.fish.gschema.xml:15
+msgid "Command to execute on click"
+msgstr "Beim Anklicken des Fisches auszuführender Befehl"
+
+#: data/org.gnome.gnome-panel.applet.fish.gschema.xml:16
+msgid ""
+"This key specifies the command that will be tried to execute when the fish "
+"is clicked."
+msgstr ""
+"Dieser Schlüssel gibt den Befehl an, der beim Anklicken des Fischs "
+"ausgeführt werden soll."
+
+#: data/org.gnome.gnome-panel.applet.fish.gschema.xml:21
+msgid "Pause per frame"
+msgstr "Pause nach jedem Einzelbild"
+
+#: data/org.gnome.gnome-panel.applet.fish.gschema.xml:22
+msgid "This key specifies the number of seconds each frame will be displayed."
+msgstr ""
+"Dieser Schlüssel legt die Anzahl der Sekunden fest, die jedes Einzelbild "
+"angezeigt werden soll."
+
+#: data/org.gnome.gnome-panel.applet.fish.gschema.xml:26
+msgid "Rotate on vertical panels"
+msgstr "Auf vertikalen Panels drehen"
+
+# CHECK
+#: data/org.gnome.gnome-panel.applet.fish.gschema.xml:27
+msgid ""
+"If true, the fish's animation will be displayed rotated on vertical panels."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, wird die Fischanimation auf vertikalen "
+"Panels gedreht angezeigt."
+
+#: data/org.gnome.gnome-panel.applet.window-list.gschema.xml:11
+msgid "Show windows from all workspaces"
+msgstr "Auf allen Arbeitsfläche befindliche Fenster anzeigen"
+
+#: data/org.gnome.gnome-panel.applet.window-list.gschema.xml:12
+msgid ""
+"If true, the window list will show windows from all workspaces. Otherwise it "
+"will only display windows from the current workspace."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, zeigt die Fensterliste alle geöffneten "
+"Fenster an, einschließlich denen, die sich auf anderen Arbeitsflächen "
+"befinden. Andernfalls zeigt sie lediglich die auf der momentan sichtbaren "
+"Arbeitsfläche befindlichen Fenster an."
+
+#: data/org.gnome.gnome-panel.applet.window-list.gschema.xml:16
+msgid "When to group windows"
+msgstr "Wann Fenster gruppiert werden sollen"
+
+#: data/org.gnome.gnome-panel.applet.window-list.gschema.xml:17
+msgid ""
+"Decides when to group windows from the same application on the window list. "
+"Possible values are \"never\", \"auto\" and \"always\"."
+msgstr ""
+"Dieser Schlüssel legt fest, wann Fenster derselben Anwendung in der "
+"Fensterliste gruppiert werden sollen. Zulässige Werte: »never« (nie), "
+"»auto« (bei Platzmangel) sowie »always« (immer)."
+
+#: data/org.gnome.gnome-panel.applet.window-list.gschema.xml:21
+msgid "Move windows to current workspace when unminimized"
+msgstr ""
+"Fenster beim Wiederherstellen auf momentan sichtbare Arbeitsfläche "
+"verschieben"
+
+#: data/org.gnome.gnome-panel.applet.window-list.gschema.xml:22
+msgid ""
+"If true, then when unminimizing a window, move it to the current workspace. "
+"Otherwise, switch to the workspace of the window."
+msgstr ""
+"Fall dieser Schlüssel WAHR ist, wird ein Fenster auf die sichtbare "
+"Arbeitsfläche verschoben, wenn es wiederhergestellt wird. Andernfalls wird "
+"zur Arbeitsfläche gewechselt, auf der sich das Fenster befindet."
+
+#: data/org.gnome.gnome-panel.applet.workspace-switcher.gschema.xml:5
+msgid "Display workspace names"
+msgstr "Namen der Arbeitsflächen anzeigen"
+
+#: data/org.gnome.gnome-panel.applet.workspace-switcher.gschema.xml:6
+msgid ""
+"If true, the workspaces in the workspace switcher will display the names of "
+"the workspaces. Otherwise they will display the windows on the workspace. "
+"This setting only works when the window manager is Metacity."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, zeigt der Arbeitsflächenumschalter auf den "
+"Mini-Arbeitsflächen im Umschalter deren Namen an. Andernfalls enthalten "
+"diese den Inhalt der Arbeitsflächen. Dies funktioniert nur, wenn der Fenster-"
+"Manager »Metacity« verwendet wird."
+
+#: data/org.gnome.gnome-panel.applet.workspace-switcher.gschema.xml:10
+msgid "Display all workspaces"
+msgstr "Alle Arbeitsflächen anzeigen"
+
+#: data/org.gnome.gnome-panel.applet.workspace-switcher.gschema.xml:11
+msgid ""
+"If true, the workspace switcher will show all workspaces. Otherwise it will "
+"only show the current workspace."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, zeigt der Arbeitsflächenumschalter alle "
+"Arbeitsflächen an. Andernfalls zeigt er lediglich die momentan sichtbare."
+
+#: data/org.gnome.gnome-panel.applet.workspace-switcher.gschema.xml:16
+msgid "Rows in workspace switcher"
+msgstr "Zeilen in Arbeitsflächenumschalter"
+
+#: data/org.gnome.gnome-panel.applet.workspace-switcher.gschema.xml:17
+msgid ""
+"This key specifies how many rows (for horizontal layout) or columns (for "
+"vertical layout) the workspace switcher shows the workspaces in. This key is "
+"only relevant if the display_all_workspaces key is true."
+msgstr ""
+"Dieser Schlüssel legt die Anzahl der Zeilen (bei horizontaler Darstellung) "
+"oder Spalten (bei vertikaler Darstellung) fest, in denen der Umschalter die "
+"Arbeitsflächen anzeigt. Dieser Schlüssel kommt ausschließlich zum Tragen, "
+"falls der Schlüssel »display_all_workspaces« WAHR ist."
+
+#: data/org.gnome.gnome-panel.gschema.xml:35
+msgid "Enable tooltips"
+msgstr "Minihilfen aktivieren"
+
+#: data/org.gnome.gnome-panel.gschema.xml:36
+msgid ""
+"If true, tooltips are shown for objects in panels. Tooltips can be disabled "
+"for the whole desktop with the gtk-enable-tooltips property in GTK+."
+msgstr ""
+"Falls aktiviert, werden Minihilfen für Panel-Objekte angezeigt. Minihilfen "
+"können für die gesamte Arbeitsumgebung über die Eigenschaft »gtk-enable-"
+"tooltips« in GTK+ deaktiviert werden."
+
+#: data/org.gnome.gnome-panel.gschema.xml:40
+msgid "Confirm panel removal"
+msgstr "Entfernen des Panels bestätigen"
+
+#: data/org.gnome.gnome-panel.gschema.xml:41
+msgid ""
+"If true, a dialog is shown asking for confirmation if the user wants to "
+"remove a panel."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, wird ein Dialog angezeigt, der den Benutzer "
+"dazu auffordert, das Entfernen eines Panels zu bestätigen."
+
+#: data/org.gnome.gnome-panel.gschema.xml:46
+msgid "Icon size in menus"
+msgstr "Symbolgröße in Menüs"
+
+#: data/org.gnome.gnome-panel.gschema.xml:47
+msgid "The size of icons in menus."
+msgstr "Die Größe der Symbole in den Menüs."
+
+#: data/org.gnome.gnome-panel.gschema.xml:52
+msgid "Maximum icon size in panels"
+msgstr "Maximale Symbolgröße in Panels"
+
+#: data/org.gnome.gnome-panel.gschema.xml:53
+msgid "The maximum size of icons in panels."
+msgstr "Die maximale Größe der Symbole in Panels."
+
+#: data/org.gnome.gnome-panel.gschema.xml:58
+msgid "Icon size in the menus"
+msgstr "Symbolgröße in den Menüs"
+
+#: data/org.gnome.gnome-panel.gschema.xml:62
+msgid "Icon size for only Applications item in the Menu Bar applet"
+msgstr "Symbolgröße nur für das Anwendungen-Objekt im Menüleisten-Applet"
+
+#: data/org.gnome.gnome-panel.gschema.xml:66
+msgid "Which theme variant to use"
+msgstr "Legt fest, welche Themenvariante verwendet wird"
+
+#: data/org.gnome.gnome-panel.gschema.xml:73
+msgid "Panel ID list"
+msgstr "Liste Panel-Kennungen"
+
+#: data/org.gnome.gnome-panel.gschema.xml:74
+msgid ""
+"A list of panel IDs. Each ID identifies an individual toplevel panel. The "
+"settings for each of these panels are stored in /apps/panel/toplevels/$(id)."
+msgstr ""
+"Eine Liste der Panel-Kennungen. Jede Kennung entspricht einem Panel auf "
+"oberster Ebene. Die Einstellungen jedes dieser Panels werden unter »/apps/"
+"panel/toplevels/$(id)« abgelegt."
+
+#: data/org.gnome.gnome-panel.gschema.xml:78
+msgid "Panel object ID list"
+msgstr "Liste der Panel-Objektkennungen"
+
+#: data/org.gnome.gnome-panel.gschema.xml:79
+msgid ""
+"A list of panel object IDs. Each ID identifies an individual panel object (e."
+"g. an applet, launcher, action button or menu button/bar). The settings for "
+"each of these objects are stored in /apps/panel/objects/$(id)."
+msgstr ""
+"Eine Liste der Panel-Objektkennungen. Jede Kennung entspricht einem Panel-"
+"Objekt (z.B. einem Applet, einem Starter, Aktionsknopf oder einer Knopf-/"
+"Menüleiste). Die Einstellungen jedes dieser Panel-Objekte werden unter »/"
+"apps/panel/objects/$(id)« abgelegt."
+
+#: data/org.gnome.gnome-panel.gschema.xml:86
+msgid "Complete panel lockdown"
+msgstr "Einstellungssperre für gesamtes Panel"
+
+#: data/org.gnome.gnome-panel.gschema.xml:87
+msgid ""
+"If true, the panel will not allow any changes to the configuration of the "
+"panel. Individual applets may need to be locked down separately however. The "
+"panel must be restarted for this to take effect."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, unterbindet das Panel jegliche Änderungen "
+"an der Panel-Konfiguration. Applets müssen jedoch möglicherweise einzeln "
+"gesperrt werden. Damit diese Einstellungen wirksam werden, muss das Panel "
+"neu gestartet werden."
+
+#: data/org.gnome.gnome-panel.gschema.xml:91
+msgid "Applet IIDs to disable from loading"
+msgstr "Zu ignorierende Applet-IIDs"
+
+#: data/org.gnome.gnome-panel.gschema.xml:92
+msgid ""
+"A list of applet IIDs that the panel will ignore. This way you can disable "
+"certain applets from loading or showing up in the menu. For example to "
+"disable the mini-commander applet add 'OAFIID:GNOME_MiniCommanderApplet' to "
+"this list. The panel must be restarted for this to take effect."
+msgstr ""
+"Eine Liste von Applet-IIDs, die das Panel ignoriert. Auf diese Weise können "
+"Sie verhindern, dass bestimmte Applets geladen oder im Menü angezeigt "
+"werden. Falls Sie beispielsweise das Befehlszeilen-Applet deaktivieren "
+"möchten, so müssen Sie »OAFIID:GNOME_MiniCommanderApplet« zur Liste "
+"hinzufügen. Damit diese Einstellungen wirksam werden, muss das Panel neu "
+"gestartet werden."
+
+#: data/org.gnome.gnome-panel.gschema.xml:96
+msgid "Disable Force Quit"
+msgstr "Erzwungenes Beenden deaktivieren"
+
+#: data/org.gnome.gnome-panel.gschema.xml:97
+msgid ""
+"If true, the panel will not allow a user to force an application to quit by "
+"removing access to the force quit button."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, erlaubt es das Panel dem Benutzer nicht, "
+"das Beenden einer Anwendung zu erzwingen. Dies wird durch das Entfernen des "
+"»Anwendung beenden«-Knopfes bewerkstelligt."
+
+#: data/org.gnome.gnome-panel.gschema.xml:104
+msgid "History of \"Run Application\" dialog"
+msgstr "Chronik des Dialogs »Anwendung ausführen«"
+
+#: data/org.gnome.gnome-panel.gschema.xml:105
+msgid ""
+"The list of commands used in the past in the \"Run Application\" dialog."
+msgstr "Eine Liste der im Dialog »Anwendung ausführen« verwendeten Befehle."
+
+#: data/org.gnome.gnome-panel.gschema.xml:109
+msgid "Enable program list in \"Run Application\" dialog"
+msgstr "Programmliste im Dialog »Anwendung ausführen« aktivieren"
+
+#: data/org.gnome.gnome-panel.gschema.xml:110
+msgid ""
+"If true, the \"Known Applications\" listing in the \"Run Application\" "
+"dialog is made available. Whether or not the listing is expanded when the "
+"dialog is shown is controlled by the show_program_list key."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, wird die Liste bekannter Anwendungen im "
+"Dialog »Anwendung ausführen« angezeigt. Der Schlüssel »show_program_list« "
+"legt fest, ob die Größe der Liste der des Fensters angepasst werden soll."
+
+#: data/org.gnome.gnome-panel.gschema.xml:114
+msgid "Expand program list in \"Run Application\" dialog"
+msgstr "Programmliste im Dialog »Anwendung ausführen« ausklappen"
+
+#: data/org.gnome.gnome-panel.gschema.xml:115
+msgid ""
+"If true, the \"Known Applications\" listing in the \"Run Application\" "
+"dialog is expanded when the dialog is opened. This key is only relevant if "
+"the enable_program_list key is true."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, wird die Liste bekannter Anwendungen der "
+"Größe des Dialogs »Anwendung ausführen« angepasst, sobald dieser geöffnet "
+"wird. Dieser Schlüssel kommt ausschließlich zum Tragen, falls der Schlüssel "
+"»enable_program_list« WAHR ist."
+
+#: data/org.gnome.gnome-panel.gschema.xml:119
+msgid "Enable autocompletion in \"Run Application\" dialog"
+msgstr ""
+"Automatische Vervollständigung im Dialog »Anwendung ausführen« aktivieren"
+
+#: data/org.gnome.gnome-panel.gschema.xml:120
+msgid ""
+"If true, autocompletion in the \"Run Application\" dialog is made available."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, wird die automatische Vervollständigung im "
+"Dialog »Anwendung ausführen« aktiviert."
+
+#: data/org.gnome.gnome-panel.launcher.gschema.xml:5
+msgid "Launcher location"
+msgstr "Speicherort des Starters"
+
+#: data/org.gnome.gnome-panel.launcher.gschema.xml:6
+msgid ""
+"The location of the .desktop file describing the launcher. This key is only "
+"relevant if the object_type key is \"launcher-object\"."
+msgstr ""
+"Der Speicherort der .desktop-Datei, die den Starter beschreibt. Dieser "
+"Schlüssel kommt ausschließlich zum Tragen, falls der Objekttypschlüssel "
+"»object_type« »launcher-object« ist."
+
+#: data/org.gnome.gnome-panel.menu-button.gschema.xml:5
+msgid "Tooltip displayed for menu"
+msgstr "Für Menü anzuzeigende Minihilfe"
+
+#: data/org.gnome.gnome-panel.menu-button.gschema.xml:6
+msgid "The text to display in a tooltip for this menu."
+msgstr "Der für dieses Menü in einer Minihilfe anzuzeigende Text."
+
+#: data/org.gnome.gnome-panel.menu-button.gschema.xml:10
+msgid "Icon used for button"
+msgstr "Für Knopf verwendetes Symbol"
+
+#: data/org.gnome.gnome-panel.menu-button.gschema.xml:11
+msgid ""
+"The location of the image file used as the icon for the object's button. If "
+"empty, the default icon for the menu will be used."
+msgstr ""
+"Der Speicherort der Bilddatei, die als Symbol für den Objektknopf verwendet "
+"werden soll. Falls leer, wird das Standardsymbol für das Menü verwendet."
+
+#: data/org.gnome.gnome-panel.menu-button.gschema.xml:15
+msgid "Menu content path"
+msgstr "Pfad zum Menüinhalt"
+
+#: data/org.gnome.gnome-panel.menu-button.gschema.xml:16
+msgid ""
+"The path from which the menu contents is constructed. If empty, the menu "
+"will be the default applications menu."
+msgstr ""
+"Der Pfad, mit Hilfe dessen der Menüinhalt konstruiert wird. Falls leer, wird "
+"hier das vorgegebene Anwendungsmenü verwendet."
+
+#: data/org.gnome.gnome-panel.object.gschema.xml:5
+msgid "Object IID"
+msgstr "Objekt-IID"
+
+#: data/org.gnome.gnome-panel.object.gschema.xml:6
+msgid ""
+"The implementation ID of the object - e.g. \"ClockAppletFactory::ClockApplet"
+"\"."
+msgstr ""
+"Die Implementationskennung des Objekts - z.B. »ClockAppletFactory::"
+"ClockApplet«."
+
+#: data/org.gnome.gnome-panel.object.gschema.xml:10
+msgid "Toplevel panel containing object"
+msgstr "Übergeordnetes Panel, das Objekt enthält"
+
+#: data/org.gnome.gnome-panel.object.gschema.xml:11
+msgid "The identifier of the toplevel panel which contains this object."
+msgstr ""
+"Der Identifikator des übergeordneten Panels, das dieses Objekt enthält."
+
+#: data/org.gnome.gnome-panel.object.gschema.xml:15
+msgid "Interpret position relative to bottom/right edge"
+msgstr "Die Position relativ zur unteren rechten Ecke bestimmen"
+
+#: data/org.gnome.gnome-panel.object.gschema.xml:16
+msgid ""
+"If set to 'end', the position of the object is interpreted relative to the "
+"right (or bottom if vertical) edge of the panel."
+msgstr ""
+"Falls auf »end« gesetzt, wird die Position des Objekts relativ zur rechten "
+"Kante (oder der unteren, falls vertikal) des Panels berechnet."
+
+#: data/org.gnome.gnome-panel.object.gschema.xml:20
+msgid "Object's position on the panel"
+msgstr "Objektposition auf dem Panel"
+
+#: data/org.gnome.gnome-panel.object.gschema.xml:21
+msgid ""
+"The index of this panel object within the other objects with the same pack-"
+"type, from the left (or top if vertical) panel edge."
+msgstr ""
+"Der Index dieses Panel-Objekts innerhalb der anderen Objekte des gleichen "
+"Pack-Typs, zur linken (bzw. oberen, falls vertikal) Panel-Kante angegeben."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:5
+msgid "Name to identify panel"
+msgstr "Name zur Panel-Identifikation"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:6
+msgid ""
+"This is a human readable name which you can use to identify a panel. Its "
+"main purpose is to serve as the panel's window title which is useful when "
+"navigating between panels."
+msgstr ""
+"Dies ist ein menschenlesbarer Name, anhand dessen Sie ein Panel "
+"identifizieren können. Seine Hauptaufgabe besteht darin, als Fenstertitel "
+"für das Panel zu fungieren, was beim Umschalten zwischen Panels nützlich ist."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:10
+msgid "Xinerama monitor where the panel is displayed"
+msgstr "Xinerama-Monitor, auf dem das Panel angezeigt wird"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:11
+msgid ""
+"In a Xinerama setup, you may have panels on each individual monitor. This "
+"key identifies the current monitor the panel is displayed on."
+msgstr ""
+"In einer Xinerama-Umgebung ist es möglich, monitorspezifische Panels "
+"anzulegen. Dieser Schlüssel identifiziert den Bildschirm, auf dem das Panel "
+"momentan angezeigt wird."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:15
+msgid "Expand to occupy entire screen width"
+msgstr "Ausdehnen und so die gesamte Bildschirmbreite belegen"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:16
+msgid ""
+"If true, the panel will occupy the entire screen width (height if this is a "
+"vertical panel). In this mode the panel can only be placed at a screen edge. "
+"If false, the panel will only be large enough to accommodate the applets, "
+"launchers and buttons on the panel."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, belegt das Panel die gesamte "
+"Bildschirmbreite (Höhe, falls es ein vertikales Panel ist). In diesem Modus "
+"kann das Panel ausschließlich an Bildschirmkanten platziert werden. Falls "
+"dieser Schlüssel FALSCH ist, ist das Panel gerade so groß, dass die Applets, "
+"Starter und Knöpfe darauf passen."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:20
+msgid "Panel orientation"
+msgstr "Panel-Ausrichtung"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:21
+msgid ""
+"The orientation of the panel. Possible values are \"top\", \"bottom\", \"left"
+"\", \"right\". In expanded mode the key specifies which screen edge the "
+"panel is on. In un-expanded mode the difference between \"top\" and \"bottom"
+"\" is less important - both indicate that this is a horizontal panel - but "
+"still give a useful hint as to how some panel objects should behave. For "
+"example, on a \"top\" panel a menu button will pop up its menu below the "
+"panel, whereas on a \"bottom\" panel the menu will be popped up above the "
+"panel."
+msgstr ""
+"Die Ausrichtung des Panels. Zulässige Werte: »top« (oben), »bottom« (unten), "
+"»left« (links) sowie »right« (rechts). Im ausgedehnten Modus gibt der "
+"Schlüssel an, auf welcher Seite des Bildschirms sich das Panel befindet. Im "
+"unausgedehnten Modus ist der Unterschied zwischen »top« und »bottom« weniger "
+"wichtig: Beide zeigen an, dass es sich hierbei um ein horizontales Panel "
+"handelt - sie sind jedoch für das Verhalten mancher Panel-Objekte "
+"ausschlaggebend. So wird z.B. bei einem oberen Panel (»top«) das Menü eines "
+"Menüknopfes unterhalb, bei einem unteren Panel (»bottom«) oberhalb des "
+"Panels angezeigt."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:25
+msgid "Panel size"
+msgstr "Panel-Größe"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:26
+msgid ""
+"The height (width for a vertical panel) of the panel. The panel will "
+"determine at runtime a minimum size based on the font size and other "
+"indicators. The maximum size is fixed at one quarter of the screen height "
+"(or width)."
+msgstr ""
+"Die Höhe des Panels (Breite bei vertikalen Panels). Das Panel legt auf Basis "
+"der Schriftgröße und anderer Indikatoren beim Ausführen eine minimale Größe "
+"fest. Die maximale Größe ist auf ein Viertel der Bildschirmhöhe (bzw. -"
+"breite) begrenzt."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:30
+msgid "X co-ordinate of panel"
+msgstr "X-Koordinate des Panels"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:31
+msgid ""
+"The location of the panel along the x-axis. This key is only relevant in un-"
+"expanded mode. In expanded mode this key is ignored and the panel is placed "
+"at the screen edge specified by the orientation key."
+msgstr ""
+"Die Position des Panels auf der X-Achse. Dieser Schlüssel kommt "
+"ausschließlich im nicht ausgedehnten Modus zum Tragen. Im ausgedehnten Modus "
+"wird dieser Schlüssel ignoriert und das Panel an der vom Schlüssel "
+"»orientation« angegebenen Bildschirmkante platziert."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:35
+msgid "Y co-ordinate of panel"
+msgstr "Y-Koordinate des Panels"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:36
+msgid ""
+"The location of the panel along the y-axis. This key is only relevant in un-"
+"expanded mode. In expanded mode this key is ignored and the panel is placed "
+"at the screen edge specified by the orientation key."
+msgstr ""
+"Die Position des Panels auf der Y-Achse. Dieser Schlüssel kommt "
+"ausschließlich im nicht ausgedehnten Modus zum Tragen. Im ausgedehnten Modus "
+"wird dieser Schlüssel ignoriert und das Panel an der vom Schlüssel "
+"»orientation« angegebenen Bildschirmkante platziert."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:40
+msgid "X co-ordinate of panel, starting from the right of the screen"
+msgstr "X-Koordinate des Panels, ausgehend von rechts"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:41
+msgid ""
+"The location of the panel along the x-axis, starting from the right of the "
+"screen. If set to -1, the value is ignored and the value of the x key is "
+"used. If the value is greater than 0, then the value of the x key is "
+"ignored. This key is only relevant in un-expanded mode. In expanded mode "
+"this key is ignored and the panel is placed at the screen edge specified by "
+"the orientation key."
+msgstr ""
+"Die Position des Panels auf der X-Achse, beginnend rechts vom Bildschirm. "
+"Falls dieser Wert -1 ist, wird er ignoriert und der Wert des Schlüssels »x« "
+"verwendet. Falls dieser Wert größer als 0 ist, wird der Wert des Schlüssels "
+"»x« ignoriert. Dieser Schlüssel kommt ausschließlich im nicht ausgedehnten "
+"Modus zum Tragen. Im ausgedehnten Modus wird dieser Schlüssel ignoriert und "
+"das Panel an der vom Schlüssel »orientation« angegebenen Bildschirmkante "
+"platziert."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:45
+msgid "Y co-ordinate of panel, starting from the bottom of the screen"
+msgstr "Y-Koordinate des Panels, ausgehend von unten"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:46
+msgid ""
+"The location of the panel along the y-axis, starting from the bottom of the "
+"screen. If set to -1, the value is ignored and the value of the y key is "
+"used. If the value is greater than 0, then the value of the y key is "
+"ignored. This key is only relevant in un-expanded mode. In expanded mode "
+"this key is ignored and the panel is placed at the screen edge specified by "
+"the orientation key."
+msgstr ""
+"Die Position des Panels auf der Y-Achse, beginnend unten vom Bildschirm. "
+"Falls dieser Wert -1 ist, wird er ignoriert und der Wert des Schlüssels »y« "
+"verwendet. Falls dieser Wert größer als 0 ist, wird der Wert des Schlüssels "
+"»y« ignoriert. Dieser Schlüssel kommt ausschließlich im nicht ausgedehnten "
+"Modus zum Tragen. Im ausgedehnten Modus wird dieser Schlüssel ignoriert und "
+"das Panel an der vom Schlüssel »orientation« angegebenen Bildschirmkante "
+"platziert."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:50
+msgid "Center panel on x-axis"
+msgstr "Panel auf X-Achse zentrieren"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:51
+msgid ""
+"If true, the x and x_right keys are ignored and the panel is placed at the "
+"center of the x-axis of the screen. If the panel is resized it will remain "
+"at that position - i.e. the panel will grow on both sides. If false, the x "
+"and x_right keys specify the location of the panel."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, werden die Schlüssel »x« und »x_right« "
+"ignoriert und das Panel im Zentrum der X-Achse auf dem Bildschirm platziert. "
+"Falls die Größe des Panels verändert wird, verharrt es auf dieser Position - "
+"das Panel wächst also auf beiden Seiten. Falls dieser Schlüssel FALSCH ist, "
+"geben die Schlüssel »x« und »x_right« den Anzeigeort des Panels an."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:55
+msgid "Center panel on y-axis"
+msgstr "Panel auf Y-Achse zentrieren"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:56
+msgid ""
+"If true, the y and y_bottom keys are ignored and the panel is placed at the "
+"center of the y-axis of the screen. If the panel is resized it will remain "
+"at that position - i.e. the panel will grow on both sides. If false, the y "
+"and y_bottom keys specify the location of the panel."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, werden die Schlüssel »y« und »y_bottom« "
+"ignoriert und das Panel im Zentrum der Y-Achse auf dem Bildschirm platziert. "
+"Falls die Größe des Panels verändert wird, verharrt es auf dieser Position - "
+"das Panel wächst also auf beiden Seiten. Falls dieser Schlüssel FALSCH ist, "
+"geben die Schlüssel »y« und »y_bottom« den Anzeigeort des Panels an."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:60
+msgid "Automatically hide panel into corner"
+msgstr "Panel automatisch in der Ecke verbergen"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:61
+msgid ""
+"If true, the panel is automatically hidden into a corner of the screen when "
+"the pointer leaves the panel area. Moving the pointer to that corner again "
+"will cause the panel to re-appear."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, wird das Panel automatisch in einer "
+"Bildschirmecke verborgen, sobald der Zeiger die Panel-Fläche verlässt. "
+"Erneutes Bewegen in diese Ecke sorgt dafür, dass das Panel wieder angezeigt "
+"wird."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:65
+msgid "Enable hide buttons"
+msgstr "Verbergen-Knöpfe aktivieren"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:66
+msgid ""
+"If true, buttons will be placed on each side of the panel which may be used "
+"to move the panel to edge of the screen, leaving only a button showing."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, werden auf jeder Seite des Panels Knöpfe "
+"angezeigt, die verwendet werden können, um das Panel an den Rand des "
+"Bildschirms zu verschieben, wobei in diesem Zustand nur ein Knopf angezeigt "
+"wird."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:70
+msgid "Enable arrows on hide buttons"
+msgstr "Pfeile auf Verbergen-Knöpfen anzeigen"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:71
+msgid ""
+"If true, arrows will be placed on the hide buttons. This key is only "
+"relevant if the enable_buttons key is true."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, werden auf den Verbergen-Knöpfen Pfeile "
+"angezeigt. Dieser Schlüssel kommt ausschließlich zum Tragen, falls der "
+"Schlüssel »enable_buttons« WAHR ist."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:76
+msgid "Panel autohide delay"
+msgstr "Verzögerung beim Auto-Verbergen"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:77
+msgid ""
+"Specifies the number of milliseconds delay after the pointer leaves the "
+"panel area before the panel is automatically hidden. This key is only "
+"relevant if the auto_hide key is true."
+msgstr ""
+"Gibt die Anzahl der Millisekunden an, die sich der Zeiger außerhalb der "
+"Panel-Fläche befinden muss, bevor das Panel automatisch verborgen wird. "
+"Dieser Schlüssel kommt ausschließlich zum Tragen, falls der Schlüssel "
+"»auto_hide« WAHR ist."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:82
+msgid "Panel autounhide delay"
+msgstr "Verzögerung beim Auto-Wiederanzeigen"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:83
+msgid ""
+"Specifies the number of milliseconds delay after the pointer enters the "
+"panel area before the panel is automatically re-shown. This key is only "
+"relevant if the auto_hide key is true."
+msgstr ""
+"Gibt die Anzahl der Millisekunden an, die sich der Zeiger über der Panel-"
+"Fläche befinden muss, bevor das Panel automatisch wieder angezeigt wird. "
+"Dieser Schlüssel kommt ausschließlich zum Tragen, falls der Schlüssel "
+"»auto_hide« WAHR ist."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:88
+msgid "Visible pixels when hidden"
+msgstr "Sichtbare Pixel wenn verborgen"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:89
+msgid ""
+"Specifies the number of pixels visible when the panel is automatically "
+"hidden into a corner. This key is only relevant if the auto_hide key is true."
+msgstr ""
+"Gibt die Anzahl der sichtbaren Pixel an, wenn das Panel automatisch in einer "
+"Ecke verbogen wurde. Dieser Schlüssel kommt ausschließlich zum Tragen, wenn "
+"der Schlüssel »auto_hide« WAHR ist."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:93
+msgid "Animation speed"
+msgstr "Animationsgeschwindigkeit"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:94
+msgid ""
+"The speed in which panel animations should occur. Possible values are \"slow"
+"\", \"medium\" and \"fast\". This key is only relevant if the "
+"enable_animations key is true."
+msgstr ""
+"Die Geschwindigkeit, in der Animationen wiedergegeben werden sollen. "
+"Zulässige Werte: »slow« (langsam), »medium« (mittel) sowie »fast« (schnell). "
+"Dieser Schlüssel kommt ausschließlich zum Tragen, falls der Schlüssel "
+"»enable_animations« WAHR ist."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:103
+msgid "Use custom background color"
+msgstr "Benutzerdefinierte Hintergrundfarbe verwenden"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:108
+msgid "Background Color"
+msgstr "Hintergrundfarbe"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:113
+msgid "Use custom background image"
+msgstr "Benutzerdefiniertes Hintergrundbild verwenden"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:118
+msgid "Background image"
+msgstr "Hintergrundbild"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:119
+msgid ""
+"Specifies the file to be used for the background image. If the image "
+"contains an alpha channel it will be composited onto the desktop background "
+"image."
+msgstr ""
+"Gibt die für das Hintergrundbild zu verwendende Datei an. Falls das Bild "
+"einen Alphakanal enthält, wird es mit dem Hintergrundbild der Arbeitsfläche "
+"gemischt."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:124
+msgid "Image options"
+msgstr "Bildoptionen"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:125
+msgid ""
+"Determines how the image set by image-uri is rendered. Possible values are "
+"\"none\", \"stretch\", \"fit\". With \"stretch\", the image will be scaled "
+"to the panel dimensions and the aspect ratio of the image will not be "
+"maintained. With \"fit\", the image will be scaled (retaining the aspect "
+"ratio of the image) to the panel height (if horizontal)."
+msgstr ""
+"Legt fest, wie das durch »image-uri« festgelegte Bild dargestellt wird. "
+"Mögliche Werte sind »none« (nicht), »stretch« (strecken), »fit« (einpassen). "
+"Durch »stretch« wird das Bild auf die Abmessungen des Panels skaliert, wobei "
+"das Seitenverhältnis des Bildes nicht beibehalten wird. »fit« skaliert das "
+"Bild auf die Höhe des Panels (falls horizontal) unter Beibehaltung des "
+"Seitenverhältnisses."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:130
+msgid "Rotate image on vertical panels"
+msgstr "Bild auf vertikalen Panels drehen"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:131
+msgid ""
+"If true, the background image will be rotated when the panel is oriented "
+"vertically."
+msgstr ""
+"Falls dieser Schlüssel WAHR ist, wird das Hintergrundbild gedreht angezeigt, "
+"falls das Panel vertikal ausgerichtet ist."
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:136
+msgid "Use custom text color"
+msgstr "Benutzerdefinierte Textfarbe verwenden"
+
+#: data/org.gnome.gnome-panel.toplevel.gschema.xml:141
+msgid "Text Color"
+msgstr "Textfarbe"
+
+#: gnome-panel/applet.c:333
+msgid "???"
+msgstr "???"
+
+#: gnome-panel/applet.c:471
+#: gnome-panel/libpanel-applet-private/gp-applet-frame.c:199
+#: libpanel-applet/panel-applet.c:1200
+msgid "_Move"
+msgstr "_Verschieben"
+
+#: gnome-panel/applet.c:478
+#: gnome-panel/libpanel-applet-private/gp-applet-frame.c:206
+#: libpanel-applet/panel-applet.c:1200
+msgid "_Remove From Panel"
+msgstr "Aus dem Panel _entfernen"
+
+#: gnome-panel/gnome-desktop-item-edit.c:27
+msgid "Create new file in the given directory"
+msgstr "Eine neue Datei im angegebenen Ordner anlegen"
+
+#: gnome-panel/gnome-desktop-item-edit.c:28
+msgid "[FILE...]"
+msgstr "[DATEI …]"
+
+#: gnome-panel/gnome-desktop-item-edit.c:106
+msgid "- Edit .desktop files"
+msgstr "– .desktop-Dateien bearbeiten"
+
+#: gnome-panel/gnome-desktop-item-edit.c:144
+#: gnome-panel/gnome-desktop-item-edit.c:198 gnome-panel/launcher.c:1095
+msgid "Create Launcher"
+msgstr "Einen Starter anlegen"
+
+#: gnome-panel/gnome-desktop-item-edit.c:169
+#: gnome-panel/gnome-desktop-item-edit.c:192
+msgid "Directory Properties"
+msgstr "Ordner-Eigenschaften"
+
+#: gnome-panel/gnome-desktop-item-edit.c:175 gnome-panel/launcher.c:935
+msgid "Launcher Properties"
+msgstr "Starter-Eigenschaften"
+
+#: gnome-panel/gnome-panel.desktop.in:4 gnome-panel/main.c:173
+msgid "Panel"
+msgstr "Panel"
+
+#: gnome-panel/gnome-panel.desktop.in:5
+msgid ""
+"Launch other applications and provide various utilities to manage windows, "
+"show the time, etc."
+msgstr ""
+"Startet andere Anwendungen und liefert verschiedene Werkzeuge zum Verwalten "
+"von Fenstern, dem Anzeigen der Zeit usw."
+
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: gnome-panel/gnome-panel.desktop.in:7
+msgid "gnome-panel"
+msgstr "gnome-panel"
+
+#: gnome-panel/gp-add-applet-window.c:137
+msgid "Help"
+msgstr "Hilfe"
+
+#: gnome-panel/gp-add-applet-window.c:148
+msgid "About"
+msgstr "Info"
+
+#: gnome-panel/gp-add-applet-window.c:193
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: gnome-panel/gp-add-applet-window.c:380 gnome-panel/panel-addto-dialog.ui:16
+msgid "Add to Panel"
+msgstr "Zum Panel hinzufügen"
+
+#: gnome-panel/gp-add-applet-window.c:553
+msgid "No applets found"
+msgstr "Keine Applets gefunden"
+
+#: gnome-panel/gp-arrow-button.c:120
+msgid "Hide Panel"
+msgstr "Panel verbergen"
+
+#: gnome-panel/gp-properties-dialog.c:213
+msgctxt "Orientation"
+msgid "Top"
+msgstr "Oben"
+
+#: gnome-panel/gp-properties-dialog.c:214
+msgctxt "Orientation"
+msgid "Bottom"
+msgstr "Unten"
+
+#: gnome-panel/gp-properties-dialog.c:215
+msgctxt "Orientation"
+msgid "Left"
+msgstr "Links"
+
+#: gnome-panel/gp-properties-dialog.c:216
+msgctxt "Orientation"
+msgid "Right"
+msgstr "Rechts"
+
+#: gnome-panel/gp-properties-dialog.ui:15
+msgid "Panel Properties"
+msgstr "Panel-Eigenschaften"
+
+#: gnome-panel/gp-properties-dialog.ui:53
+#: gnome-panel/gp-properties-dialog.ui:323
+msgid "Some of these properties are locked down"
+msgstr "Einige dieser Eigenschaften sind gesperrt"
+
+#: gnome-panel/gp-properties-dialog.ui:79
+msgid "_Orientation:"
+msgstr "_Ausrichtung:"
+
+#: gnome-panel/gp-properties-dialog.ui:122
+msgid "_Size:"
+msgstr "_Größe:"
+
+#: gnome-panel/gp-properties-dialog.ui:158
+msgid "pixels"
+msgstr "Pixel"
+
+#: gnome-panel/gp-properties-dialog.ui:191
+msgid "Miscellaneous:"
+msgstr "Sonstiges:"
+
+#: gnome-panel/gp-properties-dialog.ui:210
+msgid "E_xpand"
+msgstr "Aus_dehnen"
+
+#: gnome-panel/gp-properties-dialog.ui:225
+msgid "_Autohide"
+msgstr "Auto-_Verbergen"
+
+#: gnome-panel/gp-properties-dialog.ui:240
+msgid "Show hide _buttons"
+msgstr "Verbergen-_Knöpfe anzeigen"
+
+#: gnome-panel/gp-properties-dialog.ui:255
+msgid "Arro_ws on hide buttons"
+msgstr "_Pfeile auf Verbergen-Knöpfen anzeigen"
+
+#: gnome-panel/gp-properties-dialog.ui:288 modules/clock/clock.ui:629
+#: modules/fish/fish.ui:91
+msgid "General"
+msgstr "Allgemein"
+
+#: gnome-panel/gp-properties-dialog.ui:355
+msgid "Background color:"
+msgstr "Hintergrundfarbe:"
+
+#: gnome-panel/gp-properties-dialog.ui:418
+msgid "Background image:"
+msgstr "Hintergrundbild:"
+
+#: gnome-panel/gp-properties-dialog.ui:457
+msgid "Tile"
+msgstr "Kacheln"
+
+#: gnome-panel/gp-properties-dialog.ui:472
+msgid "Stretch"
+msgstr "Strecken"
+
+#: gnome-panel/gp-properties-dialog.ui:487
+msgid "Fit"
+msgstr "Einpassen"
+
+#: gnome-panel/gp-properties-dialog.ui:509
+msgid "Rotate image on vertical panel"
+msgstr "Bild auf vertikalem Panel drehen"
+
+#: gnome-panel/gp-properties-dialog.ui:552
+msgid "Text color:"
+msgstr "Textfarbe:"
+
+#: gnome-panel/gp-properties-dialog.ui:607
+msgid "Theme"
+msgstr "Thema"
+
+#: gnome-panel/launcher.c:339
+msgid "Could not show this URL"
+msgstr "Diese Adresse konnte nicht angezeigt werden"
+
+#: gnome-panel/launcher.c:340
+msgid "No URL was specified."
+msgstr "Es wurde keine Adresse festgelegt."
+
+#: gnome-panel/launcher.c:378 gnome-panel/libpanel-util/panel-launch.c:50
+msgid "Could not launch application"
+msgstr "Anwendung konnte nicht gestartet werden"
+
+#: gnome-panel/launcher.c:422
+msgid "Could not use dropped item"
+msgstr "Übergebenes Objekt konnte nicht verarbeitet werden"
+
+#: gnome-panel/launcher.c:620
+msgid "No URI provided for panel launcher desktop file\n"
+msgstr "Keine Adresse für Panel-Starter-Arbeitsflächen-Datei angegeben\n"
+
+#: gnome-panel/launcher.c:665
+#, c-format
+msgid "Unable to open desktop file %s for panel launcher%s%s\n"
+msgstr ""
+"Arbeitsflächen-Datei %s konnte nicht für Panel-Starter %s geöffnet werden%s\n"
+
+#: gnome-panel/launcher.c:1000
+msgid "_Launch"
+msgstr "_Starten"
+
+#: gnome-panel/launcher.c:1005 gnome-panel/panel-action-button.c:169
+#: gnome-panel/panel-context-menu.c:135
+msgid "_Properties"
+msgstr "Ei_genschaften"
+
+#: gnome-panel/launcher.c:1036
+msgid "Launcher location is not set, cannot load launcher\n"
+msgstr ""
+"Ort des Starters ist nicht festgelegt; Starter kann nicht geladen werden\n"
+
+#: gnome-panel/launcher.c:1166 gnome-panel/panel-ditem-editor.c:1315
+#: gnome-panel/panel-ditem-editor.c:1349 gnome-panel/panel-ditem-editor.c:1380
+msgid "Could not save launcher"
+msgstr "Starter konnte nicht gespeichert werden"
+
+#. FIXME: We need a title in this case, but we don't know what
+#. * the format should be. Let's put something simple until
+#. * the following bug gets fixed:
+#. * http://bugzilla.gnome.org/show_bug.cgi?id=165132
+#. FIXME: http://bugzilla.gnome.org/show_bug.cgi?id=165132
+#: gnome-panel/libpanel-util/panel-error.c:78
+#: gnome-panel/panel-applet-frame.c:800
+msgid "Error"
+msgstr "Fehler"
+
+#: gnome-panel/libpanel-util/panel-icon-chooser.c:383
+msgid "Choose an icon"
+msgstr "Wählen Sie ein Symbol"
+
+#: gnome-panel/libpanel-util/panel-icon-chooser.c:386 gnome-panel/panel.c:1251
+#: gnome-panel/panel-ditem-editor.c:655 gnome-panel/panel-ditem-editor.c:997
+#: gnome-panel/panel-force-quit.c:228 gnome-panel/panel-recent.c:152
+#: gnome-panel/panel-run-dialog.c:1277 gnome-panel/panel-run-dialog.ui:236
+#: modules/clock/clock.ui:67 modules/menu/gp-recent-menu.c:206
+msgid "_Cancel"
+msgstr "Abbre_chen"
+
+#: gnome-panel/libpanel-util/panel-icon-chooser.c:388
+#: gnome-panel/panel-ditem-editor.c:999
+msgid "_Open"
+msgstr "Ö_ffnen"
+
+#: gnome-panel/libpanel-util/panel-launch.c:47 modules/menu/gp-menu-utils.c:353
+#, c-format
+msgid "Could not launch '%s'"
+msgstr "»%s« konnte nicht gestartet werden"
+
+#: gnome-panel/libpanel-util/panel-show.c:46 modules/menu/gp-menu-utils.c:387
+#, c-format
+msgid "Could not open location '%s'"
+msgstr "Speicherort »%s« konnte nicht angezeigt werden"
+
+#: gnome-panel/main.c:37
+msgid "Replace a currently running panel"
+msgstr "Momentan laufendes Panel ersetzen"
+
+#: gnome-panel/main.c:38
+msgid "Print version"
+msgstr "Version ausgeben"
+
+#: gnome-panel/panel-action-button.c:159
+msgid "_Lock Screen"
+msgstr "Bildschirm _sperren"
+
+#: gnome-panel/panel-action-button.c:164
+msgid "_Activate Screensaver"
+msgstr "Bildschirmschoner _aktivieren"
+
+#: gnome-panel/panel-action-button.c:356 modules/menu/gp-lock-logout.c:966
+msgid "Lock Screen"
+msgstr "Bildschirm sperren"
+
+#: gnome-panel/panel-action-button.c:357 modules/menu/gp-lock-logout.c:967
+msgid "Protect your computer from unauthorized use"
+msgstr "Den Rechner vor unbefugtem Zugriff schützen"
+
+#. when changing one of those two strings, don't forget to
+#. * update the ones in panel-menu-items.c (look for
+#. * "1" (msgctxt: "panel:showusername"))
+#: gnome-panel/panel-action-button.c:370 modules/menu/gp-lock-logout.c:949
+msgid "Log Out"
+msgstr "Abmelden"
+
+#: gnome-panel/panel-action-button.c:371 modules/menu/gp-lock-logout.c:950
+msgid "Log out of this session to log in as a different user"
+msgstr ""
+"Von dieser Sitzung abmelden, um sich als ein anderer Benutzer anzumelden"
+
+#: gnome-panel/panel-action-button.c:379
+msgid "Run Application..."
+msgstr "Anwendung ausführen …"
+
+#: gnome-panel/panel-action-button.c:380
+msgid "Run an application by typing a command or choosing from a list"
+msgstr ""
+"Eine Anwendung durch Eingabe eines Befehls oder Auswahl aus einer Liste "
+"ausführen"
+
+#: gnome-panel/panel-action-button.c:388
+msgid "Search for Files..."
+msgstr "Nach Dateien suchen …"
+
+#: gnome-panel/panel-action-button.c:389
+msgid "Locate documents and folders on this computer by name or content"
+msgstr ""
+"Auf diesem Rechner nach Namen und Inhalten von Dokumenten und Ordnern suchen"
+
+#: gnome-panel/panel-action-button.c:396 gnome-panel/panel-force-quit.c:237
+msgid "Force Quit"
+msgstr "Beenden erzwingen"
+
+# CHECK - misbehaving übersetzen, ohne erzieherisch zu wirken
+# 	  ("schlecht benehmen")
+#: gnome-panel/panel-action-button.c:397
+msgid "Force a misbehaving application to quit"
+msgstr "Das Beenden einer fehlerhaften Anwendung erzwingen"
+
+#: gnome-panel/panel-action-button.c:405 modules/menu/gp-lock-logout.c:1008
+msgid "Hibernate"
+msgstr "Ruhezustand"
+
+#: gnome-panel/panel-action-button.c:414 modules/menu/gp-lock-logout.c:1025
+msgid "Suspend"
+msgstr "Bereitschaft"
+
+#: gnome-panel/panel-action-button.c:423
+msgid "Hybrid sleep"
+msgstr "Hybrid-Ruhezustand"
+
+#: gnome-panel/panel-action-button.c:432 modules/menu/gp-lock-logout.c:1061
+msgid "Restart"
+msgstr "Neu starten"
+
+#: gnome-panel/panel-action-button.c:433 modules/menu/gp-lock-logout.c:1062
+msgid "Restart the computer"
+msgstr "Den Rechner neustarten"
+
+#: gnome-panel/panel-action-button.c:441 modules/menu/gp-lock-logout.c:1078
+msgid "Power Off"
+msgstr "Ausschalten"
+
+#: gnome-panel/panel-action-button.c:442 modules/menu/gp-lock-logout.c:1079
+msgid "Power off the computer"
+msgstr "Den Rechner ausschalten"
+
+#: gnome-panel/panel-addto-dialog.c:136 gnome-panel/panel-menu-button.c:953
+#: modules/menu/gp-menu-module.c:39
+msgid "Main Menu"
+msgstr "Hauptmenü"
+
+#: gnome-panel/panel-addto-dialog.c:137 modules/menu/gp-menu-module.c:40
+msgid "The main GNOME menu"
+msgstr "Das GNOME-Hauptmenü"
+
+#: gnome-panel/panel-addto-dialog.c:185
+msgid "(empty)"
+msgstr "(leer)"
+
+#: gnome-panel/panel-addto-dialog.c:384
+msgid "Custom Application Launcher"
+msgstr "Benutzerdefinierter Anwendungsstarter"
+
+#: gnome-panel/panel-addto-dialog.c:385
+msgid "Create a new launcher"
+msgstr "Einen neuen Starter anlegen"
+
+#: gnome-panel/panel-addto-dialog.c:394
+msgid "Application Launcher..."
+msgstr "Anwendungsstarter …"
+
+#: gnome-panel/panel-addto-dialog.c:395
+msgid "Copy a launcher from the applications menu"
+msgstr "Einen Anwendungsstarter aus dem Anwendungsmenü kopieren"
+
+#: gnome-panel/panel-addto-dialog.c:879
+#, c-format
+msgid "Find an _item to add to \"%s\":"
+msgstr "Wählen Sie ein _Objekt, das zu »%s« hinzugefügt werden soll:"
+
+#: gnome-panel/panel-addto-dialog.c:883
+msgid "Find an _item to add to the panel:"
+msgstr "Wählen Sie ein _Objekt, das zum Panel hinzugefügt werden soll:"
+
+#: gnome-panel/panel-addto-dialog.c:1005
+msgid "_Forward"
+msgstr "_Weiter"
+
+#: gnome-panel/panel-addto-dialog.c:1008 gnome-panel/panel-addto-dialog.ui:158
+#: modules/clock/clock.ui:682
+msgid "_Add"
+msgstr "_Hinzufügen"
+
+#: gnome-panel/panel-addto-dialog.ui:38
+msgid "Find an item to add to the panel:"
+msgstr "Wählen Sie ein Objekt, das zum Panel hinzugefügt werden soll:"
+
+#: gnome-panel/panel-addto-dialog.ui:142
+msgid "_Back"
+msgstr "_Zurück"
+
+#: gnome-panel/panel-addto-dialog.ui:173 gnome-panel/panel-ditem-editor.c:652
+#: modules/clock/clock.ui:406 modules/fish/fish-applet.c:622
+#: modules/fish/fish.ui:51 modules/wncklet/window-list.ui:285
+#: modules/wncklet/workspace-switcher.ui:37
+msgid "_Close"
+msgstr "S_chließen"
+
+#: gnome-panel/panel-applet-frame.c:763
+#, c-format
+msgid "The panel encountered a problem while loading \"%s\"."
+msgstr "Das Panel ist beim Laden von »%s« auf ein Problem gestoßen."
+
+#: gnome-panel/panel-applet-frame.c:775
+msgid "OK"
+msgstr "OK"
+
+#: gnome-panel/panel-applet-frame.c:779
+msgid "Do you want to delete the applet from your configuration?"
+msgstr "Wollen Sie das Applet aus Ihrer Konfiguration löschen?"
+
+#: gnome-panel/panel-applet-frame.c:782
+msgid "D_on't Delete"
+msgstr "_Nicht löschen"
+
+#: gnome-panel/panel-applet-frame.c:783 gnome-panel/panel.c:1252
+msgid "_Delete"
+msgstr "Lö_schen"
+
+#: gnome-panel/panel.c:416
+#, c-format
+msgid "Open URL: %s"
+msgstr "Adresse öffnen: %s"
+
+#. Translators: %s is a URI
+#: gnome-panel/panel.c:485 gnome-panel/panel-menu-items.c:513
+#: modules/menu/gp-bookmarks.c:101 modules/menu/gp-recent-menu.c:135
+#, c-format
+msgid "Open '%s'"
+msgstr "»%s« öffnen"
+
+#. is_exec?
+#. exec
+#. name
+#: gnome-panel/panel.c:533 gnome-panel/panel-menu-items.c:1066
+#: modules/menu/gp-places-menu.c:428
+msgid "Open your personal folder"
+msgstr "Den persönlichen Ordner öffnen"
+
+#. is_exec?
+#. exec
+#: gnome-panel/panel.c:542 gnome-panel/panel-menu-items.c:1095
+#: modules/menu/gp-places-menu.c:511
+msgid "Computer"
+msgstr "Rechner"
+
+#. name
+#: gnome-panel/panel.c:543 gnome-panel/panel-menu-items.c:1096
+#: modules/menu/gp-places-menu.c:512
+msgid ""
+"Browse all local and remote disks and folders accessible from this computer"
+msgstr ""
+"Alle lokalen und entfernten Laufwerke und Ordner durchsuchen, die von diesem "
+"Rechner aus erreichbar sind"
+
+#. is_exec?
+#. exec
+#: gnome-panel/panel.c:550 gnome-panel/panel-menu-items.c:1105
+#: modules/menu/gp-places-menu.c:567
+msgid "Network"
+msgstr "Netzwerk"
+
+#. name
+#: gnome-panel/panel.c:551 gnome-panel/panel-menu-items.c:1106
+#: modules/menu/gp-places-menu.c:568
+msgid "Browse bookmarked and local network locations"
+msgstr "Lokale und als Lesezeichen gespeicherte Orte durchsuchen"
+
+#: gnome-panel/panel.c:1243
+msgid "Delete this panel?"
+msgstr "Dieses Panel löschen?"
+
+#: gnome-panel/panel.c:1247
+msgid ""
+"When a panel is deleted, the panel and its\n"
+"settings are lost."
+msgstr ""
+"Beim Löschen eines Panels gehen seine\n"
+"gesamten Einstellungen verloren."
+
+#: gnome-panel/panel-context-menu.c:60
+msgid "Cannot delete this panel"
+msgstr "Dieses Panel konnte nicht gelöscht werden"
+
+#: gnome-panel/panel-context-menu.c:61
+msgid "You must always have at least one panel."
+msgstr "Es muss immer mindestens ein Panel vorhanden sein."
+
+#: gnome-panel/panel-context-menu.c:126
+msgid "_Add to Panel..."
+msgstr "Zum Panel _hinzufügen …"
+
+#: gnome-panel/panel-context-menu.c:142
+msgid "_Delete This Panel"
+msgstr "Dieses Panel _löschen"
+
+#: gnome-panel/panel-context-menu.c:154
+msgid "_New Panel"
+msgstr "Panel a_nlegen"
+
+#: gnome-panel/panel-ditem-editor.c:110
+msgid "Application"
+msgstr "Anwendung"
+
+#: gnome-panel/panel-ditem-editor.c:112
+msgid "Application in Terminal"
+msgstr "Anwendung im Terminal"
+
+#: gnome-panel/panel-ditem-editor.c:114
+msgid "Location"
+msgstr "Ort"
+
+# CHECK
+#. Type
+#: gnome-panel/panel-ditem-editor.c:600
+msgid "_Type:"
+msgstr "_Typ:"
+
+#. Name
+#: gnome-panel/panel-ditem-editor.c:607
+msgid "_Name:"
+msgstr "_Name:"
+
+#: gnome-panel/panel-ditem-editor.c:632
+msgid "_Browse..."
+msgstr "_Durchsuchen …"
+
+#. Comment
+#: gnome-panel/panel-ditem-editor.c:639
+msgid "Co_mment:"
+msgstr "Ko_mmentar:"
+
+#: gnome-panel/panel-ditem-editor.c:646
+msgid "_Revert"
+msgstr "Zu_rücksetzen"
+
+#: gnome-panel/panel-ditem-editor.c:658 gnome-panel/panel-run-dialog.c:1278
+#: modules/clock/clock.ui:82
+msgid "_OK"
+msgstr "_OK"
+
+#: gnome-panel/panel-ditem-editor.c:966
+msgid "Choose an application..."
+msgstr "Anwendung auswählen …"
+
+#: gnome-panel/panel-ditem-editor.c:970
+msgid "Choose a file..."
+msgstr "Datei auswählen …"
+
+#: gnome-panel/panel-ditem-editor.c:1135 gnome-panel/panel-ditem-editor.c:1144
+msgid "Comm_and:"
+msgstr "_Befehl:"
+
+#: gnome-panel/panel-ditem-editor.c:1153
+msgid "_Location:"
+msgstr "_Ort:"
+
+#: gnome-panel/panel-ditem-editor.c:1316
+msgid "The name of the launcher is not set."
+msgstr "Der Name des Starters ist nicht gesetzt."
+
+#: gnome-panel/panel-ditem-editor.c:1320
+msgid "Could not save directory properties"
+msgstr "Ordner-Eigenschaften konnten nicht gespeichert werden"
+
+#: gnome-panel/panel-ditem-editor.c:1321
+msgid "The name of the directory is not set."
+msgstr "Der Name des Ordners ist nicht gesetzt."
+
+#: gnome-panel/panel-ditem-editor.c:1337
+msgid "The command of the launcher is not set."
+msgstr "Der Befehl des Startes ist nicht gesetzt."
+
+#: gnome-panel/panel-ditem-editor.c:1340
+msgid "The location of the launcher is not set."
+msgstr "Der Ort des Starters ist nicht gesetzt."
+
+#: gnome-panel/panel-force-quit.c:75
+msgid ""
+"Click on a window to force the application to quit. To cancel press <ESC>."
+msgstr ""
+"Klicken Sie auf ein Fenster, um das Beenden dieser Anwendung zu erzwingen. "
+"Drücken Sie die Escape-Taste, um abzubrechen."
+
+# CHECK - misbehaving übersetzen, ohne erzieherisch zu wirken
+# 	  ("schlecht benehmen")
+#: gnome-panel/panel-force-quit.c:220
+msgid "Force this application to exit?"
+msgstr "Das Beenden dieser Anwendung erzwingen?"
+
+#: gnome-panel/panel-force-quit.c:223
+msgid ""
+"If you choose to force an application to exit, unsaved changes in any open "
+"documents in it might get lost."
+msgstr ""
+"Wenn Sie das Beenden einer Anwendung erzwingen, gehen die Änderungen in "
+"allen geöffneten Dokumenten verloren."
+
+#: gnome-panel/panel-force-quit.c:230
+msgid "_Force quit"
+msgstr "Beenden _erzwingen"
+
+#: gnome-panel/panel-layout.c:1095 gnome-panel/panel-layout.c:1110
+msgid "Cannot create initial panel layout.\n"
+msgstr "Initiale Panel-Anordnung konnte nicht erstellt werden.\n"
+
+#: gnome-panel/panel-menu-button.c:552 modules/menu/main-menu-menu.ui:5
+#: modules/menu/menu-bar-menu.ui:5
+msgid "_Edit Menus"
+msgstr "Menüs _bearbeiten"
+
+#: gnome-panel/panel-menu-items.c:362 modules/menu/gp-lock-logout.c:932
+msgid "Switch User"
+msgstr "Benutzer wechseln"
+
+#: gnome-panel/panel-menu-items.c:489 modules/menu/gp-places-menu.c:474
+msgid "Bookmarks"
+msgstr "Lesezeichen"
+
+#: gnome-panel/panel-menu-items.c:583 modules/menu/gp-places-menu.c:93
+#, c-format
+msgid "Unable to scan %s for media changes"
+msgstr "%s konnte nicht auf Medienwechsel überprüft werden"
+
+#: gnome-panel/panel-menu-items.c:625 modules/menu/gp-places-menu.c:294
+#, c-format
+msgid "Rescan %s"
+msgstr "%s neu einlesen"
+
+#: gnome-panel/panel-menu-items.c:662 modules/menu/gp-places-menu.c:143
+#, c-format
+msgid "Unable to mount %s"
+msgstr "%s konnte nicht eingehängt werden"
+
+#: gnome-panel/panel-menu-items.c:724 modules/menu/gp-places-menu.c:337
+#, c-format
+msgid "Mount %s"
+msgstr "%s einhängen"
+
+#: gnome-panel/panel-menu-items.c:932 modules/menu/gp-places-menu.c:534
+msgid "Removable Media"
+msgstr "Wechselmedium"
+
+#: gnome-panel/panel-menu-items.c:1023 modules/menu/gp-places-menu.c:590
+msgid "Network Places"
+msgstr "Netzwerkorte"
+
+#. Translators: Desktop is used here as in
+#. * "Desktop Folder" (this is not the Desktop
+#. * environment).
+#. Translators: Desktop is used here as in "Desktop Folder"
+#. * (this is not the Desktop environment).
+#.
+#: gnome-panel/panel-menu-items.c:1083 modules/menu/gp-places-menu.c:451
+msgctxt "Desktop Folder"
+msgid "Desktop"
+msgstr "Arbeitsfläche"
+
+#: gnome-panel/panel-menu-items.c:1084 modules/menu/gp-places-menu.c:452
+msgid "Open the contents of your desktop in a folder"
+msgstr "Die Arbeitsfläche in einem Ordner öffnen"
+
+#: gnome-panel/panel-menu-items.c:1363 modules/menu/gp-menu-bar-applet.c:156
+msgid "Places"
+msgstr "Orte"
+
+#: gnome-panel/panel-image-menu-item.c:125
+msgid "Image widget"
+msgstr "Bild-Widget"
+
+#: gnome-panel/panel-image-menu-item.c:126
+msgid "Child widget to appear next to the menu text"
+msgstr "Unterelement, das neben dem Menütext angezeigt wird"
+
+#: gnome-panel/panel-image-menu-item.c:133
+msgid "Always show image"
+msgstr "Bild immer anzeigen"
+
+#: gnome-panel/panel-image-menu-item.c:134
+msgid "Whether the image will always be shown"
+msgstr "Legt fest, ob das Bild immer angezeigt wird"
+
+#: gnome-panel/panel-recent.c:76 gnome-panel/panel-recent.c:86
+#, c-format
+msgid "Could not open recently used document \"%s\""
+msgstr "Zuletzt geöffnetes Dokument »%s« konnte nicht geöffnet werden"
+
+#: gnome-panel/panel-recent.c:88
+#, c-format
+msgid "An unknown error occurred while trying to open \"%s\"."
+msgstr "Beim Versuch, »%s« zu öffnen, ist ein unbekannter Fehler aufgetreten."
+
+#: gnome-panel/panel-recent.c:145 modules/menu/gp-recent-menu.c:194
+msgid "Clear the Recent Documents list?"
+msgstr "Liste der zuletzt geöffneten Dokumente löschen?"
+
+#: gnome-panel/panel-recent.c:147 modules/menu/gp-recent-menu.c:199
+msgid ""
+"If you clear the Recent Documents list, you clear the following:\n"
+"• All items from the Places → Recent Documents menu item.\n"
+"• All items from the recent documents list in all applications."
+msgstr ""
+"Das Leeren der Liste der zuletzt geöffneten Dokumente betrifft:\n"
+"• Alle Einträge im Menü Orte → Zuletzt geöffnete Dokumente.\n"
+"• Die Liste der zuletzt geöffneten Dokumente in allen Anwendungen."
+
+#: gnome-panel/panel-recent.c:153 modules/menu/gp-recent-menu.c:207
+msgid "C_lear"
+msgstr "_Löschen"
+
+#: gnome-panel/panel-recent.c:159
+msgid "Clear Recent Documents"
+msgstr "Liste der zuletzt geöffneten Dokumente löschen"
+
+#: gnome-panel/panel-recent.c:194 modules/menu/gp-places-menu.c:617
+msgid "Recent Documents"
+msgstr "Zuletzt geöffnete Dokumente"
+
+#: gnome-panel/panel-recent.c:232 modules/menu/gp-recent-menu.c:239
+msgid "Clear Recent Documents..."
+msgstr "Liste der zuletzt geöffneten Dokumente löschen …"
+
+#: gnome-panel/panel-recent.c:234 modules/menu/gp-recent-menu.c:244
+msgid "Clear all items from the recent documents list"
+msgstr "Liste der zuletzt geöffneten Dokumente löschen"
+
+#: gnome-panel/panel-run-dialog.c:426
+msgid "Cannot find a terminal, using xterm, even if it may not work"
+msgstr ""
+"Es kann kein Terminal gefunden werden. xterm wird verwendet, selbst falls es "
+"nicht funktioniert"
+
+#: gnome-panel/panel-run-dialog.c:490
+#, c-format
+msgid "Could not run command '%s'"
+msgstr "Befehl »%s« konnte nicht ausgeführt werden"
+
+#: gnome-panel/panel-run-dialog.c:531
+#, c-format
+msgid "Could not convert '%s' from UTF-8"
+msgstr "»%s« konnte nicht aus UTF-8 konvertiert werden"
+
+#: gnome-panel/panel-run-dialog.c:1274
+msgid "Choose a file to append to the command..."
+msgstr "Wählen Sie eine an den Befehl anzuhängende Datei …"
+
+#: gnome-panel/panel-run-dialog.c:1657 gnome-panel/panel-run-dialog.ui:194
+msgid "Select an application to view its description."
+msgstr "Wählen Sie eine Anwendung, um ihre Beschreibung anzuzeigen."
+
+#: gnome-panel/panel-run-dialog.c:1695
+#, c-format
+msgid "Will run command: '%s'"
+msgstr "Den Befehl »%s« ausführen"
+
+#: gnome-panel/panel-run-dialog.c:1728
+#, c-format
+msgid "URI list dropped on run dialog had wrong format (%d) or length (%d)\n"
+msgstr ""
+"Die mit dem »Ausführen«-Dialog übergebene URI-Liste hat ein falsches Format "
+"(%d) oder eine falsche Länge (%d)\n"
+
+#: gnome-panel/panel-run-dialog.ui:8
+msgid "Run Application"
+msgstr "Anwendung ausführen"
+
+#: gnome-panel/panel-run-dialog.ui:45
+msgid "Command icon"
+msgstr "Befehlssymbol"
+
+#: gnome-panel/panel-run-dialog.ui:46
+msgid "The icon of the command to be run."
+msgstr "Das Symbol des auszuführenden Befehls."
+
+#: gnome-panel/panel-run-dialog.ui:89
+msgid "Run in _terminal"
+msgstr "Im _Terminal ausführen"
+
+#: gnome-panel/panel-run-dialog.ui:98
+msgid "Select this box to run the command in a terminal window."
+msgstr ""
+"Kreuzen Sie dieses Feld an, um den Befehl in einem Terminal-Fenster "
+"auszuführen."
+
+#: gnome-panel/panel-run-dialog.ui:110
+msgid "Run with _file..."
+msgstr "Mit _Datei ausführen …"
+
+# CHECK - semantisch fragwürdig
+#: gnome-panel/panel-run-dialog.ui:117
+msgid ""
+"Click this button to browse for a file whose name to append to the command "
+"string."
+msgstr ""
+"Klicken Sie auf diesen Knopf, um eine Datei auszuwählen, deren Name an die "
+"Befehlszeichenkette angehängt werden soll."
+
+#: gnome-panel/panel-run-dialog.ui:176
+msgid "List of known applications"
+msgstr "Liste bekannter Anwendungen"
+
+#: gnome-panel/panel-run-dialog.ui:212
+msgid "Show list of known _applications"
+msgstr "Liste bekannter _Anwendungen anzeigen"
+
+#: gnome-panel/panel-run-dialog.ui:251
+msgid "_Run"
+msgstr "Aus_führen"
+
+#: gnome-panel/panel-run-dialog.ui:260
+msgid ""
+"Click this button to run the selected application or the command in the "
+"command entry field."
+msgstr ""
+"Klicken Sie auf diesen Knopf, um die gewählte Anwendung oder den Befehl im "
+"Befehlseintragfeld auszuführen."
+
+#. translators: these string will be shown in MetaCity's switch window
+#. * popup when you pass the focus to a panel
+#: gnome-panel/panel-toplevel.c:1565
+msgid "Top Expanded Edge Panel"
+msgstr "Oberes Kanten-Panel, ausgedehnt"
+
+#: gnome-panel/panel-toplevel.c:1566
+msgid "Top Centered Panel"
+msgstr "Oberes Panel, zentriert"
+
+#: gnome-panel/panel-toplevel.c:1567
+msgid "Top Floating Panel"
+msgstr "Oberes Panel, freischwebend"
+
+#: gnome-panel/panel-toplevel.c:1568
+msgid "Top Edge Panel"
+msgstr "Oberes Kanten-Panel"
+
+#: gnome-panel/panel-toplevel.c:1572
+msgid "Bottom Expanded Edge Panel"
+msgstr "Unteres Kanten-Panel, ausgedehnt"
+
+#: gnome-panel/panel-toplevel.c:1573
+msgid "Bottom Centered Panel"
+msgstr "Unteres Panel, zentriert"
+
+#: gnome-panel/panel-toplevel.c:1574
+msgid "Bottom Floating Panel"
+msgstr "Unteres Panel, freischwebend"
+
+#: gnome-panel/panel-toplevel.c:1575
+msgid "Bottom Edge Panel"
+msgstr "Unteres Kanten-Panel"
+
+#: gnome-panel/panel-toplevel.c:1579
+msgid "Left Expanded Edge Panel"
+msgstr "Linkes Kanten-Panel, ausgedehnt"
+
+#: gnome-panel/panel-toplevel.c:1580
+msgid "Left Centered Panel"
+msgstr "Linkes Panel, zentriert"
+
+#: gnome-panel/panel-toplevel.c:1581
+msgid "Left Floating Panel"
+msgstr "Linkes Panel, freischwebend"
+
+#: gnome-panel/panel-toplevel.c:1582
+msgid "Left Edge Panel"
+msgstr "Linkes Kanten-Panel"
+
+#: gnome-panel/panel-toplevel.c:1586
+msgid "Right Expanded Edge Panel"
+msgstr "Rechtes Kanten-Panel, ausgedehnt"
+
+#: gnome-panel/panel-toplevel.c:1587
+msgid "Right Centered Panel"
+msgstr "Rechtes Panel, zentriert"
+
+#: gnome-panel/panel-toplevel.c:1588
+msgid "Right Floating Panel"
+msgstr "Rechtes Panel, freischwebend"
+
+#: gnome-panel/panel-toplevel.c:1589
+msgid "Right Edge Panel"
+msgstr "Rechtes Kanten-Panel"
+
+#: gnome-panel/panel-util.c:312
+#, c-format
+msgid "Icon '%s' not found"
+msgstr "Symbol »%s« konnte nicht gefunden werden"
+
+#: gnome-panel/panel-util.c:555
+msgid "file"
+msgstr "Datei"
+
+#: gnome-panel/panel-util.c:723 modules/menu/gp-menu-utils.c:207
+msgid "Home"
+msgstr "Persönlicher Ordner"
+
+#. Translators: this is the same string as the one found in
+#. * nautilus
+#. Translators: this is the same string as the one found in nautilus
+#: gnome-panel/panel-util.c:732 modules/menu/gp-menu-utils.c:224
+msgid "File System"
+msgstr "Dateisystem"
+
+#. Translators: the first string is the name of a gvfs
+#. * method, and the second string is a path. For
+#. * example, "Trash: some-directory". It means that the
+#. * directory called "some-directory" is in the trash.
+#.
+#. Translators: the first string is the name of a gvfs method, and the
+#. * second string is a path. For example, "Trash: some-directory". It
+#. * means that the directory called "some-directory" is in the trash.
+#.
+#: gnome-panel/panel-util.c:946 modules/menu/gp-menu-utils.c:122
+#, c-format
+msgid "%1$s: %2$s"
+msgstr "%1$s: %2$s"
+
+#. Translators: This is a strftime format string.
+#. * It is used to display the time in 12-hours format
+#. * (eg, like in the US: 8:10 am). The %p expands to
+#. * am/pm.
+#.
+#. Translators: This is a strftime format string.
+#. * It is used to display the time in 12-hours format (eg, like
+#. * in the US: 8:10 am). The %p expands to am/pm.
+#.
+#: modules/clock/calendar-window.c:271 modules/clock/clock-location-tile.c:490
+msgid "%l:%M %p"
+msgstr "%I:%M %p"
+
+#. Translators: This is a strftime format string.
+#. * It is used to display the time in 24-hours format
+#. * (eg, like in France: 20:10).
+#.
+#. Translators: This is a strftime format string.
+#. * It is used to display the time in 24-hours format
+#. * (eg, like in France: 20:10).
+#. Translators: This is a strftime format string.
+#. * It is used to display the time in 24-hours format (eg, like
+#. * in France: 20:10).
+#.
+#: modules/clock/calendar-window.c:277 modules/clock/clock-location-tile.c:453
+#: modules/clock/clock-location-tile.c:497
+msgid "%H:%M"
+msgstr "%H:%M"
+
+#. Translators: This is a strftime format string.
+#. * It is used to display the start date of an appointment, in
+#. * the most abbreviated way possible.
+#.
+#: modules/clock/calendar-window.c:284
+msgid "%b %d"
+msgstr "%d. %b"
+
+#: modules/clock/calendar-window.c:789
+msgid "Tasks"
+msgstr "Aufgaben"
+
+#: modules/clock/calendar-window.c:789 modules/clock/calendar-window.c:972
+#: modules/clock/calendar-window.c:1563
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: modules/clock/calendar-window.c:912
+msgid "All Day"
+msgstr "Ganztägig"
+
+#: modules/clock/calendar-window.c:1056
+msgid "Appointments"
+msgstr "Termine"
+
+#: modules/clock/calendar-window.c:1081
+msgid "Birthdays and Anniversaries"
+msgstr "Geburts- und Jahrestage"
+
+#: modules/clock/calendar-window.c:1106
+msgid "Weather Information"
+msgstr "Wetterinformationen"
+
+#: modules/clock/calendar-window.c:1563 modules/clock/clock.ui:748
+msgid "Locations"
+msgstr "Orte"
+
+#: modules/clock/calendar-window.c:1824
+msgid "Calendar"
+msgstr "Kalender"
+
+#. Translators: This is a strftime format string.
+#. * It is used to display a date.
+#.
+#: modules/clock/clock-applet.c:227
+msgid "%A %B %d (%Z)"
+msgstr "%A, %d. %B (%Z)"
+
+#: modules/clock/clock-applet.c:236
+msgid "Click to hide your appointments and tasks"
+msgstr "Klicken, um Ihre Termine und Aufgaben zu verbergen"
+
+#: modules/clock/clock-applet.c:239
+msgid "Click to view your appointments and tasks"
+msgstr "Klicken, um Ihre Termine und Aufgaben anzuzeigen"
+
+#: modules/clock/clock-applet.c:243
+msgid "Click to hide month calendar"
+msgstr "Klicken, um den Monatskalender zu verbergen"
+
+#: modules/clock/clock-applet.c:246
+msgid "Click to view month calendar"
+msgstr "Klicken, um den Monatskalender anzuzeigen"
+
+#. Done!
+#: modules/clock/clock-applet.c:850
+msgid "Computer Clock"
+msgstr "Rechner-Uhr"
+
+#: modules/clock/clock-applet.c:983
+msgid "Failed to open the time settings"
+msgstr "Zeiteinstellungen konnten nicht geöffnet werden"
+
+#: modules/clock/clock-applet.c:1543 modules/fish/fish-applet.c:148
+#, c-format
+msgid "Could not display help document '%s'"
+msgstr "Das Hilfedokument »%s« konnte nicht dargestellt werden"
+
+#: modules/clock/clock-applet.c:1572 modules/fish/fish-applet.c:174
+msgid "Error displaying help document"
+msgstr "Fehler beim Darstellen des Hilfedokuments"
+
+#: modules/clock/clock-applet.c:1621
+msgid "Choose Location"
+msgstr "Ort wählen"
+
+#: modules/clock/clock-applet.c:1700
+msgid "Edit Location"
+msgstr "Ort bearbeiten"
+
+#: modules/clock/clock-applet.c:1736 modules/clock/clock-applet.c:1744
+msgid "Default"
+msgstr "Vorgabe"
+
+#: modules/clock/clock-applet.c:1737
+msgid "Kelvin"
+msgstr "Kelvin"
+
+#: modules/clock/clock-applet.c:1738
+msgid "Celsius"
+msgstr "Celsius"
+
+#: modules/clock/clock-applet.c:1739
+msgid "Fahrenheit"
+msgstr "Fahrenheit"
+
+#: modules/clock/clock-applet.c:1745
+msgid "Meters per second (m/s)"
+msgstr "Meter pro Sekunde (m/s)"
+
+#: modules/clock/clock-applet.c:1746
+msgid "Kilometers per hour (kph)"
+msgstr "Kilometer pro Stunde (km/h)"
+
+#: modules/clock/clock-applet.c:1747
+msgid "Miles per hour (mph)"
+msgstr "Meilen pro Stunde (mph)"
+
+#: modules/clock/clock-applet.c:1748
+msgid "Knots"
+msgstr "Knoten"
+
+#: modules/clock/clock-applet.c:1749
+msgid "Beaufort scale"
+msgstr "Beaufort-Skala"
+
+#: modules/clock/clock-applet.c:1802
+msgid "City Name"
+msgstr "Stadtname"
+
+#: modules/clock/clock-applet.c:1806
+msgid "City Time Zone"
+msgstr "Stadt-Zeitzone"
+
+#: modules/clock/clock-location-tile.c:174
+msgid "Failed to set the system timezone"
+msgstr "Systemzeitzone konnte nicht gesetzt werden"
+
+#: modules/clock/clock-location-tile.c:222
+msgid "<small>Set...</small>"
+msgstr "<small>Einstellen …</small>"
+
+#: modules/clock/clock-location-tile.c:223
+msgid "<small>Set</small>"
+msgstr "<small>Einstellen</small>"
+
+#: modules/clock/clock-location-tile.c:298
+msgid "Set location as current location and use its timezone for this computer"
+msgstr ""
+"Ort als aktuellen Ort festlegen und dessen Zeitzone für diesen Rechner "
+"einstellen"
+
+#. Translators: This is a strftime format string.
+#. * It is used to display the time in 12-hours format
+#. * (eg, like in the US: 8:10 am), when the local
+#. * weekday differs from the weekday at the location
+#. * (the %A expands to the weekday). The %p expands to
+#. * am/pm.
+#: modules/clock/clock-location-tile.c:430
+msgid "%l:%M <small>%p (%A)</small>"
+msgstr "%l:%M <small>%p (%A)</small>"
+
+#. Translators: This is a strftime format string.
+#. * It is used to display the time in 24-hours format
+#. * (eg, like in France: 20:10), when the local
+#. * weekday differs from the weekday at the location
+#. * (the %A expands to the weekday).
+#: modules/clock/clock-location-tile.c:438
+msgid "%H:%M <small>(%A)</small>"
+msgstr "%H:%M <small>(%A)</small>"
+
+#. Translators: This is a strftime format string.
+#. * It is used to display the time in 12-hours format
+#. * (eg, like in the US: 8:10 am). The %p expands to
+#. * am/pm.
+#: modules/clock/clock-location-tile.c:447
+msgid "%l:%M <small>%p</small>"
+msgstr "%l:%M <small>%p</small>"
+
+#: modules/clock/clock-location-tile.c:597
+#, c-format
+msgid "%s, %s"
+msgstr "%s, %s"
+
+#. Translators: The two strings are temperatures.
+#: modules/clock/clock-location-tile.c:610
+#, c-format
+msgid "%s, feels like %s"
+msgstr "%s, gefühlt wie %s"
+
+#: modules/clock/clock-location-tile.c:631
+#, c-format
+msgid "Sunrise: %s / Sunset: %s"
+msgstr "Sonnenaufgang: %s / Sonnenuntergang: %s"
+
+#: modules/clock/clock-module.c:33
+msgid "Clock"
+msgstr "Uhr"
+
+#: modules/clock/clock-module.c:34
+msgid "Get the current time and date"
+msgstr "Die aktuelle Uhrzeit und das heutige Datum anzeigen"
+
+#: modules/clock/clock-menu.ui:5
+msgid "Copy Date and _Time"
+msgstr "Datum und _Uhrzeit kopieren"
+
+#: modules/clock/clock-menu.ui:11
+msgid "Ad_just Date & Time"
+msgstr "Datum und Uhrzeit _anpassen"
+
+#: modules/clock/clock-menu.ui:15 modules/wncklet/window-list-menu.ui:5
+#: modules/wncklet/workspace-switcher-menu.ui:5
+msgid "_Preferences"
+msgstr "_Einstellungen"
+
+#: modules/clock/clock.ui:30
+msgid "East"
+msgstr "östlich"
+
+#: modules/clock/clock.ui:33
+msgid "West"
+msgstr "westlich"
+
+#: modules/clock/clock.ui:44
+msgid "North"
+msgstr "nördlich"
+
+#: modules/clock/clock.ui:47
+msgid "South"
+msgstr "südlich"
+
+#: modules/clock/clock.ui:206 modules/clock/clock.ui:221
+msgid "(optional)"
+msgstr "(optional)"
+
+#: modules/clock/clock.ui:265
+msgid "_Location Name:"
+msgstr "_Name des Ortes:"
+
+#: modules/clock/clock.ui:278
+msgid "L_atitude:"
+msgstr "_Breitengrad:"
+
+#: modules/clock/clock.ui:292
+msgid "L_ongitude:"
+msgstr "_Längengrad:"
+
+#. Languages that have a single word that translates as either 'state' or 'province' should use that instead of 'region'.
+#: modules/clock/clock.ui:308
+msgid ""
+"Type a city, region, or country name and then select a match from the pop-up."
+msgstr ""
+"Geben Sie einen Ort, eine Region oder ein Land ein und wählen dann aus der "
+"Liste."
+
+#: modules/clock/clock.ui:325
+msgid "_Timezone:"
+msgstr "_Zeitzone:"
+
+#: modules/clock/clock.ui:360
+msgid "Clock Preferences"
+msgstr "Einstellungen der Uhr"
+
+#: modules/clock/clock.ui:376 modules/fish/fish.ui:36
+msgid "_Help"
+msgstr "_Hilfe"
+
+#: modules/clock/clock.ui:391
+msgid "Time _Settings"
+msgstr "Zeit_einstellungen"
+
+#: modules/clock/clock.ui:451
+msgid "Clock Format"
+msgstr "Uhr-Format"
+
+#: modules/clock/clock.ui:470
+msgid "_12 hour format"
+msgstr "_12-Stunden-Format"
+
+#: modules/clock/clock.ui:487
+msgid "_24 hour format"
+msgstr "_24-Stunden-Format"
+
+#: modules/clock/clock.ui:527
+msgid "Panel Display"
+msgstr "Panel-Anzeige"
+
+#: modules/clock/clock.ui:547
+msgid "Show the _date"
+msgstr "_Datum anzeigen"
+
+#: modules/clock/clock.ui:563
+msgid "Show seco_nds"
+msgstr "_Sekunden anzeigen"
+
+#: modules/clock/clock.ui:579
+msgid "Show _weather"
+msgstr "_Wetter anzeigen"
+
+#: modules/clock/clock.ui:595
+msgid "Show _temperature"
+msgstr "_Temperatur anzeigen"
+
+#: modules/clock/clock.ui:697
+msgid "_Edit"
+msgstr "_Bearbeiten"
+
+#: modules/clock/clock.ui:712
+msgid "_Remove"
+msgstr "Entfe_rnen"
+
+#: modules/clock/clock.ui:773
+msgid "Display"
+msgstr "Anzeige"
+
+#: modules/clock/clock.ui:805
+msgid "_Visibility unit:"
+msgstr "_Sichtweiteneinheit:"
+
+#: modules/clock/clock.ui:828
+msgid "_Pressure unit:"
+msgstr "_Luftdruckeinheit:"
+
+#: modules/clock/clock.ui:864
+msgid "_Temperature unit:"
+msgstr "_Temperatureinheit:"
+
+#: modules/clock/clock.ui:878
+msgid "_Wind speed unit:"
+msgstr "_Windgeschwindigkeitseinheit:"
+
+#: modules/clock/clock.ui:910
+msgid "Weather"
+msgstr "Wetter"
+
+#: modules/fish/fish-applet.c:203
+#, c-format
+msgid ""
+"Warning: The command appears to be something actually useful.\n"
+"Since this is a useless applet, you may not want to do this.\n"
+"We strongly advise you against using %s for anything\n"
+"which would make the applet \"practical\" or useful."
+msgstr ""
+"Warnung: Dieser Befehl scheint in der Tat in irgendeiner Form nützlich zu "
+"sein.\n"
+"Da dies jedoch ein nutzloses Applet ist, ist dies möglicherweise nicht "
+"erwünscht.\n"
+"Wir bitten Sie nachdrücklich, %s nicht für etwas zu verwenden,\n"
+"das dieses Applet irgendwie »praktisch« oder »nützlich« machen könnte."
+
+#: modules/fish/fish-applet.c:365 modules/fish/fish-applet.c:471
+#, no-c-format
+msgid "%s the Fish"
+msgstr "%s, der Fisch"
+
+#: modules/fish/fish-applet.c:369
+#, c-format
+msgid "%s the Fish, a contemporary oracle"
+msgstr "%s, der Fisch - ein zeitgenössisches Orakel"
+
+#: modules/fish/fish-applet.c:427
+msgid "Unable to locate the command to execute"
+msgstr "Der auszuführende Befehl konnte nicht gefunden werden"
+
+#: modules/fish/fish-applet.c:476
+#, no-c-format
+msgid "%s the Fish Says:"
+msgstr "%s, der Fisch, sagt:"
+
+#: modules/fish/fish-applet.c:545
+#, c-format
+msgid ""
+"Unable to read output from command\n"
+"\n"
+"Details: %s"
+msgstr ""
+"Ausgabe des Befehls konnte nicht gelesen werden\n"
+"\n"
+"Details: %s"
+
+#: modules/fish/fish-applet.c:621
+msgid "_Speak again"
+msgstr "Erneut _sprechen"
+
+#: modules/fish/fish-applet.c:693
+#, c-format
+msgid "The configured command is not working and has been replaced by: %s"
+msgstr ""
+"Der Konfigurationsbefehl funktioniert nicht mehr und wurde ersetzt durch: %s"
+
+#: modules/fish/fish-applet.c:722
+#, c-format
+msgid ""
+"Unable to execute '%s'\n"
+"\n"
+"Details: %s"
+msgstr ""
+"»%s« konnte nicht ausgeführt werden\n"
+"\n"
+"Details: %s"
+
+#: modules/fish/fish-applet.c:738
+#, c-format
+msgid ""
+"Unable to read from '%s'\n"
+"\n"
+"Details: %s"
+msgstr ""
+"Von »%s« konnte nicht gelesen werden\n"
+"\n"
+"Details: %s"
+
+#: modules/fish/fish-applet.c:1120
+msgid "The water needs changing"
+msgstr "Das Wasser muss gewechselt werden"
+
+#: modules/fish/fish-applet.c:1122
+msgid "Look at today's date!"
+msgstr "Man beachte das heutige Datum!"
+
+#: modules/fish/fish-applet.c:1216
+#, c-format
+msgid "%s the Fish, the fortune teller"
+msgstr "%s, der wahrsagende Fisch"
+
+#: modules/fish/fish-module.c:33
+msgid "Fish"
+msgstr "Fisch"
+
+#: modules/fish/fish-module.c:34
+msgid "Display a swimming fish or another animated creature"
+msgstr "Einen schwimmenden Fisch oder ein anderes animiertes Tier anzeigen"
+
+#: modules/fish/fish-menu.ui:5
+msgid "Preferences"
+msgstr "Einstellungen"
+
+#: modules/fish/fish.ui:22
+msgid "Fish Preferences"
+msgstr "Fisch-Einstellungen"
+
+#: modules/fish/fish.ui:134
+msgid "_Name of fish:"
+msgstr "_Name des Fisches:"
+
+#: modules/fish/fish.ui:174
+msgid "Co_mmand to run when clicked:"
+msgstr "Beim _Anklicken auszuführender Befehl:"
+
+#: modules/fish/fish.ui:240
+msgid "Animation:"
+msgstr "Animation:"
+
+#: modules/fish/fish.ui:277
+msgid "    "
+msgstr "    "
+
+#: modules/fish/fish.ui:301
+msgid "_Pause per frame:"
+msgstr "_Pause nach jedem Einzelbild:"
+
+#: modules/fish/fish.ui:332
+msgid "seconds"
+msgstr "Sekunden"
+
+#: modules/fish/fish.ui:349
+msgid "_Rotate on vertical panels"
+msgstr "Auf vertikalen Panels _drehen"
+
+#: modules/menu/gp-lock-logout.c:1042
+msgid "Hybrid Sleep"
+msgstr "Hybrid-Ruhezustand"
+
+#: modules/menu/gp-main-menu-applet.c:68 modules/menu/gp-menu-bar-applet.c:220
+#, c-format
+msgid "Please install the '%s' application."
+msgstr "Bitte installieren Sie die Anwendung »%s«."
+
+#: modules/menu/gp-menu-bar-applet.c:131
+msgid "Applications"
+msgstr "Anwendungen"
+
+#: modules/menu/gp-menu-bar-applet.c:136
+msgid "Browse and run installed applications"
+msgstr "Installierte Anwendungen durchsuchen und starten"
+
+#: modules/menu/gp-menu-bar-applet.c:160
+msgid "Access documents, folders and network places"
+msgstr "Auf Dokumente, Ordner und Orte im Netzwerk zugreifen"
+
+#: modules/menu/gp-menu-bar-applet.c:181
+msgid "System"
+msgstr "System"
+
+#: modules/menu/gp-menu-bar-applet.c:185
+msgid "Change system appearance and behavior, or get help"
+msgstr "Erscheinungsbild und Verhalten des System anpassen oder Hilfe erhalten"
+
+#: modules/menu/gp-menu-module.c:46
+msgid "Menu Bar"
+msgstr "Menüleiste"
+
+#: modules/menu/gp-menu-module.c:47
+msgid "A custom menu bar"
+msgstr "Eine benutzerdefinierte Menüleiste"
+
+#: modules/menu/gp-menu-module.c:53
+msgid "User menu"
+msgstr "Benutzermenü"
+
+#: modules/menu/gp-menu-module.c:54
+msgid "Menu to change your settings and log out"
+msgstr "Menü zum Ändern Ihrer Einstellungen und zum Abmelden"
+
+#: modules/notification-area/na-applet.c:155
+msgid "Panel Notification Area"
+msgstr "Panel-Benachrichtigungsfeld"
+
+#: modules/notification-area/na-module.c:33
+msgid "Notification Area"
+msgstr "Benachrichtigungsfeld"
+
+#: modules/notification-area/na-module.c:34
+msgid "Area where notification icons appear"
+msgstr "Bereich, in dem Benachrichtigungssymbole angezeigt werden"
+
+# CHECK
+#: modules/separator/separator-module.c:33
+msgid "Separator"
+msgstr "Trennlinie"
+
+#: modules/separator/separator-module.c:34
+msgid "A separator to organize the panel items"
+msgstr "Eine Trennlinie, um die Panel-Objekte anzuordnen"
+
+#: modules/status-notifier/sn-module.c:33
+msgid "Status Notifier Host"
+msgstr "Statusbenachrichtigungs-Rechner"
+
+#: modules/status-notifier/sn-module.c:34
+msgid "Display all Status Notifier Items"
+msgstr "Alle Statusbenachrichtigungseinträge anzeigen"
+
+#: modules/wncklet/showdesktop.c:100
+#, c-format
+msgid "Failed to load %s: %s\n"
+msgstr "%s konnte nicht geladen werden: %s\n"
+
+#: modules/wncklet/showdesktop.c:101
+msgid "Icon not found"
+msgstr "Symbol nicht gefunden"
+
+#: modules/wncklet/showdesktop.c:181
+msgid "Click here to restore hidden windows."
+msgstr "Klicken Sie hier, um die verborgenen Fenster wieder hervorzuholen."
+
+#: modules/wncklet/showdesktop.c:183
+msgid "Click here to hide all windows and show the desktop."
+msgstr ""
+"Klicken Sie hier, um alle Fenster zu verbergen und die Arbeitsfläche "
+"anzuzeigen."
+
+#: modules/wncklet/showdesktop.c:214
+msgid ""
+"Your window manager does not support the show desktop button, or you are not "
+"running a window manager."
+msgstr ""
+"Ihr Fenstermanager unterstützt den »Arbeitsfläche anzeigen«-Knopf nicht oder "
+"Sie verwenden momentan keinen Fenstermanager."
+
+#: modules/wncklet/showdesktop.c:411
+msgid "Show Desktop Button"
+msgstr "Arbeitsflächen-Knopf anzeigen"
+
+#: modules/wncklet/window-list.ui:8
+msgid "Window List Preferences"
+msgstr "Einstellungen der Fensterliste"
+
+#: modules/wncklet/window-list.ui:35
+msgid "Window List Content"
+msgstr "Inhalt der Fensterliste"
+
+# Ohne "befindlich" wird's zweideutig
+#: modules/wncklet/window-list.ui:55
+msgid "Sh_ow windows from current workspace"
+msgstr "Auf momentan a_ktiver Arbeitsfläche befindliche Fenster anzeigen"
+
+#: modules/wncklet/window-list.ui:72
+msgid "Show windows from a_ll workspaces"
+msgstr "Auf a_llen Arbeitsfläche befindliche Fenster anzeigen"
+
+#: modules/wncklet/window-list.ui:112
+msgid "Window Grouping"
+msgstr "Fenster gruppieren"
+
+#: modules/wncklet/window-list.ui:132
+msgid "_Never group windows"
+msgstr "Fenster _nie gruppieren"
+
+# missing accelerator
+#: modules/wncklet/window-list.ui:149
+msgid "Group windows when _space is limited"
+msgstr "Fenster gruppieren, falls der _Platz begrenzt ist"
+
+#: modules/wncklet/window-list.ui:166
+msgid "_Always group windows"
+msgstr "Fenster _immer gruppieren"
+
+#: modules/wncklet/window-list.ui:206
+msgid "Restoring Minimized Windows"
+msgstr "Wiederherstellen minimierter Fenster"
+
+#: modules/wncklet/window-list.ui:226
+msgid "Restore to current _workspace"
+msgstr "Auf _momentan sichtbarer Arbeitsfläche wiederherstellen"
+
+#: modules/wncklet/window-list.ui:243
+msgid "Restore to na_tive workspace"
+msgstr "Auf _ursprünglicher Arbeitsfläche wiederherstellen"
+
+#: modules/wncklet/window-menu.c:170 modules/wncklet/wncklet-module.c:55
+msgid "Window Selector"
+msgstr "Fensterwähler"
+
+#: modules/wncklet/wncklet-module.c:41
+msgid "Show Desktop"
+msgstr "Arbeitsfläche anzeigen"
+
+#: modules/wncklet/wncklet-module.c:42
+msgid "Hide application windows and show the desktop"
+msgstr "Anwendungsfenster ausblenden und Arbeitsfläche anzeigen"
+
+#: modules/wncklet/wncklet-module.c:48
+msgid "Window List"
+msgstr "Fensterliste"
+
+#: modules/wncklet/wncklet-module.c:49
+msgid "Switch between open windows using buttons"
+msgstr "Mittels Knöpfen zwischen geöffneten Fenstern wechseln"
+
+#: modules/wncklet/wncklet-module.c:56
+msgid "Switch between open windows using a menu"
+msgstr "Mit einem Menü zwischen geöffneten Fenstern wechseln"
+
+#: modules/wncklet/wncklet-module.c:62
+msgid "Workspace Switcher"
+msgstr "Arbeitsflächenumschalter"
+
+#: modules/wncklet/wncklet-module.c:63
+msgid "Switch between workspaces"
+msgstr "Wechseln zwischen Arbeitsflächen"
+
+#: modules/wncklet/workspace-switcher.c:578
+#: modules/wncklet/workspace-switcher.c:754
+#: modules/wncklet/workspace-switcher.ui:145
+msgid "rows"
+msgstr "Zeilen"
+
+#: modules/wncklet/workspace-switcher.c:578
+#: modules/wncklet/workspace-switcher.c:754
+msgid "columns"
+msgstr "Spalten"
+
+#: modules/wncklet/workspace-switcher.ui:22
+msgid "Workspace Switcher Preferences"
+msgstr "Einstellungen des Arbeitsflächenumschalters"
+
+#: modules/wncklet/workspace-switcher.ui:82
+msgid "Show _only the current workspace"
+msgstr "Nur die _momentan sichtbare Arbeitsfläche anzeigen"
+
+#: modules/wncklet/workspace-switcher.ui:104
+msgid "Show _all workspaces in:"
+msgstr "_Alle Arbeitsflächen anzeigen, und zwar in:"
+
+#: modules/wncklet/workspace-switcher.ui:128
+#: modules/wncklet/workspace-switcher.ui:228
+msgid "1"
+msgstr "1"
+
+#: modules/wncklet/workspace-switcher.ui:176
+msgid "Switcher"
+msgstr "Umschalter"
+
+#: modules/wncklet/workspace-switcher.ui:213
+msgid "Number of _workspaces:"
+msgstr "An_zahl der Arbeitsflächen:"
+
+#: modules/wncklet/workspace-switcher.ui:252
+msgid "Workspace na_mes:"
+msgstr "Na_men der Arbeitsflächen:"
+
+#: modules/wncklet/workspace-switcher.ui:272
+msgid "Workspace Names"
+msgstr "Namen der Arbeitsflächen"
+
+#: modules/wncklet/workspace-switcher.ui:288
+msgid "Show workspace _names in switcher"
+msgstr "_Namen der Arbeitsflächen im Umschalter anzeigen"
+
+#: modules/wncklet/workspace-switcher.ui:309
+msgid "Workspaces"
+msgstr "Arbeitsflächen"

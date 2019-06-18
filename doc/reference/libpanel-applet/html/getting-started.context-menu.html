@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Using a Context Menu: Panel Applet Reference Manual</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<link rel="home" href="index.html" title="Panel Applet Reference Manual">
+<link rel="up" href="getting-started.html" title="Part II. Getting Started with the Panel Applet library">
+<link rel="prev" href="getting-started.example.html" title="Hello World Example">
+<link rel="next" href="getting-started.context-menu.setup.html" title="Setting Up the Menu">
+<meta name="generator" content="GTK-Doc V1.28.1 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts"></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="getting-started.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="getting-started.example.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="getting-started.context-menu.setup.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="chapter">
+<div class="titlepage"><div><div><h2 class="title">
+<a name="getting-started.context-menu"></a>Using a Context Menu</h2></div></div></div>
+<div class="toc"><dl class="toc">
+<dt><span class="sect1"><a href="getting-started.context-menu.html#getting-started.context-menu.content">Guidelines for Context Menu</a></span></dt>
+<dt><span class="sect1"><a href="getting-started.context-menu.setup.html">Setting Up the Menu</a></span></dt>
+</dl></div>
+<p>
+     The Panel Applet library uses <span class="type">GAction</span> to define menu items appearing in the context menu of the
+     applet. This chapter provides some guidelines to applet developers and explains how to setup the context menu.
+    </p>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="getting-started.context-menu.content"></a>Guidelines for Context Menu</h2></div></div></div>
+<p>
+      To help guarantee consistency in the interaction with applets, there are some guidelines that are
+      recommended to follow:
+     </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem"><p>
+        Do not make the context menu too long: if you have more than five or six menu items, then it might be worth
+        investing efforts on rethinking what is important in the menu.
+       </p></li>
+<li class="listitem"><p>
+        For the menu item that will enable the user to configure the applet, use "Preferences" for the label,
+        and try to avoid "Configure", "Configuration", "Settings", etc.
+       </p></li>
+<li class="listitem"><p>
+        Avoid putting a "Help" menu item. The user will usually explicitly add the applet, so it is expected that he knows what the applet is about.
+        Putting a "Help" menu item in the context menu is therefore too prominent. It might make sense to add a "Help" button in the Preferences dialog, though.
+       </p></li>
+<li class="listitem"><p>
+        If you agree, avoid putting a "About" menu item. To the user, applets are not different applications but elements of one global application, the panel. Of course, this means that credits
+        for working on the applet are not visible to the user.
+       </p></li>
+</ul></div>
+</div>
+<div class="sect2">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="getting-started.context-menu.xml-file"></a>Menu XML File</h3></div></div></div>
+<p>
+      The file that is used to setup menu with the <a class="link" href="libpanel-applet-Panel-Applet.html#panel-applet-setup-menu-from-file" title="panel_applet_setup_menu_from_file ()"><code class="function">panel_applet_setup_menu_from_file()</code></a> function is a <span class="type">GtkUIManager</span> UI definition file, without the top-level <code class="constant">&lt;ui&gt;</code> tag. It must only contain menuitem entries and separators. For example:
+     </p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="symbol">&lt;</span><span class="usertype">menuitem</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"Hello World Prefs"</span><span class="normal"> action</span><span class="symbol">=</span><span class="string">"HelloWorldPrefs"</span><span class="normal"> </span><span class="symbol">/&gt;</span>
+<span class="symbol">&lt;</span><span class="normal">separator</span><span class="symbol">/&gt;</span>
+<span class="symbol">&lt;</span><span class="usertype">menuitem</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"Hello World Say"</span><span class="normal">   action</span><span class="symbol">=</span><span class="string">"HelloWorldSay"</span><span class="normal"> </span><span class="symbol">/&gt;</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+     Alternatively, the <a class="link" href="libpanel-applet-Panel-Applet.html#panel-applet-setup-menu" title="panel_applet_setup_menu ()"><code class="function">panel_applet_setup_menu()</code></a> function can be used with a string containing directly the XML.
+    </p>
+</div>
+</div>
+<div class="footer">
+<hr>Generated by GTK-Doc V1.28.1</div>
+</body>
+</html>

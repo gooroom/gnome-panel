@@ -1,0 +1,108 @@
+@import url("resource:///org/gnome/gnome-panel/theme/common.css");
+
+panel-toplevel {
+  background-color: #ffffff;
+}
+
+.gp-text-color {
+  color: #000000;
+}
+
+.gnome-panel-menu-bar,
+panel-applet > menubar,
+gp-applet > menubar {
+  background: transparent;
+  box-shadow: none;
+}
+
+.gnome-panel-menu-bar menuitem:hover,
+panel-applet > menubar menuitem:hover,
+gp-applet > menubar menuitem:hover {
+  background-color: #000000;
+}
+
+.gnome-panel-menu-bar > menuitem > label,
+panel-applet > menubar > menuitem > label,
+gp-applet > menubar > menuitem > label,
+gp-applet > menubar > menuitem > box > label,
+gp-calendar-window label,
+#tasklist-button label,
+#clock-applet-button label,
+#showdesktop-button label {
+  font-weight: normal;
+  color: #000000;
+}
+
+.gnome-panel-menu-bar > menuitem:hover > label,
+panel-applet > menubar > menuitem:hover > label,
+gp-applet > menubar > menuitem:hover > label,
+gp-applet > menubar > menuitem:hover > box > label,
+.gnome-panel-menu-bar > menuitem:hover > image,
+panel-applet > menubar > menuitem:hover > image,
+gp-applet > menubar > menuitem:hover > image {
+  color: #ffffff;
+}
+
+gp-applet.separator > separator {
+  margin: 2px 4px;
+}
+
+#tasklist-button,
+#clock-applet-button,
+#showdesktop-button {
+  padding: 0px 4px;
+  border: 0;
+  border-radius: 0;
+}
+
+#tasklist-button:checked,
+#clock-applet-button:checked,
+#showdesktop-button:checked {
+  background-color: #000000;
+}
+
+#tasklist-button:checked label,
+#clock-applet-button:checked label,
+#showdesktop-button:checked label {
+  color: #ffffff;
+}
+
+wnck-pager:selected {
+  background-color: #000000;
+}
+
+na-tray-applet {
+  -NaTrayApplet-icon-padding: 2;
+  -NaTrayApplet-icon-size: 16;
+}
+
+gp-arrow-button {
+  min-width: 20px;
+  min-height: 0px;
+
+  border: 2px solid #7f7f7f;
+  border-radius: 3px;
+  background-color: #ffffff;
+  margin: 2px;
+}
+
+.vertical gp-arrow-button {
+  min-width: 0px;
+  min-height: 20px;
+}
+
+gp-arrow-button:hover {
+  background-color: #ffffff;
+}
+
+gp-arrow-button:active {
+  background-color: #000000;
+}
+
+.horizontal sn-item {
+  padding: 0px 3px;
+}
+
+.vertical sn-item {
+  padding: 3px 0px;
+}
