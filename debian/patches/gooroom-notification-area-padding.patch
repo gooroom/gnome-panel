@@ -1,0 +1,13 @@
+diff --git a/modules/notification-area/na-tray.c b/modules/notification-area/na-tray.c
+index f9ee219..45948e6 100644
+--- a/modules/notification-area/na-tray.c
++++ b/modules/notification-area/na-tray.c
+@@ -176,7 +176,7 @@ tray_added (NaTrayManager *manager,
+   g_hash_table_insert (tray->icon_table, icon, tray);
+ 
+   position = find_icon_position (tray, icon);
+-  gtk_box_pack_start (GTK_BOX (tray->box), icon, FALSE, FALSE, 0);
++  gtk_box_pack_start (GTK_BOX (tray->box), icon, FALSE, FALSE, manager->padding);
+   gtk_box_reorder_child (GTK_BOX (tray->box), icon, position);
+ 
+   gtk_widget_show (icon);
