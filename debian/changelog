@@ -1,3 +1,13 @@
+gnome-panel (3.30.0-2+grm2u1) unstable; urgency=medium
+
+  [ cjheo ]
+  * [79a0d966] Disabled AX_COMPILER_FLAGS flags for building
+  * [f52eba2d] Add patch to adjust padding for notification-area
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Sun, 01 Dec 2019 15:58:26 +0900
+
 gnome-panel (3.30.0-2) unstable; urgency=medium
 
   * Add -Wl,-O1 to our LDFLAGS
