@@ -1,2 +1,3 @@
 gooroom-disabled-AX_COMPILER_FLAGS.patch
 gooroom-notification-area-padding.patch
+gooroom-hidpi-monitor-error.patch
