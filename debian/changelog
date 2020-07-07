@@ -1,3 +1,13 @@
+gnome-panel (3.30.0-2+grm2u2) unstable; urgency=medium
+
+  [ cjheo ]
+  * [6ae79746] 고해상도 모니터(4k)에서 디스플레이 확대시 미적용 오류 수정
+  * [3e6a9dae] [Bug:2403]동일화면 보기에서 해상도 변경이슈 처리
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Tue, 07 Jul 2020 10:24:40 +0900
+
 gnome-panel (3.30.0-2+grm2u1) unstable; urgency=medium
 
   [ cjheo ]
