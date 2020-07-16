@@ -4,7 +4,6 @@ Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
 Uploaders: @GNOME_TEAM@
 Build-Depends: debhelper (>= 11),
-               evolution-data-server-dev (>= 3.5.3),
                gnome-pkg-tools (>= 0.17),
                gtk-doc-tools (>= 1.25),
                libcairo2-dev (>= 1.10.0),
@@ -42,13 +41,11 @@ Depends: gnome-menus (>= 3.1.4),
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: alacarte,
-            evolution-data-server,
             gnome-applets,
             gnome-control-center,
             gnome-session-flashback (>= 3.14.0),
             gvfs
-Suggests: evolution-common (>= 3.4.3),
-          gnome-terminal | x-terminal-emulator,
+Suggests: gnome-terminal | x-terminal-emulator,
           gnome-user-docs,
           nautilus,
           yelp
