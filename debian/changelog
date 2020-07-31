@@ -1,3 +1,13 @@
+gnome-panel (3.30.0-2+grm2u3) unstable; urgency=medium
+
+  [ cjheo ]
+  * [b08a818a] Adjust build option to remove evolution-data-server package dependency
+  * [d947182d] Adjust notication area padding
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Fri, 31 Jul 2020 10:23:53 +0900
+
 gnome-panel (3.30.0-2+grm2u2) unstable; urgency=medium
 
   [ cjheo ]
