@@ -1,0 +1,2 @@
+usr/lib/${DEB_HOST_MULTIARCH}/gnome-panel/modules/*.la
+usr/lib/${DEB_HOST_MULTIARCH}/libgnome-panel.la

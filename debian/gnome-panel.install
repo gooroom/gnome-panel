@@ -1,0 +1,4 @@
+usr/bin
+usr/lib/${DEB_HOST_MULTIARCH}/gnome-panel/modules/*.so
+usr/share/applications
+usr/share/man

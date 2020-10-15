@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_LDFLAGS_MAINT_APPEND = -Wl,-O1 -Wl,--as-needed  # overrides upstream --no-as-needed
+export DPKG_GENSYMBOLS_CHECK_LEVEL = 4
+
+DOPACKAGES=$(shell dh_listpackages)
+
+%:
+	dh $@ --with gnome
+
+override_dh_auto_configure:
+	dh_auto_configure -- --$(if $(filter libgnome-panel-doc,$(DOPACKAGES)),en,dis)able-gtk-doc --disable-Werror
+
+override_dh_installdocs:
+	dh_installdocs ./AUTHORS ./NEWS ./README

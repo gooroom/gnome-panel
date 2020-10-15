@@ -1,0 +1,3 @@
+usr/include/gnome-panel/libgnome-panel
+usr/lib/${DEB_HOST_MULTIARCH}/libgnome-panel*.so
+usr/lib/${DEB_HOST_MULTIARCH}/pkgconfig/libgnome-panel.pc
