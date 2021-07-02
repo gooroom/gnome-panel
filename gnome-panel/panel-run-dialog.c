@@ -44,20 +44,18 @@
 
 #include <libpanel-util/panel-error.h>
 #include <libpanel-util/panel-glib.h>
-#include <libpanel-util/panel-gtk.h>
 #include <libpanel-util/panel-keyfile.h>
 #include <libpanel-util/panel-show.h>
 #include <libpanel-util/panel-xdg.h>
 
 #include "panel-util.h"
-#include "panel-enums.h"
-#include "panel-stock-icons.h"
 #include "panel-multiscreen.h"
-#include "menu.h"
 #include "panel-lockdown.h"
 #include "panel-xutils.h"
 #include "panel-icon-names.h"
 #include "panel-schemas.h"
+
+#define PANEL_GTK_BUILDER_GET(builder, name) GTK_WIDGET (gtk_builder_get_object (builder, name))
 
 typedef struct {
 	GtkWidget        *run_dialog;
@@ -205,10 +203,10 @@ panel_run_dialog_destroy (PanelRunDialog *dialog)
 		g_free (l->data);
 	g_list_free (dialog->completion_items);
 	dialog->completion_items = NULL;
-	
-	if (dialog->completion)
-		g_completion_free (dialog->completion);
-	dialog->completion = NULL;
+
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+	g_clear_pointer (&dialog->completion, g_completion_free);
+	G_GNUC_END_IGNORE_DEPRECATIONS
 
 	if (dialog->run_settings)
 		g_object_unref (dialog->run_settings);
@@ -310,9 +308,13 @@ command_is_executable (const char   *command,
  * Set the DISPLAY variable, to be use by g_spawn_async.
  */
 static void
-set_environment (gpointer display)
+set_environment (gpointer user_data)
 {
-  g_setenv ("DISPLAY", display, TRUE);
+  GdkDisplay *display;
+
+  display = gdk_display_get_default ();
+
+  g_setenv ("DISPLAY", gdk_display_get_name (display), TRUE);
 }
 
 static void
@@ -378,6 +380,7 @@ panel_run_dialog_prepend_terminal_to_vector (int *argc, char ***argv)
 	if (terminal) {
 		gchar *command_line;
 		gchar *exec_flag;
+		GError *error;
 
 		exec_flag = g_settings_get_string (settings, "exec-arg");
 
@@ -387,10 +390,11 @@ panel_run_dialog_prepend_terminal_to_vector (int *argc, char ***argv)
 			command_line = g_strdup_printf ("%s %s", terminal,
 							exec_flag);
 
-		g_shell_parse_argv (command_line,
-				    &term_argc,
-				    &term_argv,
-				    NULL /* error */);
+		error = NULL;
+		if (!g_shell_parse_argv (command_line, &term_argc, &term_argv, &error)) {
+			g_warning ("%s", error->message);
+			g_error_free (error);
+		}
 
 		g_free (command_line);
 		g_free (exec_flag);
@@ -457,30 +461,24 @@ panel_run_dialog_launch_command (PanelRunDialog *dialog,
 				 const char     *command,
 				 const char     *locale_command)
 {
-	GdkScreen  *screen;
 	gboolean    result;
 	GError     *error = NULL;
 	char      **argv;
 	int         argc;
-	char       *display;
 	GPid        pid;
 
 	if (!command_is_executable (locale_command, &argc, &argv))
 		return FALSE;
 
-	screen = gtk_window_get_screen (GTK_WINDOW (dialog->run_dialog));
-
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->terminal_checkbox)))
 		panel_run_dialog_prepend_terminal_to_vector (&argc, &argv);
-
-	display = gdk_screen_make_display_name (screen);
 
 	result = g_spawn_async (NULL, /* working directory */
 				argv,
 				NULL, /* envp */
 				G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
 				set_environment,
-				display,
+				NULL,
 				&pid,
 				&error);
 
@@ -499,7 +497,6 @@ panel_run_dialog_launch_command (PanelRunDialog *dialog,
 		g_child_watch_add (pid, dummy_child_watch, NULL);
 	}
 
-	g_free (display);
 	g_strfreev (argv);
 
 	return result;
@@ -686,13 +683,13 @@ fuzzy_command_match (const char *cmd1,
 
 	/* same for the user command */
 	tokens = g_strsplit (cmd2, " ", -1);
-	word2 = g_path_get_basename (tokens [0]);
 	if (!tokens || !tokens [0]) {
 		g_free (word1);
 		g_strfreev (tokens);
 		return FALSE;
 	}
 
+	word2 = g_path_get_basename (tokens [0]);
 	g_strfreev (tokens);
 
 	if (!strcmp (word1, word2)) {
@@ -846,6 +843,12 @@ get_all_applications_from_alias (GMenuTreeAlias *alias,
 		break;
 	}
 
+	case GMENU_TREE_ITEM_SEPARATOR:
+	case GMENU_TREE_ITEM_HEADER:
+	case GMENU_TREE_ITEM_ALIAS:
+		break;
+
+	case GMENU_TREE_ITEM_INVALID:
 	default:
 		break;
 	}
@@ -882,6 +885,11 @@ get_all_applications_from_dir (GMenuTreeDirectory *directory,
 			break;
 		}
 
+		case GMENU_TREE_ITEM_SEPARATOR:
+		case GMENU_TREE_ITEM_HEADER:
+			break;
+
+		case GMENU_TREE_ITEM_INVALID:
 		default:
 			break;
 		}
@@ -890,6 +898,14 @@ get_all_applications_from_dir (GMenuTreeDirectory *directory,
 	gmenu_tree_iter_unref (iter);
 
 	return list;
+}
+
+static gchar *
+get_applications_menu (void)
+{
+	const gchar *xdg_menu_prefx = g_getenv ("XDG_MENU_PREFIX");
+	return g_strdup_printf ("%sapplications.menu",
+	                        !PANEL_GLIB_STR_EMPTY (xdg_menu_prefx) ? xdg_menu_prefx : "gnome-");
 }
 
 static GSList *
@@ -1015,40 +1031,48 @@ panel_run_dialog_add_items_idle (PanelRunDialog *dialog)
 }
 
 static char *
-remove_parameters (const char *exec)
+remove_field_codes (const char *exec)
 {
-	GString *str;
-	char    *retval, *p;
+	char *retval;
+	char *p;
 
-	str = g_string_new (exec);
+	if (exec == NULL || *exec == '\0')
+		return g_strdup ("");
 
-	while ((p = strstr (str->str, "%"))) {
-		switch (p [1]) {
+	retval = g_new0 (char, strlen (exec) + 1);
+	p = retval;
+
+	while (*exec != '\0') {
+		if (*exec != '%') {
+			*p++ = *exec++;
+			continue;
+		}
+
+		switch (exec[1]) {
 		case '%':
-			g_string_erase (str, p - str->str, 1);
+			*p++ = *exec++;
+			exec++;
 			break;
-		case 'U':
-		case 'F':
-		case 'N':
-		case 'D':
 		case 'f':
+		case 'F':
 		case 'u':
+		case 'U':
 		case 'd':
+		case 'D':
 		case 'n':
-		case 'm':
+		case 'N':
 		case 'i':
 		case 'c':
 		case 'k':
 		case 'v':
-			g_string_erase (str, p - str->str, 2);
+		case 'm':
+			exec += 2;
 			break;
 		default:
+			*p++ = *exec++;
 			break;
 		}
 	}
-
-	retval = str->str;
-	g_string_free (str, FALSE);
 
 	return retval;
 }
@@ -1107,7 +1131,7 @@ program_list_selection_changed (GtkTreeSelection *selection,
 	entry = gtk_bin_get_child (GTK_BIN (dialog->combobox));
 	temp = panel_key_file_get_string (key_file, "Exec");
 	if (temp) {
-		stripped = remove_parameters (temp);
+		stripped = remove_field_codes (temp);
 		gtk_entry_set_text (GTK_ENTRY (entry), stripped);
 		g_free (stripped);
 	} else {
@@ -1321,9 +1345,8 @@ fill_files_from (const char *dirname,
 		char       *file;
 		char       *item;
 		const char *suffix;
-		
-		if (!dent->d_name ||
-		    dent->d_name [0] != prefix)
+
+		if (dent->d_name [0] != prefix)
 			continue;
 
 		file = g_build_filename (dirname, dent->d_name, NULL);
@@ -1446,7 +1469,10 @@ panel_run_dialog_update_completion (PanelRunDialog *dialog,
 	executables = NULL;
 
 	if (!dialog->completion) {
+		G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 		dialog->completion = g_completion_new (NULL);
+		G_GNUC_END_IGNORE_DEPRECATIONS
+
 		dialog->possible_executables = fill_possible_executables ();
 		dialog->dir_hash = g_hash_table_new_full (g_str_hash,
 							  g_str_equal,
@@ -1495,9 +1521,11 @@ panel_run_dialog_update_completion (PanelRunDialog *dialog,
 
 	if (list == NULL)
 		return;
-		
+
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 	g_completion_add_items (dialog->completion, list);
-		
+	G_GNUC_END_IGNORE_DEPRECATIONS
+
 	dialog->completion_items = g_list_concat (dialog->completion_items,
 						  list);	
 }
@@ -1513,6 +1541,7 @@ entry_event (GtkEditable    *entry,
 	char             *nprefix;
 	char             *temp;
 	int               pos, tmp;
+	int               text_len;
 
 	if (event->type != GDK_KEY_PRESS)
 		return FALSE;
@@ -1526,6 +1555,8 @@ entry_event (GtkEditable    *entry,
 				     PANEL_RUN_ENABLE_COMPLETION_KEY))
 		return FALSE;
 
+	text_len = strlen (gtk_entry_get_text (GTK_ENTRY (entry)));
+
 	/* tab completion */
 	if (event->keyval == GDK_KEY_Tab) {
 		gtk_editable_get_selection_bounds (entry, &pos, &tmp);
@@ -1533,7 +1564,7 @@ entry_event (GtkEditable    *entry,
 		if (dialog->completion_started &&
 		    pos != tmp &&
 		    pos != 1 &&
-		    tmp == strlen (gtk_entry_get_text (GTK_ENTRY (entry)))) {
+		    tmp == text_len) {
 	    		gtk_editable_select_region (entry, 0, 0);		
 			gtk_editable_set_position (entry, -1);
 			
@@ -1546,12 +1577,12 @@ entry_event (GtkEditable    *entry,
 		if (dialog->completion_started &&
 		    pos != tmp &&
 		    pos != 0 &&
-		    tmp == strlen (gtk_entry_get_text (GTK_ENTRY (entry)))) {
+		    tmp == text_len) {
 			temp = gtk_editable_get_chars (entry, 0, pos);
 			prefix = g_strconcat (temp, event->string, NULL);
 			g_free (temp);
 		} else if (pos == tmp &&
-			   tmp == strlen (gtk_entry_get_text (GTK_ENTRY (entry)))) {
+			   tmp == text_len) {
 			prefix = g_strconcat (gtk_entry_get_text (GTK_ENTRY (entry)),
 					      event->string, NULL);
 		} else {
@@ -1575,8 +1606,9 @@ entry_event (GtkEditable    *entry,
 		pos = strlen (prefix);
 		nprefix = NULL;
 
-		g_completion_complete_utf8 (dialog->completion, nospace_prefix,
-					    &nprefix);
+		G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+		g_completion_complete_utf8 (dialog->completion, nospace_prefix, &nprefix);
+		G_GNUC_END_IGNORE_DEPRECATIONS
 
 		if (nprefix) {
 			int insertpos;

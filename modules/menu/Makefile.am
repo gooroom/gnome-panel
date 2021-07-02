@@ -1,9 +1,9 @@
 NULL =
 
 menu_libdir = $(libdir)/gnome-panel/modules
-menu_lib_LTLIBRARIES = menu.la
+menu_lib_LTLIBRARIES = org.gnome.gnome-panel.menu.la
 
-menu_la_CPPFLAGS = \
+org_gnome_gnome_panel_menu_la_CPPFLAGS = \
 	-DLOCALEDIR=\""$(localedir)"\" \
 	-DGMENU_I_KNOW_THIS_IS_UNSTABLE \
 	-DG_LOG_DOMAIN=\""menu"\" \
@@ -12,14 +12,14 @@ menu_la_CPPFLAGS = \
 	$(AM_CPPFLAGS) \
 	$(NULL)
 
-menu_la_CFLAGS = \
+org_gnome_gnome_panel_menu_la_CFLAGS = \
 	$(LIBGNOME_PANEL_CFLAGS) \
 	$(MENU_CFLAGS) \
 	$(WARN_CFLAGS) \
 	$(AM_CFLAGS) \
 	$(NULL)
 
-menu_la_SOURCES = \
+org_gnome_gnome_panel_menu_la_SOURCES = \
 	gp-bookmarks.c \
 	gp-bookmarks.h \
 	gp-lock-logout.c \
@@ -30,6 +30,10 @@ menu_la_SOURCES = \
 	gp-menu-bar-applet.h \
 	gp-menu-bar.c \
 	gp-menu-bar.h \
+	gp-menu-button-applet.c \
+	gp-menu-button-applet.h \
+	gp-menu-button.c \
+	gp-menu-button.h \
 	gp-menu-module.c \
 	gp-menu-utils.c \
 	gp-menu-utils.h \
@@ -48,17 +52,23 @@ menu_la_SOURCES = \
 	$(BUILT_SOURCES) \
 	$(NULL)
 
-menu_la_LIBADD = \
+org_gnome_gnome_panel_menu_la_LIBADD = \
 	$(top_builddir)/libgnome-panel/libgnome-panel.la \
 	$(LIBGNOME_PANEL_LIBS) \
 	$(MENU_LIBS) \
 	$(NULL)
 
-menu_la_LDFLAGS = \
+org_gnome_gnome_panel_menu_la_LDFLAGS = \
 	-module -avoid-version \
 	$(WARN_LDFLAGS) \
 	$(AM_LDFLAGS) \
 	$(NULL)
+
+gsettings_SCHEMAS = \
+	org.gnome.gnome-panel.applet.menu-button.gschema.xml \
+	$(NULL)
+
+@GSETTINGS_RULES@
 
 menu_resources := $(shell $(GLIB_COMPILE_RESOURCES) \
 	--sourcedir=$(srcdir) --generate-dependencies \
@@ -117,10 +127,12 @@ EXTRA_DIST = \
 	org.freedesktop.login1.Manager.xml \
 	org.gnome.ScreenSaver.xml \
 	org.gnome.SessionManager.xml \
+	$(gsettings_SCHEMAS) \
 	$(menu_resources) \
 	$(NULL)
 
 CLEANFILES = \
+	*.gschema.valid \
 	$(BUILT_SOURCES) \
 	$(NULL)
 

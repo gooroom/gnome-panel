@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2018 Alberts Muktupāvels
+ * Copyright (C) 2016-2020 Alberts Muktupāvels
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -24,16 +24,20 @@ G_BEGIN_DECLS
 
 struct _GpAppletInfo
 {
-  GpGetAppletTypeFunc     get_applet_type_func;
+  GpGetAppletTypeFunc       get_applet_type_func;
 
-  gchar                  *name;
-  gchar                  *description;
-  gchar                  *icon_name;
+  gchar                    *name;
+  gchar                    *description;
+  gchar                    *icon_name;
 
-  gchar                  *help_uri;
-  GpSetupAboutDialogFunc  about_dialog_func;
+  GpInitialSetupDialogFunc  initial_setup_dialog_func;
 
-  gchar                  *backends;
+  gchar                    *help_uri;
+  GpAboutDialogFunc         about_dialog_func;
+
+  gchar                    *backends;
+
+  GpIsDisabledFunc          is_disabled_func;
 };
 
 void gp_applet_info_free (GpAppletInfo *info);

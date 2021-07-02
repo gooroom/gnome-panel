@@ -3,30 +3,97 @@
   min-width: 16px;
 }
 
-.gp-image-menu-item > image:dir(ltr) {
+.gp-image-menu-item:not(.image-only) > image:dir(ltr) {
   margin-right: 5px;
 }
 
-.gp-image-menu-item > image:dir(rtl) {
+.gp-image-menu-item:not(.image-only) > image:dir(rtl) {
   margin-left: 5px;
 }
 
-panel-toplevel.left gp-applet > menubar > .gp-image-menu-item > image:dir(ltr) {
+panel-toplevel.left gp-applet > menubar > .gp-image-menu-item:not(.image-only) > image:dir(ltr) {
   margin-right: 0px;
   margin-top: 5px;
 }
 
-panel-toplevel.left gp-applet > menubar > .gp-image-menu-item > image:dir(rtl) {
+panel-toplevel.left gp-applet > menubar > .gp-image-menu-item:not(.image-only) > image:dir(rtl) {
   margin-left: 0px;
   margin-bottom: 5px;
 }
 
-panel-toplevel.right gp-applet > menubar > .gp-image-menu-item > image:dir(ltr) {
+panel-toplevel.right gp-applet > menubar > .gp-image-menu-item:not(.image-only) > image:dir(ltr) {
   margin-right: 0px;
   margin-bottom: 5px;
 }
 
-panel-toplevel.right gp-applet > menubar > .gp-image-menu-item > image:dir(rtl) {
+panel-toplevel.right gp-applet > menubar > .gp-image-menu-item:not(.image-only) > image:dir(rtl) {
   margin-left: 0px;
   margin-top: 5px;
+}
+
+gp-menu-button:hover .icon,
+gp-action-button:hover image,
+gp-launcher-button:hover image {
+  -gtk-icon-effect: highlight;
+}
+
+panel-toplevel.horizontal gp-menu-button,
+panel-toplevel.horizontal gp-action-button,
+panel-toplevel.horizontal gp-launcher-button  {
+  padding: 0 2px;
+}
+
+panel-toplevel.vertical gp-menu-button,
+panel-toplevel.vertical gp-action-button,
+panel-toplevel.vertical gp-launcher-button {
+  padding: 2px 0;
+}
+
+panel-toplevel.horizontal gp-menu-button .icon {
+  padding: 0 4px;
+}
+
+panel-toplevel.vertical gp-menu-button .icon {
+  padding: 4px 0;
+}
+
+na-tray-applet {
+  -NaTrayApplet-icon-padding: 2;
+  -NaTrayApplet-icon-size: 16;
+}
+
+gp-applet.separator > separator {
+  margin: 2px 4px;
+}
+
+.horizontal sn-item {
+  padding: 0px 3px;
+}
+
+.vertical sn-item {
+  padding: 3px 0px;
+}
+
+#tasklist-button,
+#clock-applet-button,
+#showdesktop-button {
+  padding: 0px 4px;
+  border: 0;
+  border-radius: 0;
+}
+
+gp-arrow-button {
+  min-width: 20px;
+  min-height: 0px;
+  border-radius: 3px;
+  margin: 2px;
+}
+
+.vertical gp-arrow-button {
+  min-width: 0px;
+  min-height: 20px;
+}
+
+.context-row {
+  padding: 4px 10px;
 }

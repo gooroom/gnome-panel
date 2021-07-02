@@ -32,39 +32,21 @@ gp-calendar-window label,
   color: #ffffff;
 }
 
-gp-applet.separator > separator {
-  margin: 2px 4px;
-}
-
-#clock-applet-button,
-#showdesktop-button {
-  padding: 0px 4px;
-  border: 0;
-  border-radius: 0;
+.gnome-panel-menu-bar > menuitem:hover > label,
+panel-applet > menubar > menuitem:hover > label,
+gp-applet > menubar > menuitem:hover > .gp-text-color,
+gp-applet > menubar > menuitem:hover > box > .gp-text-color {
+  font-weight: normal;
+  color: #ffffff;
 }
 
 wnck-pager:selected {
   background-color: #215d9c;
 }
 
-na-tray-applet {
-  -NaTrayApplet-icon-padding: 2;
-  -NaTrayApplet-icon-size: 16;
-}
-
 gp-arrow-button {
-  min-width: 20px;
-  min-height: 0px;
-
   border: 1px solid #1c1f1f;
-  border-radius: 3px;
   background-image: linear-gradient(to bottom, #343a3a, #2f3434 60%, #2a2f2f);
-  margin: 2px;
-}
-
-.vertical gp-arrow-button {
-  min-width: 0px;
-  min-height: 20px;
 }
 
 gp-arrow-button:hover {
@@ -73,14 +55,6 @@ gp-arrow-button:hover {
 
 gp-arrow-button:active {
   background-image: linear-gradient(to bottom, #232727, #2d3232);
-}
-
-.horizontal sn-item {
-  padding: 0px 3px;
-}
-
-.vertical sn-item {
-  padding: 3px 0px;
 }
 
 #tasklist-button,
@@ -102,13 +76,13 @@ gp-arrow-button:active {
   outline-color: rgba(238, 238, 236, 0.3);
   border-color: #1b1f20;
   border-bottom-color: #0b0c0c;
-  background-image: linear-gradient(to bottom, #2e3436, #2a2e30 60%, #25292b);
+  background-image: linear-gradient(to bottom, alpha(#2e3436, 0.8), alpha(#2a2e30, 0.8) 60%, alpha(#25292b, 0.8));
   text-shadow: 0 -1px rgba(0, 0, 0, 0.82745);
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.05);
 }
 
 #tasklist-button:hover > box {
-  background-image: linear-gradient(to bottom, #353c3e, #2e3436 60%, #2a2e30);
+  background-image: linear-gradient(to bottom, alpha(#353c3e, 0.8), alpha(#2e3436, 0.8) 60%, alpha(#2a2e30, 0.8));
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.05);
   -gtk-icon-effect: highlight;
 }
@@ -133,4 +107,9 @@ gp-arrow-button:active {
 #tasklist-button:active label,
 #tasklist-button:checked label {
   color: #eeeeec;
+}
+
+#showdesktop-button {
+  background: none;
+  box-shadow: none;
 }

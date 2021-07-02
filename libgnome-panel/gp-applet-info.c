@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2018 Alberts Muktupāvels
+ * Copyright (C) 2016-2020 Alberts Muktupāvels
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -55,12 +55,30 @@ gp_applet_info_new (GpGetAppletTypeFunc  func,
   info->description = g_strdup (description);
   info->icon_name = g_strdup (icon_name);
 
+  info->initial_setup_dialog_func = NULL;
+
   info->help_uri = NULL;
   info->about_dialog_func = NULL;
 
   info->backends = NULL;
 
+  info->is_disabled_func = NULL;
+
   return info;
+}
+
+/**
+ * gp_applet_info_set_initial_setup_dialog:
+ * @info: a #GpAppletInfo
+ * @func: the function to call to setup initial setup dialog
+ *
+ * Specifies a function to be used to setup initial setup dialog.
+ */
+void
+gp_applet_info_set_initial_setup_dialog (GpAppletInfo             *info,
+                                         GpInitialSetupDialogFunc  func)
+{
+  info->initial_setup_dialog_func = func;
 }
 
 /**
@@ -68,7 +86,8 @@ gp_applet_info_new (GpGetAppletTypeFunc  func,
  * @info: a #GpAppletInfo
  * @help_uri: the help uri
  *
- * Sets the help uri.
+ * Sets the help uri. Must be in `help:<document>` format. Optional page
+ * identifier with options and anchor can be passed to gp_applet_show_help().
  */
 void
 gp_applet_info_set_help_uri (GpAppletInfo *info,
@@ -86,8 +105,8 @@ gp_applet_info_set_help_uri (GpAppletInfo *info,
  * Specifies a function to be used to setup about dialog.
  */
 void
-gp_applet_info_set_about_dialog (GpAppletInfo           *info,
-                                 GpSetupAboutDialogFunc  func)
+gp_applet_info_set_about_dialog (GpAppletInfo      *info,
+                                 GpAboutDialogFunc  func)
 {
   info->about_dialog_func = func;
 }
@@ -105,6 +124,20 @@ gp_applet_info_set_backends (GpAppletInfo *info,
 {
   g_free (info->backends);
   info->backends = g_strdup (backends);
+}
+
+/**
+ * gp_applet_info_set_is_disabled:
+ * @info: a #GpAppletInfo
+ * @func: the function to call to check if applet should be disabled
+ *
+ * Specifies a function to be used to check if applet should be disabled.
+ */
+void
+gp_applet_info_set_is_disabled (GpAppletInfo     *info,
+                                GpIsDisabledFunc  func)
+{
+  info->is_disabled_func = func;
 }
 
 void

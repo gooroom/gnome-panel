@@ -323,7 +323,7 @@ The <application>Clock</application> applet displays the date and time, and when
 			</itemizedlist>
 		</listitem>
 		<listitem>
-			<para>Senyaleu el lloc de la vostra aplicació on voleu inserir l'element.</para>
+			<para>Assenyaleu el lloc de la vostra aplicació on voleu inserir l'element.</para>
 		</listitem>
 		<listitem>
 			<para lang="en">
@@ -341,7 +341,7 @@ The <application>Clock</application> applet displays the date and time, and when
 			<para>Cliqueu el botó dret en la miniaplicació i seleccioneu <guimenuitem>Ajusta la data i l'hora</guimenuitem>.</para>
 	</listitem>
 	<listitem>
-			<para>Introduïu la contrasenya de l'<literal>superusuari</literal> i cliqueu <guibutton>D'acord</guibutton>.</para>
+			<para>Introduïu la contrasenya del <literal>superusuari</literal> i cliqueu <guibutton>D'acord</guibutton>.</para>
 	</listitem>
 	<listitem>
 			<para>La miniaplicació <application>Rellotge</application> inicia l'eina del sistema per a establir la data i l'hora del sistema. Utilitzeu l'eina per a ajustar la data i l'hora.</para>

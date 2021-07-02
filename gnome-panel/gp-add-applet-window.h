@@ -20,11 +20,17 @@
 
 #include <gtk/gtk.h>
 
+#include "gp-module-manager.h"
+#include "panel-toplevel.h"
+
 G_BEGIN_DECLS
 
 #define GP_TYPE_ADD_APPLET_WINDOW gp_add_applet_window_get_type ()
 G_DECLARE_FINAL_TYPE (GpAddAppletWindow, gp_add_applet_window,
                       GP, ADD_APPLET_WINDOW, GtkWindow)
+
+GtkWidget *gp_add_applet_window_new (GpModuleManager *manager,
+                                     PanelToplevel   *toplevel);
 
 G_END_DECLS
 

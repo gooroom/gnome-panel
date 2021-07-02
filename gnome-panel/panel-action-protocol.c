@@ -23,52 +23,76 @@
 #include <config.h>
 
 #include "panel-action-protocol.h"
+#include "panel-applets-manager.h"
 
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
 
-#include "menu.h"
 #include "applet.h"
 #include "panel-toplevel.h"
 #include "panel-util.h"
-#include "panel-force-quit.h"
 #include "panel-run-dialog.h"
-#include "panel-menu-button.h"
 
 static Atom atom_gnome_panel_action            = None;
 static Atom atom_gnome_panel_action_main_menu  = None;
 static Atom atom_gnome_panel_action_run_dialog = None;
-static Atom atom_gnome_panel_action_kill_dialog = None;
+
+static void
+menu_destroy_cb (GtkWidget   *widget,
+                 PanelWidget *panel_widget)
+{
+	panel_toplevel_pop_autohide_disabler (panel_widget->toplevel);
+}
+
+static void
+menu_loaded_cb (GtkWidget   *widget,
+                PanelWidget *panel_widget)
+{
+	GdkWindow *window;
+	GdkRectangle rect;
+	GdkDisplay *display;
+	GdkSeat *seat;
+	GdkDevice *device;
+
+	g_signal_connect (widget, "destroy", G_CALLBACK (menu_destroy_cb), panel_widget);
+	panel_toplevel_push_autohide_disabler (panel_widget->toplevel);
+
+	window = gtk_widget_get_window (GTK_WIDGET (panel_widget));
+
+	rect.x = 0;
+	rect.y = 0;
+	rect.width = 1;
+	rect.height = 1;
+
+	display = gdk_display_get_default ();
+	seat = gdk_display_get_default_seat (display);
+	device = gdk_seat_get_pointer (seat);
+
+	gdk_window_get_device_position (window, device,
+	                                &rect.x, &rect.y,
+	                                NULL);
+
+	gtk_menu_popup_at_rect (GTK_MENU (widget), window, &rect,
+	                        GDK_GRAVITY_SOUTH_EAST,
+	                        GDK_GRAVITY_NORTH_WEST,
+	                        NULL);
+}
 
 static void
 panel_action_protocol_main_menu (GdkScreen *screen,
 				 guint32    activate_time)
 {
-	GSList      *panels;
-	PanelWidget *panel_widget;
-	GtkWidget   *menu;
-	AppletInfo  *info;
+	GSList *panels;
+	GtkWidget *menu;
 
 	if (panel_applet_activate_main_menu (activate_time))
 		return;
 
-	info = panel_applet_get_by_type (PANEL_OBJECT_MENU, screen);
-	if (info && panel_menu_button_is_main_menu (PANEL_MENU_BUTTON (info->widget))) {
-		panel_menu_button_popup_menu (PANEL_MENU_BUTTON (info->widget),
-					      1, activate_time);
-		return;
-	}
-
 	panels = panel_widget_get_panels ();
-	panel_widget = panels->data;
-	menu = create_main_menu (panel_widget);
+	menu = panel_applets_manager_get_standalone_menu ();
 
-	panel_toplevel_push_autohide_disabler (panel_widget->toplevel);
-
-	gtk_menu_set_screen (GTK_MENU (menu), screen);
-	gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
-			NULL, NULL, 0, activate_time);
+	g_signal_connect (menu, "loaded", G_CALLBACK (menu_loaded_cb), panels->data);
 }
 
 static void
@@ -76,13 +100,6 @@ panel_action_protocol_run_dialog (GdkScreen *screen,
 				  guint32    activate_time)
 {
 	panel_run_dialog_present (screen, activate_time);
-}
-
-static void
-panel_action_protocol_kill_dialog (GdkScreen *screen,
-				   guint32    activate_time)
-{
-	panel_force_quit (screen, activate_time);
 }
 
 static GdkFilterReturn
@@ -94,6 +111,7 @@ panel_action_protocol_filter (GdkXEvent *gdk_xevent,
 	GdkScreen *screen;
 	GdkDisplay *display;
 	XEvent    *xevent = (XEvent *) gdk_xevent;
+	Atom       atom;
 
 	if (xevent->type != ClientMessage)
 		return GDK_FILTER_CONTINUE;
@@ -110,12 +128,12 @@ panel_action_protocol_filter (GdkXEvent *gdk_xevent,
 	if (window != gdk_screen_get_root_window (screen))
 		return GDK_FILTER_CONTINUE;
 
-	if (xevent->xclient.data.l [0] == atom_gnome_panel_action_main_menu)
+	atom = xevent->xclient.data.l[0];
+
+	if (atom == atom_gnome_panel_action_main_menu)
 		panel_action_protocol_main_menu (screen, xevent->xclient.data.l [1]);
-	else if (xevent->xclient.data.l [0] == atom_gnome_panel_action_run_dialog)
+	else if (atom == atom_gnome_panel_action_run_dialog)
 		panel_action_protocol_run_dialog (screen, xevent->xclient.data.l [1]);
-	else if (xevent->xclient.data.l [0] == atom_gnome_panel_action_kill_dialog)
-		panel_action_protocol_kill_dialog (screen, xevent->xclient.data.l [1]);
 	else
 		return GDK_FILTER_CONTINUE;
 
@@ -140,10 +158,6 @@ panel_action_protocol_init (void)
 	atom_gnome_panel_action_run_dialog =
 		XInternAtom (GDK_DISPLAY_XDISPLAY (display),
 			     "_GNOME_PANEL_ACTION_RUN_DIALOG",
-			     FALSE);
-	atom_gnome_panel_action_kill_dialog =
-		XInternAtom (GDK_DISPLAY_XDISPLAY (display),
-			     "_GNOME_PANEL_ACTION_KILL_DIALOG",
 			     FALSE);
 
 	/* We'll filter event sent on non-root windows later */

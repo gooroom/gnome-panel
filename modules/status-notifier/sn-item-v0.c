@@ -169,6 +169,7 @@ get_surface (SnItemV0       *v0,
 
   pixmaps = get_pixmaps_sorted (v0, orientation, size);
   surface = NULL;
+  best = NULL;
 
   for (l = pixmaps; l != NULL; l = l->next)
     {
@@ -207,6 +208,8 @@ get_surface (SnItemV0       *v0,
     }
 
   g_list_free (pixmaps);
+
+  g_assert (surface != NULL || best != NULL);
 
   if (surface != NULL)
     return cairo_surface_reference (surface);

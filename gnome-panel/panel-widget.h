@@ -12,7 +12,6 @@
 
 #include <gtk/gtk.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include "button-widget.h"
 #include "panel-types.h"
 #include "panel-toplevel.h"
 
@@ -32,9 +31,7 @@ typedef struct _PanelWidget		PanelWidget;
 
 typedef struct _PanelWidgetClass	PanelWidgetClass;
 
-typedef struct _AppletRecord		AppletRecord;
 typedef struct _AppletData		AppletData;
-typedef struct _DNDRecord		DNDRecord;
 
 typedef struct _AppletSizeHints		AppletSizeHints;
 typedef struct _AppletSizeHintsAlloc	AppletSizeHintsAlloc;
@@ -65,8 +62,7 @@ struct _AppletData
 	/* Valid size ranges for expanded applets */
 	int *           size_hints; 
 	int             size_hints_len;
-  
-	guint           size_constrained : 1;
+
 	guint           expand_major : 1;
 	guint           expand_minor : 1;
 };
@@ -92,8 +88,6 @@ struct _PanelWidget
 	                                  */
 	
 	PanelToplevel  *toplevel;
-	
-	GdkEventKey    *key_event;
 
 	/* helpers to get a good size in packed panels with applets using
 	 * size hints */
@@ -158,22 +152,12 @@ void            panel_widget_set_orientation    (PanelWidget    *panel_widget,
 void            panel_widget_set_size           (PanelWidget    *panel_widget,
 						 int             size);
 
-/*draw EVERYTHING (meaning icons)*/
-void		panel_widget_draw_all		(PanelWidget *panel,
-						 GdkRectangle *area);
-/*draw just one icon (applet has to be an icon of course)*/
-void		panel_widget_draw_icon		(PanelWidget *panel,
-						 ButtonWidget *applet);
-
-
 /*get pos of the cursor location in panel coordinates*/
 int		panel_widget_get_cursorloc	(PanelWidget *panel);
 /* get pack type & index for insertion at the cursor location in panel */
 void            panel_widget_get_insert_at_cursor (PanelWidget         *widget,
 						   PanelObjectPackType *pack_type,
 						   int                 *pack_index);
-/* get pack type for insertion at the cursor location in panel */
-PanelObjectPackType panel_widget_get_insert_pack_type_at_cursor (PanelWidget *panel);
 /* get index for insertion with pack type */
 int                 panel_widget_get_new_pack_index   (PanelWidget          *panel,
 						       PanelObjectPackType   pack_type);
@@ -186,10 +170,6 @@ void            panel_widget_focus              (PanelWidget *panel);
 
 PanelOrientation panel_widget_get_applet_orientation (PanelWidget *panel);
 
-
-void     panel_widget_set_applet_size_constrained (PanelWidget *panel,
-						   GtkWidget   *applet,
-						   gboolean     size_constrained);
 void     panel_widget_set_applet_expandable       (PanelWidget *panel,
 						   GtkWidget   *applet,
 						   gboolean     major,

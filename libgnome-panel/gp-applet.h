@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Alberts Muktupāvels
+ * Copyright (C) 2016-2020 Alberts Muktupāvels
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -19,6 +19,7 @@
 #define GP_APPLET_H
 
 #include <gtk/gtk.h>
+#include <libgnome-panel/gp-lockdown.h>
 
 G_BEGIN_DECLS
 
@@ -59,8 +60,11 @@ typedef enum
 /**
  * GpAppletClass:
  * @parent_class: The parent class.
+ * @initial_setup: virtual method called when applet has initial settings
  * @placement_changed: Signal is emitted when the orientation or position
  *     properties of applet has changed.
+ * @remove_from_panel: virtual method called when applet is removed from
+ *     panel.
  *
  * The class structure for the #GpApplet class.
  */
@@ -68,52 +72,71 @@ struct _GpAppletClass
 {
   GtkEventBoxClass parent_class;
 
+  void (* initial_setup)       (GpApplet        *applet,
+                                GVariant        *initial_settings);
+
   void (* placement_changed)   (GpApplet        *applet,
                                 GtkOrientation   orientation,
                                 GtkPositionType  position);
 
+  void (* remove_from_panel)   (GpApplet        *self);
+
   /*< private >*/
-  gpointer padding[10];
+  gpointer padding[9];
 };
 
-gboolean         gp_applet_get_locked_down          (GpApplet           *applet);
+gboolean         gp_applet_get_locked_down           (GpApplet           *applet);
 
-GtkOrientation   gp_applet_get_orientation          (GpApplet           *applet);
+GpLockdownFlags  gp_applet_get_lockdowns             (GpApplet           *applet);
 
-GtkPositionType  gp_applet_get_position             (GpApplet           *applet);
+GtkOrientation   gp_applet_get_orientation           (GpApplet           *applet);
 
-void             gp_applet_set_flags                (GpApplet           *applet,
-                                                     GpAppletFlags       flags);
+GtkPositionType  gp_applet_get_position              (GpApplet           *applet);
 
-void             gp_applet_set_size_hints           (GpApplet           *applet,
-                                                     const gint         *size_hints,
-                                                     guint               n_elements,
-                                                     gint                base_size);
+void             gp_applet_set_flags                 (GpApplet           *applet,
+                                                      GpAppletFlags       flags);
 
-GSettings       *gp_applet_settings_new             (GpApplet           *applet,
-                                                     const gchar        *schema);
+void             gp_applet_set_size_hints            (GpApplet           *applet,
+                                                      const gint         *size_hints,
+                                                      guint               n_elements,
+                                                      gint                base_size);
 
-void             gp_applet_request_focus            (GpApplet           *applet,
-                                                     guint32             timestamp);
+GSettings       *gp_applet_settings_new              (GpApplet           *applet,
+                                                      const gchar        *schema);
 
-void             gp_applet_setup_menu               (GpApplet           *applet,
-                                                     const gchar        *xml,
-                                                     const GActionEntry *entries);
+void             gp_applet_request_focus             (GpApplet           *applet,
+                                                      guint32             timestamp);
 
-void             gp_applet_setup_menu_from_file     (GpApplet           *applet,
-                                                     const gchar        *filename,
-                                                     const GActionEntry *entries);
+void             gp_applet_setup_menu                (GpApplet           *applet,
+                                                      const gchar        *xml,
+                                                      const GActionEntry *entries);
 
-void             gp_applet_setup_menu_from_resource (GpApplet           *applet,
-                                                     const gchar        *resource_path,
-                                                     const GActionEntry *entries);
+void             gp_applet_setup_menu_from_file      (GpApplet           *applet,
+                                                      const gchar        *filename,
+                                                      const GActionEntry *entries);
 
-GAction         *gp_applet_menu_lookup_action       (GpApplet           *applet,
-                                                     const gchar        *action_name);
+void             gp_applet_setup_menu_from_resource  (GpApplet           *applet,
+                                                      const gchar        *resource_path,
+                                                      const GActionEntry *entries);
 
-guint            gp_applet_get_panel_icon_size      (GpApplet           *applet);
+GAction         *gp_applet_menu_lookup_action        (GpApplet           *applet,
+                                                      const gchar        *action_name);
 
-guint            gp_applet_get_menu_icon_size       (GpApplet           *applet);
+gboolean         gp_applet_get_prefer_symbolic_icons (GpApplet           *applet);
+
+guint            gp_applet_get_panel_icon_size       (GpApplet           *applet);
+
+guint            gp_applet_get_menu_icon_size        (GpApplet           *applet);
+
+void             gp_applet_show_about                (GpApplet           *applet);
+
+void             gp_applet_show_help                 (GpApplet           *applet,
+                                                      const char         *page);
+
+void             gp_applet_popup_menu_at_widget      (GpApplet           *applet,
+                                                      GtkMenu            *menu,
+                                                      GtkWidget          *widget,
+                                                      GdkEvent           *event);
 
 G_END_DECLS
 

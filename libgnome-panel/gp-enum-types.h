@@ -9,6 +9,8 @@
 G_BEGIN_DECLS
 GType gp_applet_flags_get_type (void) G_GNUC_CONST;
 #define GP_TYPE_APPLET_FLAGS (gp_applet_flags_get_type())
+GType gp_lockdown_flags_get_type (void) G_GNUC_CONST;
+#define GP_TYPE_LOCKDOWN_FLAGS (gp_lockdown_flags_get_type())
 G_END_DECLS
 
 #endif

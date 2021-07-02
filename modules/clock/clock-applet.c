@@ -47,7 +47,6 @@
 #include <gdk/gdkkeysyms.h>
 #include <gdk/gdkx.h>
 
-#define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-wall-clock.h>
 
 #include <libgnome-panel/gp-utils.h>
@@ -803,7 +802,6 @@ create_clock_widget (ClockApplet *cd)
 
         orientation = gp_applet_get_orientation (GP_APPLET (cd));
 
-        cd->wall_clock = g_object_new (GNOME_TYPE_WALL_CLOCK, NULL);
         g_signal_connect (cd->wall_clock, "notify::clock",
                           G_CALLBACK (update_clock), cd);
 
@@ -1133,7 +1131,8 @@ load_cities (ClockApplet *cd)
                                     &latitude, &longitude)) {
                 ClockLocation *loc;
 
-                loc = clock_location_new (cd->world,
+                loc = clock_location_new (cd->wall_clock,
+                                          cd->world,
                                           name, code,
                                           latlon_override, latitude, longitude);
 
@@ -1161,6 +1160,8 @@ fill_clock_applet (ClockApplet *cd)
                           G_CALLBACK (show_week_changed), cd);
         g_signal_connect (cd->applet_settings, "changed::cities",
                           G_CALLBACK (locations_changed), cd);
+
+        cd->wall_clock = g_object_new (GNOME_TYPE_WALL_CLOCK, NULL);
 
         cd->world = gweather_location_get_world ();
         load_cities (cd);
@@ -1316,6 +1317,11 @@ run_prefs_edit_save (GtkButton   *button,
         }
 
         station_loc = gloc;
+        if (gweather_location_get_level (station_loc) == GWEATHER_LOCATION_DETACHED) {
+                /* According to the documentation, the parent of a detached location is
+                 * the nearest weather station. */
+                station_loc = gweather_location_get_parent (station_loc);
+        }
         while (gweather_location_get_level (station_loc) < GWEATHER_LOCATION_WEATHER_STATION) {
                 station_loc = gweather_location_get_children (station_loc)[0];
                 g_assert (station_loc != NULL);
@@ -1337,7 +1343,13 @@ run_prefs_edit_save (GtkButton   *button,
                 lon = -lon;
         }
 
-        loc = clock_location_new (cd->world, name, weather_code, TRUE, lat, lon);
+        loc = clock_location_new (cd->wall_clock,
+                                  cd->world,
+                                  name,
+                                  weather_code,
+                                  TRUE,
+                                  lat,
+                                  lon);
         /* has the side-effect of setting the current location if
          * there's none and this one can be considered as a current one
          */
@@ -1516,73 +1528,10 @@ prefs_hide_event (GtkWidget   *widget,
 }
 
 static void
-clock_utils_display_help (GtkWidget   *widget,
-                          const gchar *doc_id,
-                          const gchar *link_id,
-                          GtkWindow   *parent)
-{
-	GError *error = NULL;
-	char   *uri;
-
-	if (link_id)
-		uri = g_strdup_printf ("help:%s/%s", doc_id, link_id);
-	else
-		uri = g_strdup_printf ("help:%s", doc_id);
-
-	gtk_show_uri_on_window (parent, uri, gtk_get_current_event_time (), &error);
-	g_free (uri);
-
-	if (error &&
-	    g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-		g_error_free (error);
-	else if (error) {
-		GtkWidget *dialog;
-		char      *primary;
-
-		primary = g_markup_printf_escaped (
-				_("Could not display help document '%s'"),
-				doc_id);
-		dialog = gtk_message_dialog_new (
-				parent,
-				GTK_DIALOG_MODAL|GTK_DIALOG_DESTROY_WITH_PARENT,
-				GTK_MESSAGE_ERROR,
-				GTK_BUTTONS_CLOSE,
-				"%s", primary);
-
-		gtk_message_dialog_format_secondary_text (
-					GTK_MESSAGE_DIALOG (dialog),
-					"%s", error->message);
-
-		g_error_free (error);
-		g_free (primary);
-
-		g_signal_connect (dialog, "response",
-				  G_CALLBACK (gtk_widget_destroy),
-				  NULL);
-
-		gtk_window_set_icon_name (GTK_WINDOW (dialog), CLOCK_ICON);
-		gtk_window_set_screen (GTK_WINDOW (dialog),
-				       gtk_widget_get_screen (widget));
-
-		if (parent == NULL) {
-			/* we have no parent window */
-			gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dialog),
-							  FALSE);
-			gtk_window_set_title (GTK_WINDOW (dialog),
-					      _("Error displaying help document"));
-		}
-
-		gtk_widget_show (dialog);
-	}
-}
-
-static void
 prefs_help (GtkWidget   *widget,
             ClockApplet *cd)
 {
-	clock_utils_display_help (cd->prefs_window,
-				  "clock", "clock-settings",
-				  GTK_WINDOW (cd->prefs_window));
+        gp_applet_show_help (GP_APPLET (cd), "clock-settings");
 }
 
 static void

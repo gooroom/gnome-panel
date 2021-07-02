@@ -1,0 +1,1319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GpApplet: GNOME Panel Reference Manual</title>
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
+<link rel="home" href="index.html" title="GNOME Panel Reference Manual">
+<link rel="up" href="ch01.html" title="API Reference">
+<link rel="prev" href="ch01.html" title="API Reference">
+<link rel="next" href="libgnome-panel-GpAppletInfo.html" title="GpAppletInfo">
+<meta name="generator" content="GTK-Doc V1.99 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts">
+<a href="#" class="shortcut">Top</a><span id="nav_description">  <span class="dim">|</span> 
+                  <a href="#GpApplet.description" class="shortcut">Description</a></span><span id="nav_hierarchy">  <span class="dim">|</span> 
+                  <a href="#GpApplet.object-hierarchy" class="shortcut">Object Hierarchy</a></span><span id="nav_interfaces">  <span class="dim">|</span> 
+                  <a href="#GpApplet.implemented-interfaces" class="shortcut">Implemented Interfaces</a></span><span id="nav_properties">  <span class="dim">|</span> 
+                  <a href="#GpApplet.properties" class="shortcut">Properties</a></span><span id="nav_signals">  <span class="dim">|</span> 
+                  <a href="#GpApplet.signals" class="shortcut">Signals</a></span>
+</td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="ch01.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="libgnome-panel-GpAppletInfo.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="refentry">
+<a name="GpApplet"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GpApplet.top_of_page"></a>GpApplet</span></h2>
+<p>GpApplet — a widget embedded in a panel</p>
+</td>
+<td class="gallery_image" valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsect1">
+<a name="GpApplet.functions"></a><h2>Functions</h2>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="functions_proto_type">
+<col class="functions_proto_name">
+</colgroup>
+<tbody>
+<tr>
+<td class="function_type">
+<span class="returnvalue">gboolean</span>
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-get-locked-down" title="gp_applet_get_locked_down ()">gp_applet_get_locked_down</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="libgnome-panel-GpLockdown.html#GpLockdownFlags" title="enum GpLockdownFlags"><span class="returnvalue">GpLockdownFlags</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-get-lockdowns" title="gp_applet_get_lockdowns ()">gp_applet_get_lockdowns</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GtkOrientation</span>
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-get-orientation" title="gp_applet_get_orientation ()">gp_applet_get_orientation</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GtkPositionType</span>
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-get-position" title="gp_applet_get_position ()">gp_applet_get_position</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-set-flags" title="gp_applet_set_flags ()">gp_applet_set_flags</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-set-size-hints" title="gp_applet_set_size_hints ()">gp_applet_set_size_hints</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GSettings</span> *
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-settings-new" title="gp_applet_settings_new ()">gp_applet_settings_new</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-request-focus" title="gp_applet_request_focus ()">gp_applet_request_focus</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-setup-menu" title="gp_applet_setup_menu ()">gp_applet_setup_menu</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-setup-menu-from-file" title="gp_applet_setup_menu_from_file ()">gp_applet_setup_menu_from_file</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-setup-menu-from-resource" title="gp_applet_setup_menu_from_resource ()">gp_applet_setup_menu_from_resource</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GAction</span> *
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-menu-lookup-action" title="gp_applet_menu_lookup_action ()">gp_applet_menu_lookup_action</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">gboolean</span>
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-get-prefer-symbolic-icons" title="gp_applet_get_prefer_symbolic_icons ()">gp_applet_get_prefer_symbolic_icons</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">guint</span>
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-get-panel-icon-size" title="gp_applet_get_panel_icon_size ()">gp_applet_get_panel_icon_size</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">guint</span>
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-get-menu-icon-size" title="gp_applet_get_menu_icon_size ()">gp_applet_get_menu_icon_size</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-show-about" title="gp_applet_show_about ()">gp_applet_show_about</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-show-help" title="gp_applet_show_help ()">gp_applet_show_help</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GpApplet.html#gp-applet-popup-menu-at-widget" title="gp_applet_popup_menu_at_widget ()">gp_applet_popup_menu_at_widget</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="GpApplet.properties"></a><h2>Properties</h2>
+<div class="informaltable"><table class="informaltable" border="0">
+<colgroup>
+<col width="150px" class="properties_type">
+<col width="300px" class="properties_name">
+<col width="200px" class="properties_flags">
+</colgroup>
+<tbody>
+<tr>
+<td class="property_type"><span class="type">gboolean</span></td>
+<td class="property_name"><a class="link" href="GpApplet.html#GpApplet--enable-tooltips" title="The “enable-tooltips” property">enable-tooltips</a></td>
+<td class="property_flags">Read</td>
+</tr>
+<tr>
+<td class="property_type">
+<span class="type">char</span> *</td>
+<td class="property_name"><a class="link" href="GpApplet.html#GpApplet--gettext-domain" title="The “gettext-domain” property">gettext-domain</a></td>
+<td class="property_flags">Read / Write / Construct Only</td>
+</tr>
+<tr>
+<td class="property_type">
+<span class="type">char</span> *</td>
+<td class="property_name"><a class="link" href="GpApplet.html#GpApplet--id" title="The “id” property">id</a></td>
+<td class="property_flags">Read / Write / Construct Only</td>
+</tr>
+<tr>
+<td class="property_type">
+<span class="type">GVariant</span> *</td>
+<td class="property_name"><a class="link" href="GpApplet.html#GpApplet--initial-settings" title="The “initial-settings” property">initial-settings</a></td>
+<td class="property_flags">Write / Construct Only</td>
+</tr>
+<tr>
+<td class="property_type"><a class="link" href="libgnome-panel-GpLockdown.html#GpLockdownFlags" title="enum GpLockdownFlags"><span class="type">GpLockdownFlags</span></a></td>
+<td class="property_name"><a class="link" href="GpApplet.html#GpApplet--lockdowns" title="The “lockdowns” property">lockdowns</a></td>
+<td class="property_flags">Read</td>
+</tr>
+<tr>
+<td class="property_type"><span class="type">gboolean</span></td>
+<td class="property_name"><a class="link" href="GpApplet.html#GpApplet--locked-down" title="The “locked-down” property">locked-down</a></td>
+<td class="property_flags">Read</td>
+</tr>
+<tr>
+<td class="property_type"><span class="type">guint</span></td>
+<td class="property_name"><a class="link" href="GpApplet.html#GpApplet--menu-icon-size" title="The “menu-icon-size” property">menu-icon-size</a></td>
+<td class="property_flags">Read</td>
+</tr>
+<tr>
+<td class="property_type">
+<a class="link" href="libgnome-panel-Module.html#GpModule"><span class="type">GpModule</span></a> *</td>
+<td class="property_name"><a class="link" href="GpApplet.html#GpApplet--module" title="The “module” property">module</a></td>
+<td class="property_flags">Write / Construct Only</td>
+</tr>
+<tr>
+<td class="property_type"><span class="type">GtkOrientation</span></td>
+<td class="property_name"><a class="link" href="GpApplet.html#GpApplet--orientation" title="The “orientation” property">orientation</a></td>
+<td class="property_flags">Read</td>
+</tr>
+<tr>
+<td class="property_type"><span class="type">guint</span></td>
+<td class="property_name"><a class="link" href="GpApplet.html#GpApplet--panel-icon-size" title="The “panel-icon-size” property">panel-icon-size</a></td>
+<td class="property_flags">Read</td>
+</tr>
+<tr>
+<td class="property_type"><span class="type">GtkPositionType</span></td>
+<td class="property_name"><a class="link" href="GpApplet.html#GpApplet--position" title="The “position” property">position</a></td>
+<td class="property_flags">Read</td>
+</tr>
+<tr>
+<td class="property_type"><span class="type">gboolean</span></td>
+<td class="property_name"><a class="link" href="GpApplet.html#GpApplet--prefer-symbolic-icons" title="The “prefer-symbolic-icons” property">prefer-symbolic-icons</a></td>
+<td class="property_flags">Read</td>
+</tr>
+<tr>
+<td class="property_type">
+<span class="type">char</span> *</td>
+<td class="property_name"><a class="link" href="GpApplet.html#GpApplet--settings-path" title="The “settings-path” property">settings-path</a></td>
+<td class="property_flags">Read / Write / Construct Only</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="GpApplet.signals"></a><h2>Signals</h2>
+<div class="informaltable"><table class="informaltable" border="0">
+<colgroup>
+<col width="150px" class="signal_proto_type">
+<col width="300px" class="signal_proto_name">
+<col width="200px" class="signal_proto_flags">
+</colgroup>
+<tbody>
+<tr>
+<td class="signal_type"><span class="returnvalue">void</span></td>
+<td class="signal_name"><a class="link" href="GpApplet.html#GpApplet-flags-changed" title="The “flags-changed” signal">flags-changed</a></td>
+<td class="signal_flags">Run Last</td>
+</tr>
+<tr>
+<td class="signal_type"><span class="returnvalue">void</span></td>
+<td class="signal_name"><a class="link" href="GpApplet.html#GpApplet-placement-changed" title="The “placement-changed” signal">placement-changed</a></td>
+<td class="signal_flags">Run Last</td>
+</tr>
+<tr>
+<td class="signal_type"><span class="returnvalue">void</span></td>
+<td class="signal_name"><a class="link" href="GpApplet.html#GpApplet-size-hints-changed" title="The “size-hints-changed” signal">size-hints-changed</a></td>
+<td class="signal_flags">Run Last</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="GpApplet.other"></a><h2>Types and Values</h2>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="other_proto_type">
+<col class="other_proto_name">
+</colgroup>
+<tbody>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="GpApplet.html#GP-TYPE-APPLET:CAPS" title="GP_TYPE_APPLET">GP_TYPE_APPLET</a></td>
+</tr>
+<tr>
+<td class="datatype_keyword">enum</td>
+<td class="function_name"><a class="link" href="GpApplet.html#GpAppletFlags" title="enum GpAppletFlags">GpAppletFlags</a></td>
+</tr>
+<tr>
+<td class="datatype_keyword">struct</td>
+<td class="function_name"><a class="link" href="GpApplet.html#GpAppletClass" title="struct GpAppletClass">GpAppletClass</a></td>
+</tr>
+<tr>
+<td class="datatype_keyword"> </td>
+<td class="function_name"><a class="link" href="GpApplet.html#GpApplet-struct" title="GpApplet">GpApplet</a></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="GpApplet.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="screen">    GObject
+    <span class="lineart">╰──</span> GInitiallyUnowned
+        <span class="lineart">╰──</span> GtkWidget
+            <span class="lineart">╰──</span> GtkContainer
+                <span class="lineart">╰──</span> GtkBin
+                    <span class="lineart">╰──</span> GtkEventBox
+                        <span class="lineart">╰──</span> GpApplet
+</pre>
+</div>
+<div class="refsect1">
+<a name="GpApplet.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
+<p>
+GpApplet implements
+ AtkImplementorIface and  GtkBuildable.</p>
+</div>
+<div class="refsect1">
+<a name="GpApplet.includes"></a><h2>Includes</h2>
+<pre class="synopsis">#include &lt;libngome-panel/gp-applet.h&gt;
+</pre>
+</div>
+<div class="refsect1">
+<a name="GpApplet.description"></a><h2>Description</h2>
+<p>Applets are small applications that are embedded in the GNOME Panel. They
+can be used to give quick access to some features, or to display the state
+of something specific.</p>
+<p>The <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> API hides all of the embedding process as it handles all
+the communication with the GNOME Panel. It is a subclass of <span class="type">GtkEventBox</span>,
+so you can add any kind of widgets to it.</p>
+</div>
+<div class="refsect1">
+<a name="GpApplet.functions_details"></a><h2>Functions</h2>
+<div class="refsect2">
+<a name="gp-applet-get-locked-down"></a><h3>gp_applet_get_locked_down ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>
+gp_applet_get_locked_down (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>);</pre>
+<p>Gets whether <em class="parameter"><code>applet</code></em>
+ is on locked down panel. A locked down applet
+should not allow any change to its configuration.</p>
+<div class="refsect3">
+<a name="gp-applet-get-locked-down.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="gp-applet-get-locked-down.returns"></a><h4>Returns</h4>
+<p> <code class="literal">TRUE</code> if <em class="parameter"><code>applet</code></em>
+is on locked down panel, <code class="literal">FALSE</code> otherwise.</p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-get-lockdowns"></a><h3>gp_applet_get_lockdowns ()</h3>
+<pre class="programlisting"><a class="link" href="libgnome-panel-GpLockdown.html#GpLockdownFlags" title="enum GpLockdownFlags"><span class="returnvalue">GpLockdownFlags</span></a>
+gp_applet_get_lockdowns (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>);</pre>
+<p>Gets active lockdowns.</p>
+<div class="refsect3">
+<a name="gp-applet-get-lockdowns.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="gp-applet-get-lockdowns.returns"></a><h4>Returns</h4>
+<p> the <a class="link" href="libgnome-panel-GpLockdown.html#GpLockdownFlags" title="enum GpLockdownFlags"><span class="type">GpLockdownFlags</span></a> of <em class="parameter"><code>applet</code></em>
+.</p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-get-orientation"></a><h3>gp_applet_get_orientation ()</h3>
+<pre class="programlisting"><span class="returnvalue">GtkOrientation</span>
+gp_applet_get_orientation (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>);</pre>
+<p>Returns the orientation of the panel.</p>
+<div class="refsect3">
+<a name="gp-applet-get-orientation.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="gp-applet-get-orientation.returns"></a><h4>Returns</h4>
+<p> the orientation of the panel.</p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-get-position"></a><h3>gp_applet_get_position ()</h3>
+<pre class="programlisting"><span class="returnvalue">GtkPositionType</span>
+gp_applet_get_position (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>);</pre>
+<p>Returns the position of the panel.</p>
+<div class="refsect3">
+<a name="gp-applet-get-position.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="gp-applet-get-position.returns"></a><h4>Returns</h4>
+<p> the position of the panel.</p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-set-flags"></a><h3>gp_applet_set_flags ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gp_applet_set_flags (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>,
+                     <em class="parameter"><code><a class="link" href="GpApplet.html#GpAppletFlags" title="enum GpAppletFlags"><span class="type">GpAppletFlags</span></a> flags</code></em>);</pre>
+<p>Sets the <a class="link" href="GpApplet.html#GpAppletFlags" title="enum GpAppletFlags"><span class="type">GpAppletFlags</span></a> of <em class="parameter"><code>applet</code></em>
+. Most of the time, at least
+<a class="link" href="GpApplet.html#GP-APPLET-FLAGS-EXPAND-MINOR:CAPS"><code class="literal">GP_APPLET_FLAGS_EXPAND_MINOR</code></a> should be used.</p>
+<div class="refsect3">
+<a name="gp-applet-set-flags.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>flags</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html#GpAppletFlags" title="enum GpAppletFlags"><span class="type">GpAppletFlags</span></a> to use for <em class="parameter"><code>applet</code></em>
+</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-set-size-hints"></a><h3>gp_applet_set_size_hints ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gp_applet_set_size_hints (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>,
+                          <em class="parameter"><code>const <span class="type">gint</span> *size_hints</code></em>,
+                          <em class="parameter"><code><span class="type">guint</span> n_elements</code></em>,
+                          <em class="parameter"><code><span class="type">gint</span> base_size</code></em>);</pre>
+<p>Give hints to the panel about sizes <em class="parameter"><code>applet</code></em>
+ is comfortable with. This
+is generally useful for applets that can take a lot of space, in case
+the panel gets full and needs to restrict the size of some applets.</p>
+<p><em class="parameter"><code>size_hints</code></em>
+ should have an even number of sizes. It is an array of
+(max, min) pairs where min(i) &gt; max(i + 1).</p>
+<p><em class="parameter"><code>base_size</code></em>
+ will be added to all sizes in <em class="parameter"><code>size_hints</code></em>
+, and is therefore
+a way to guarantee a minimum size to <em class="parameter"><code>applet</code></em>
+.</p>
+<p>The panel will try to allocate a size that is acceptable to <em class="parameter"><code>applet</code></em>
+,
+i.e. in one of the (<em class="parameter"><code>base_size</code></em>
+ + max, <em class="parameter"><code>base_size</code></em>
+ + min) ranges.</p>
+<p><a class="link" href="GpApplet.html#GP-APPLET-FLAGS-EXPAND-MAJOR:CAPS"><code class="literal">GP_APPLET_FLAGS_EXPAND_MAJOR</code></a> must be set for <em class="parameter"><code>applet</code></em>
+ to use size hints.</p>
+<div class="refsect3">
+<a name="gp-applet-set-size-hints.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>size_hints</p></td>
+<td class="parameter_description"><p>array of sizes or <code class="literal">NULL</code>. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>n_elements</p></td>
+<td class="parameter_description"><p>length of <em class="parameter"><code>size_hints</code></em>
+</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>base_size</p></td>
+<td class="parameter_description"><p>base size of the applet</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-settings-new"></a><h3>gp_applet_settings_new ()</h3>
+<pre class="programlisting"><span class="returnvalue">GSettings</span> *
+gp_applet_settings_new (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>,
+                        <em class="parameter"><code>const <span class="type">gchar</span> *schema</code></em>);</pre>
+<p>Creates a new <span class="type">GSettings</span> object for the per-instance settings of <em class="parameter"><code>applet</code></em>
+,
+with a given schema.</p>
+<p>Note that you cannot call <a class="link" href="GpApplet.html#gp-applet-settings-new" title="gp_applet_settings_new ()"><code class="function">gp_applet_settings_new()</code></a> from <code class="function">init()</code> class
+method since required property settings-path is not set yet.</p>
+<div class="refsect3">
+<a name="gp-applet-settings-new.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>schema</p></td>
+<td class="parameter_description"><p>the name of the schema</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="gp-applet-settings-new.returns"></a><h4>Returns</h4>
+<p>a newly created <span class="type">GSettings</span>. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-request-focus"></a><h3>gp_applet_request_focus ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gp_applet_request_focus (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>,
+                         <em class="parameter"><code><span class="type">guint32</span> timestamp</code></em>);</pre>
+<p>Requests focus for <em class="parameter"><code>applet</code></em>
+. There is no guarantee that <em class="parameter"><code>applet</code></em>
+ will
+successfully get focus after that call.</p>
+<div class="refsect3">
+<a name="gp-applet-request-focus.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>timestamp</p></td>
+<td class="parameter_description"><p>the timestamp of the user interaction (typically a button
+or key press event) which triggered this call</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-setup-menu"></a><h3>gp_applet_setup_menu ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gp_applet_setup_menu (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>,
+                      <em class="parameter"><code>const <span class="type">gchar</span> *xml</code></em>,
+                      <em class="parameter"><code>const <span class="type">GActionEntry</span> *entries</code></em>);</pre>
+<p>Sets up the context menu of <em class="parameter"><code>applet</code></em>
+.</p>
+<div class="refsect3">
+<a name="gp-applet-setup-menu.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>xml</p></td>
+<td class="parameter_description"><p>a menu XML string</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>entries</p></td>
+<td class="parameter_description"><p>a pointer to the first item in an <code class="literal">NULL</code>-terminated array
+of <span class="type">GActionEntry</span> structs</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-setup-menu-from-file"></a><h3>gp_applet_setup_menu_from_file ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gp_applet_setup_menu_from_file (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>,
+                                <em class="parameter"><code>const <span class="type">gchar</span> *filename</code></em>,
+                                <em class="parameter"><code>const <span class="type">GActionEntry</span> *entries</code></em>);</pre>
+<p>Sets up the context menu of <em class="parameter"><code>applet</code></em>
+.</p>
+<div class="refsect3">
+<a name="gp-applet-setup-menu-from-file.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>filename</p></td>
+<td class="parameter_description"><p>path to a menu XML file</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>entries</p></td>
+<td class="parameter_description"><p>a pointer to the first item in an <code class="literal">NULL</code>-terminated array
+of <span class="type">GActionEntry</span> structs</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-setup-menu-from-resource"></a><h3>gp_applet_setup_menu_from_resource ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gp_applet_setup_menu_from_resource (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>,
+                                    <em class="parameter"><code>const <span class="type">gchar</span> *resource_path</code></em>,
+                                    <em class="parameter"><code>const <span class="type">GActionEntry</span> *entries</code></em>);</pre>
+<p>Sets up the context menu of <em class="parameter"><code>applet</code></em>
+.</p>
+<div class="refsect3">
+<a name="gp-applet-setup-menu-from-resource.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>resource_path</p></td>
+<td class="parameter_description"><p>a resource path</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>entries</p></td>
+<td class="parameter_description"><p>a pointer to the first item in an <code class="literal">NULL</code>-terminated array
+of <span class="type">GActionEntry</span> structs</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-menu-lookup-action"></a><h3>gp_applet_menu_lookup_action ()</h3>
+<pre class="programlisting"><span class="returnvalue">GAction</span> *
+gp_applet_menu_lookup_action (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>,
+                              <em class="parameter"><code>const <span class="type">gchar</span> *action_name</code></em>);</pre>
+<p>Looks up the action with the name <em class="parameter"><code>action_name</code></em>
+ in action group.</p>
+<div class="refsect3">
+<a name="gp-applet-menu-lookup-action.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>action_name</p></td>
+<td class="parameter_description"><p>the name of an action</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="gp-applet-menu-lookup-action.returns"></a><h4>Returns</h4>
+<p>a <span class="type">GAction</span>, or <code class="literal">NULL</code>. </p>
+<p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-get-prefer-symbolic-icons"></a><h3>gp_applet_get_prefer_symbolic_icons ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>
+gp_applet_get_prefer_symbolic_icons (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>);</pre>
+<p>Returns whether the applet should prefer symbolic icons in panels.</p>
+<div class="refsect3">
+<a name="gp-applet-get-prefer-symbolic-icons.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="gp-applet-get-prefer-symbolic-icons.returns"></a><h4>Returns</h4>
+<p> whether the applet should prefer symbolic icons in panels.</p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-get-panel-icon-size"></a><h3>gp_applet_get_panel_icon_size ()</h3>
+<pre class="programlisting"><span class="returnvalue">guint</span>
+gp_applet_get_panel_icon_size (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>);</pre>
+<p>Returns the panel icon size.</p>
+<div class="refsect3">
+<a name="gp-applet-get-panel-icon-size.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="gp-applet-get-panel-icon-size.returns"></a><h4>Returns</h4>
+<p> the panel icon size.</p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-get-menu-icon-size"></a><h3>gp_applet_get_menu_icon_size ()</h3>
+<pre class="programlisting"><span class="returnvalue">guint</span>
+gp_applet_get_menu_icon_size (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>);</pre>
+<p>Returns the menu icon size.</p>
+<div class="refsect3">
+<a name="gp-applet-get-menu-icon-size.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="gp-applet-get-menu-icon-size.returns"></a><h4>Returns</h4>
+<p> the menu icon size.</p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-show-about"></a><h3>gp_applet_show_about ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gp_applet_show_about (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>);</pre>
+<p>Show about dialog. <a class="link" href="libgnome-panel-GpAppletInfo.html#GpAboutDialogFunc" title="GpAboutDialogFunc ()"><span class="type">GpAboutDialogFunc</span></a> must be set with
+<a class="link" href="libgnome-panel-GpAppletInfo.html#gp-applet-info-set-about-dialog" title="gp_applet_info_set_about_dialog ()"><code class="function">gp_applet_info_set_about_dialog()</code></a>.</p>
+<div class="refsect3">
+<a name="gp-applet-show-about.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-show-help"></a><h3>gp_applet_show_help ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gp_applet_show_help (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>,
+                     <em class="parameter"><code>const <span class="type">char</span> *page</code></em>);</pre>
+<p>Show help. Help URI must be set with <a class="link" href="libgnome-panel-GpAppletInfo.html#gp-applet-info-set-help-uri" title="gp_applet_info_set_help_uri ()"><code class="function">gp_applet_info_set_help_uri()</code></a>.</p>
+<p>The optional <em class="parameter"><code>page</code></em>
+ indentifier may include options and anchor if needed.</p>
+<div class="refsect3">
+<a name="gp-applet-show-help.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>page</p></td>
+<td class="parameter_description"><p>the optional page identifier</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-popup-menu-at-widget"></a><h3>gp_applet_popup_menu_at_widget ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gp_applet_popup_menu_at_widget (<em class="parameter"><code><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet</code></em>,
+                                <em class="parameter"><code><span class="type">GtkMenu</span> *menu</code></em>,
+                                <em class="parameter"><code><span class="type">GtkWidget</span> *widget</code></em>,
+                                <em class="parameter"><code><span class="type">GdkEvent</span> *event</code></em>);</pre>
+<p>Displays menu and makes it available for selection. This is convenience function
+around <code class="function">gtk_menu_popup_at_widget()</code> that automatically computes the widget_anchor and
+menu_anchor parameters based on the current applet position.</p>
+<div class="refsect3">
+<a name="gp-applet-popup-menu-at-widget.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>a <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>menu</p></td>
+<td class="parameter_description"><p>the <span class="type">GtkMenu</span> to pop up.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>widget</p></td>
+<td class="parameter_description"><p>the <span class="type">GtkWidget</span> to align menu with.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>event</p></td>
+<td class="parameter_description"><p>the <span class="type">GdkEvent</span> that initiated this request or NULL if it's the current event.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="refsect1">
+<a name="GpApplet.other_details"></a><h2>Types and Values</h2>
+<div class="refsect2">
+<a name="GP-TYPE-APPLET:CAPS"></a><h3>GP_TYPE_APPLET</h3>
+<pre class="programlisting">#define GP_TYPE_APPLET gp_applet_get_type ()
+</pre>
+<p>The type for GpApplet.</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpAppletFlags"></a><h3>enum GpAppletFlags</h3>
+<p>Flags to be used with <a class="link" href="GpApplet.html#gp-applet-set-flags" title="gp_applet_set_flags ()"><code class="function">gp_applet_set_flags()</code></a>, to indicate to the panel a
+specific behavior requested by the <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a>.</p>
+<div class="refsect3">
+<a name="GpAppletFlags.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="300px" class="enum_members_name">
+<col class="enum_members_description">
+<col width="200px" class="enum_members_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="enum_member_name"><p><a name="GP-APPLET-FLAGS-NONE:CAPS"></a>GP_APPLET_FLAGS_NONE</p></td>
+<td class="enum_member_description">
+<p>No flags set.</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="GP-APPLET-FLAGS-EXPAND-MAJOR:CAPS"></a>GP_APPLET_FLAGS_EXPAND_MAJOR</p></td>
+<td class="enum_member_description">
+<p>On horizontal panels, the <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> will
+be allocated as much width as possible. On vertical panels, it will
+be allocated as much height as possible.</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="GP-APPLET-FLAGS-EXPAND-MINOR:CAPS"></a>GP_APPLET_FLAGS_EXPAND_MINOR</p></td>
+<td class="enum_member_description">
+<p>On horizontal panels, the <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> will
+be allocated the full height of the panel. On vertical panels, it
+will be allocated the full width. Most applets should set this flag
+in order to use full panel size and allow the applet to be Fitt's Law
+compliant.</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="GP-APPLET-FLAGS-HAS-HANDLE:CAPS"></a>GP_APPLET_FLAGS_HAS_HANDLE</p></td>
+<td class="enum_member_description">
+<p>The panel will draw a handle for the
+<a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a>. This handle will be usable to move the applet, and to open
+the context menu of the applet.</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpAppletClass"></a><h3>struct GpAppletClass</h3>
+<pre class="programlisting">struct GpAppletClass {
+  GtkEventBoxClass parent_class;
+
+  void (* initial_setup)       (GpApplet        *applet,
+                                GVariant        *initial_settings);
+
+  void (* placement_changed)   (GpApplet        *applet,
+                                GtkOrientation   orientation,
+                                GtkPositionType  position);
+
+  void (* remove_from_panel)   (GpApplet        *self);
+};
+</pre>
+<p>The class structure for the <a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> class.</p>
+<div class="refsect3">
+<a name="GpAppletClass.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="300px" class="struct_members_name">
+<col class="struct_members_description">
+<col width="200px" class="struct_members_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="struct_member_name"><p><em class="structfield"><code><a name="GpAppletClass.initial-setup"></a>initial_setup</code></em> ()</p></td>
+<td class="struct_member_description"><p>virtual method called when applet has initial settings</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+<tr>
+<td class="struct_member_name"><p><em class="structfield"><code><a name="GpAppletClass.placement-changed"></a>placement_changed</code></em> ()</p></td>
+<td class="struct_member_description"><p>Signal is emitted when the orientation or position
+properties of applet has changed.</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+<tr>
+<td class="struct_member_name"><p><em class="structfield"><code><a name="GpAppletClass.remove-from-panel"></a>remove_from_panel</code></em> ()</p></td>
+<td class="struct_member_description"><p>virtual method called when applet is removed from
+panel.</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpApplet-struct"></a><h3>GpApplet</h3>
+<pre class="programlisting">typedef struct _GpApplet GpApplet;</pre>
+<p><a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> is an opaque data structure and can only be accessed using
+the following functions.</p>
+</div>
+</div>
+<div class="refsect1">
+<a name="GpApplet.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="GpApplet--enable-tooltips"></a><h3>The <code class="literal">“enable-tooltips”</code> property</h3>
+<pre class="programlisting">  “enable-tooltips”          <span class="type">gboolean</span></pre>
+<p>Whether the applet should show tooltips.</p>
+<p>Owner: GpApplet</p>
+<p>Flags: Read</p>
+<p>Default value: TRUE</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpApplet--gettext-domain"></a><h3>The <code class="literal">“gettext-domain”</code> property</h3>
+<pre class="programlisting">  “gettext-domain”           <span class="type">char</span> *</pre>
+<p>The gettext domain.</p>
+<p>Owner: GpApplet</p>
+<p>Flags: Read / Write / Construct Only</p>
+<p>Default value: NULL</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpApplet--id"></a><h3>The <code class="literal">“id”</code> property</h3>
+<pre class="programlisting">  “id”                       <span class="type">char</span> *</pre>
+<p>The applet id.</p>
+<p>Owner: GpApplet</p>
+<p>Flags: Read / Write / Construct Only</p>
+<p>Default value: NULL</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpApplet--initial-settings"></a><h3>The <code class="literal">“initial-settings”</code> property</h3>
+<pre class="programlisting">  “initial-settings”         <span class="type">GVariant</span> *</pre>
+<p>The GVariant with initial settings.</p>
+<p>Owner: GpApplet</p>
+<p>Flags: Write / Construct Only</p>
+<p>Allowed values: GVariant&lt;a{sv}&gt;</p>
+<p>Default value: NULL</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpApplet--lockdowns"></a><h3>The <code class="literal">“lockdowns”</code> property</h3>
+<pre class="programlisting">  “lockdowns”                <a class="link" href="libgnome-panel-GpLockdown.html#GpLockdownFlags" title="enum GpLockdownFlags"><span class="type">GpLockdownFlags</span></a></pre>
+<p>Active lockdowns.</p>
+<p>Owner: GpApplet</p>
+<p>Flags: Read</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpApplet--locked-down"></a><h3>The <code class="literal">“locked-down”</code> property</h3>
+<pre class="programlisting">  “locked-down”              <span class="type">gboolean</span></pre>
+<p>Whether the applet is on locked down panel.</p>
+<div class="warning">
+<p><code class="literal">GpApplet:locked-down</code> has been deprecated since version 3.38 and should not be used in newly-written code.</p>
+<p>Use <a class="link" href="GpApplet.html#GpApplet--lockdowns" title="The “lockdowns” property"><span class="type">“lockdowns”</span></a> instead</p>
+</div>
+<p>Owner: GpApplet</p>
+<p>Flags: Read</p>
+<p>Default value: FALSE</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpApplet--menu-icon-size"></a><h3>The <code class="literal">“menu-icon-size”</code> property</h3>
+<pre class="programlisting">  “menu-icon-size”           <span class="type">guint</span></pre>
+<p>The size of icons in menus.</p>
+<p>Owner: GpApplet</p>
+<p>Flags: Read</p>
+<p>Allowed values: [16,24]</p>
+<p>Default value: 16</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpApplet--module"></a><h3>The <code class="literal">“module”</code> property</h3>
+<pre class="programlisting">  “module”                   <a class="link" href="libgnome-panel-Module.html#GpModule"><span class="type">GpModule</span></a> *</pre>
+<p>The applet module.</p>
+<p>Owner: GpApplet</p>
+<p>Flags: Write / Construct Only</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpApplet--orientation"></a><h3>The <code class="literal">“orientation”</code> property</h3>
+<pre class="programlisting">  “orientation”              <span class="type">GtkOrientation</span></pre>
+<p>The orientation of the panel.</p>
+<p>Owner: GpApplet</p>
+<p>Flags: Read</p>
+<p>Default value: GTK_ORIENTATION_HORIZONTAL</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpApplet--panel-icon-size"></a><h3>The <code class="literal">“panel-icon-size”</code> property</h3>
+<pre class="programlisting">  “panel-icon-size”          <span class="type">guint</span></pre>
+<p>The size of icons in panels.</p>
+<p>Owner: GpApplet</p>
+<p>Flags: Read</p>
+<p>Allowed values: [16,64]</p>
+<p>Default value: 16</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpApplet--position"></a><h3>The <code class="literal">“position”</code> property</h3>
+<pre class="programlisting">  “position”                 <span class="type">GtkPositionType</span></pre>
+<p>The position of the panel.</p>
+<p>Owner: GpApplet</p>
+<p>Flags: Read</p>
+<p>Default value: GTK_POS_TOP</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpApplet--prefer-symbolic-icons"></a><h3>The <code class="literal">“prefer-symbolic-icons”</code> property</h3>
+<pre class="programlisting">  “prefer-symbolic-icons”    <span class="type">gboolean</span></pre>
+<p>Whether the applet should prefer symbolic icons in panels.</p>
+<p>Owner: GpApplet</p>
+<p>Flags: Read</p>
+<p>Default value: FALSE</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpApplet--settings-path"></a><h3>The <code class="literal">“settings-path”</code> property</h3>
+<pre class="programlisting">  “settings-path”            <span class="type">char</span> *</pre>
+<p>The GSettings path to the per-instance settings of the applet.</p>
+<p>Owner: GpApplet</p>
+<p>Flags: Read / Write / Construct Only</p>
+<p>Default value: NULL</p>
+</div>
+</div>
+<div class="refsect1">
+<a name="GpApplet.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2">
+<a name="GpApplet-flags-changed"></a><h3>The <code class="literal">“flags-changed”</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+user_function (<a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet,
+               <span class="type">gpointer</span>  user_data)</pre>
+<p>Signal is emitted when flags has changed.</p>
+<div class="refsect3">
+<a name="GpApplet-flags-changed.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>the object on which the signal is emitted</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>user_data</p></td>
+<td class="parameter_description"><p>user data set when the signal handler was connected.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>Flags: Run Last</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpApplet-placement-changed"></a><h3>The <code class="literal">“placement-changed”</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+user_function (<a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a>       *applet,
+               <span class="type">GtkOrientation</span>  orientation,
+               <span class="type">GtkPositionType</span> position,
+               <span class="type">gpointer</span>        user_data)</pre>
+<p>Signal is emitted when the orientation or position properties of
+applet has changed.</p>
+<p>Note that <a class="link" href="GpApplet.html#gp-applet-get-orientation" title="gp_applet_get_orientation ()"><code class="function">gp_applet_get_orientation()</code></a> or <a class="link" href="GpApplet.html#gp-applet-get-position" title="gp_applet_get_position ()"><code class="function">gp_applet_get_position()</code></a>
+functions will return old values in signal handler!</p>
+<div class="refsect3">
+<a name="GpApplet-placement-changed.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>the object on which the signal is emitted</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>orientation</p></td>
+<td class="parameter_description"><p>the new orientation</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>position</p></td>
+<td class="parameter_description"><p>the new position</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>user_data</p></td>
+<td class="parameter_description"><p>user data set when the signal handler was connected.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>Flags: Run Last</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpApplet-size-hints-changed"></a><h3>The <code class="literal">“size-hints-changed”</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+user_function (<a class="link" href="GpApplet.html" title="GpApplet"><span class="type">GpApplet</span></a> *applet,
+               <span class="type">gpointer</span>  user_data)</pre>
+<p>Signal is emitted when size hints has changed.</p>
+<div class="refsect3">
+<a name="GpApplet-size-hints-changed.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>applet</p></td>
+<td class="parameter_description"><p>the object on which the signal is emitted</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>user_data</p></td>
+<td class="parameter_description"><p>user data set when the signal handler was connected.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>Flags: Run Last</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>Generated by GTK-Doc V1.99</div>
+</body>
+</html>

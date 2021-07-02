@@ -3,8 +3,8 @@
 
 #include "panel-typebuiltins.h"
 
-/* enumerations from "../gnome-panel/panel-enums-gsettings.h" */
-#include "../gnome-panel/panel-enums-gsettings.h"
+/* enumerations from "panel-enums-gsettings.h" */
+#include "panel-enums-gsettings.h"
 static const GEnumValue _panel_object_pack_type_values[] = {
   { PANEL_OBJECT_PACK_START, "PANEL_OBJECT_PACK_START", "start" },
   { PANEL_OBJECT_PACK_CENTER, "PANEL_OBJECT_PACK_CENTER", "center" },
@@ -92,55 +92,8 @@ panel_theme_variant_get_type (void)
   return type;
 }
 
-/* enumerations from "../gnome-panel/panel-enums.h" */
-#include "../gnome-panel/panel-enums.h"
-static const GEnumValue _panel_object_type_values[] = {
-  { PANEL_OBJECT_MENU, "PANEL_OBJECT_MENU", "menu" },
-  { PANEL_OBJECT_LAUNCHER, "PANEL_OBJECT_LAUNCHER", "launcher" },
-  { PANEL_OBJECT_APPLET, "PANEL_OBJECT_APPLET", "applet" },
-  { PANEL_OBJECT_ACTION, "PANEL_OBJECT_ACTION", "action" },
-  { 0, NULL, NULL }
-};
-
-GType
-panel_object_type_get_type (void)
-{
-  static GType type = 0;
-
-  if (!type)
-    type = g_enum_register_static ("PanelObjectType", _panel_object_type_values);
-
-  return type;
-}
-static const GEnumValue _panel_action_button_type_values[] = {
-  { PANEL_ACTION_NONE, "PANEL_ACTION_NONE", "none" },
-  { PANEL_ACTION_LOCK, "PANEL_ACTION_LOCK", "lock" },
-  { PANEL_ACTION_LOGOUT, "PANEL_ACTION_LOGOUT", "logout" },
-  { PANEL_ACTION_RUN, "PANEL_ACTION_RUN", "run" },
-  { PANEL_ACTION_SEARCH, "PANEL_ACTION_SEARCH", "search" },
-  { PANEL_ACTION_FORCE_QUIT, "PANEL_ACTION_FORCE_QUIT", "force-quit" },
-  { PANEL_ACTION_HIBERNATE, "PANEL_ACTION_HIBERNATE", "hibernate" },
-  { PANEL_ACTION_SUSPEND, "PANEL_ACTION_SUSPEND", "suspend" },
-  { PANEL_ACTION_HYBRID_SLEEP, "PANEL_ACTION_HYBRID_SLEEP", "hybrid-sleep" },
-  { PANEL_ACTION_REBOOT, "PANEL_ACTION_REBOOT", "reboot" },
-  { PANEL_ACTION_SHUTDOWN, "PANEL_ACTION_SHUTDOWN", "shutdown" },
-  { PANEL_ACTION_LAST, "PANEL_ACTION_LAST", "last" },
-  { 0, NULL, NULL }
-};
-
-GType
-panel_action_button_type_get_type (void)
-{
-  static GType type = 0;
-
-  if (!type)
-    type = g_enum_register_static ("PanelActionButtonType", _panel_action_button_type_values);
-
-  return type;
-}
-
-/* enumerations from "../gnome-panel/panel-types.h" */
-#include "../gnome-panel/panel-types.h"
+/* enumerations from "panel-types.h" */
+#include "panel-types.h"
 static const GEnumValue _panel_speed_values[] = {
   { PANEL_SPEED_SLOW, "PANEL_SPEED_SLOW", "slow" },
   { PANEL_SPEED_MEDIUM, "PANEL_SPEED_MEDIUM", "medium" },

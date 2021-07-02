@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2018 Alberts Muktupāvels
+ * Copyright (C) 2016-2020 Alberts Muktupāvels
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -18,8 +18,11 @@
 #ifndef GP_APPLET_INFO_H
 #define GP_APPLET_INFO_H
 
+#include "gp-initial-setup-dialog.h"
+
 #include <glib.h>
 #include <gtk/gtk.h>
+#include <libgnome-panel/gp-lockdown.h>
 
 G_BEGIN_DECLS
 
@@ -40,26 +43,64 @@ typedef struct _GpAppletInfo GpAppletInfo;
 typedef GType (* GpGetAppletTypeFunc)    (void);
 
 /**
- * GpSetupAboutDialogFunc:
+ * GpInitialSetupDialogFunc:
+ * @dialog: a #GtkAboutDialog
+ *
+ * Function for setting up initial setup dialog.
+ */
+typedef void  (* GpInitialSetupDialogFunc) (GpInitialSetupDialog *dialog);
+
+/**
+ * GpAboutDialogFunc:
  * @dialog: a #GtkAboutDialog
  *
  * Function for setting up about dialog.
+ *
+ * The dialog will be already filled in with following information - version
+ * program name, comments and logo icon name.
+ *
+ * Version will be same that was set with gp_module_set_version(). Other
+ * three fields are information from gp_applet_info_new().
  */
-typedef void  (* GpSetupAboutDialogFunc) (GtkAboutDialog *dialog);
+typedef void  (* GpAboutDialogFunc) (GtkAboutDialog *dialog);
 
-GpAppletInfo *gp_applet_info_new              (GpGetAppletTypeFunc     func,
-                                               const gchar            *name,
-                                               const gchar            *description,
-                                               const gchar            *icon_name);
+/**
+ * GpIsDisabledFunc:
+ * @flags: a #GpLockdownFlags with active lockdowns
+ * @reason: (out) (transfer full): return location for reason
+ *
+ * This function must return %TRUE if applet must be fully disabled (applet
+ * will not be loaded nor user will be able to add it to panel). Function also
+ * should return reason why applet is disabled.
+ *
+ * If applet is usable with some active lockdowns it should return %FALSE and
+ * use #GpApplet:lockdows property to adjust behaviour/functionality.
+ *
+ * Returns: %TRUE if applet should be disabled.
+ */
+typedef gboolean (* GpIsDisabledFunc) (GpLockdownFlags   flags,
+                                       char            **reason);
 
-void          gp_applet_info_set_help_uri     (GpAppletInfo           *info,
-                                               const gchar            *help_uri);
 
-void          gp_applet_info_set_about_dialog (GpAppletInfo           *info,
-                                               GpSetupAboutDialogFunc  func);
+GpAppletInfo *gp_applet_info_new                      (GpGetAppletTypeFunc       func,
+                                                       const gchar              *name,
+                                                       const gchar              *description,
+                                                       const gchar              *icon_name);
 
-void          gp_applet_info_set_backends     (GpAppletInfo           *info,
-                                               const gchar            *backends);
+void          gp_applet_info_set_initial_setup_dialog (GpAppletInfo             *info,
+                                                       GpInitialSetupDialogFunc  func);
+
+void          gp_applet_info_set_help_uri             (GpAppletInfo             *info,
+                                                       const gchar              *help_uri);
+
+void          gp_applet_info_set_about_dialog         (GpAppletInfo             *info,
+                                                       GpAboutDialogFunc         func);
+
+void          gp_applet_info_set_backends             (GpAppletInfo             *info,
+                                                       const gchar              *backends);
+
+void          gp_applet_info_set_is_disabled          (GpAppletInfo             *info,
+                                                       GpIsDisabledFunc          func);
 
 G_END_DECLS
 

@@ -19,20 +19,25 @@
 #define GP_MENU_H
 
 #include "gp-menu-utils.h"
-#include <libgnome-panel/gp-applet.h>
 
 G_BEGIN_DECLS
 
 #define GP_TYPE_MENU (gp_menu_get_type ())
 G_DECLARE_FINAL_TYPE (GpMenu, gp_menu, GP, MENU, GtkMenu)
 
-GtkWidget *gp_menu_new             (GpApplet              *applet,
-                                    const gchar           *name,
+GtkWidget *gp_menu_new             (const gchar           *name,
                                     gboolean               required);
+
+void       gp_menu_set_path        (GpMenu                *menu,
+                                    const gchar           *path);
+
+GIcon     *gp_menu_get_icon        (GpMenu                *menu);
 
 void       gp_menu_set_append_func (GpMenu                *menu,
                                     GpAppendMenuItemsFunc  append_func,
                                     gpointer               user_data);
+
+void       gp_menu_reload          (GpMenu                *menu);
 
 G_END_DECLS
 

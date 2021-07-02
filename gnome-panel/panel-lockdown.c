@@ -49,22 +49,12 @@ enum {
         PROP_DISABLE_LOCK_SCREEN,
         PROP_DISABLE_LOG_OUT,
         PROP_DISABLE_SWITCH_USER,
+        PROP_DISABLED_APPLETS,
         PROP_PANELS_LOCKED_DOWN,
         PROP_DISABLE_FORCE_QUIT
 };
 
-G_DEFINE_TYPE (PanelLockdown, panel_lockdown, G_TYPE_OBJECT);
-
-static void
-_panel_lockdown_disabled_applets_changed (GSettings     *settings,
-                                          char          *key,
-                                          PanelLockdown *lockdown)
-{
-        if (lockdown->priv->disabled_applets)
-                g_strfreev (lockdown->priv->disabled_applets);
-        lockdown->priv->disabled_applets = g_settings_get_strv (lockdown->priv->panel_settings,
-                                                                PANEL_LOCKDOWN_DISABLED_APPLETS_KEY);
-}
+G_DEFINE_TYPE_WITH_PRIVATE (PanelLockdown, panel_lockdown, G_TYPE_OBJECT)
 
 static GObject *
 panel_lockdown_constructor (GType                  type,
@@ -108,6 +98,12 @@ panel_lockdown_constructor (GType                  type,
                          G_SETTINGS_BIND_GET);
 
         g_settings_bind (lockdown->priv->panel_settings,
+                         PANEL_LOCKDOWN_DISABLED_APPLETS_KEY,
+                         lockdown,
+                         "disabled-applets",
+                         G_SETTINGS_BIND_GET);
+
+        g_settings_bind (lockdown->priv->panel_settings,
                          PANEL_LOCKDOWN_COMPLETE_LOCKDOWN_KEY,
                          lockdown,
                          "panels-locked-down",
@@ -118,15 +114,6 @@ panel_lockdown_constructor (GType                  type,
                          lockdown,
                          "disable-force-quit",
                          G_SETTINGS_BIND_GET);
-
-        g_signal_connect (lockdown->priv->panel_settings,
-                          "changed::"PANEL_LOCKDOWN_DISABLED_APPLETS_KEY,
-                          G_CALLBACK (_panel_lockdown_disabled_applets_changed),
-                          lockdown);
-
-        _panel_lockdown_disabled_applets_changed (lockdown->priv->panel_settings,
-                                                  PANEL_LOCKDOWN_DISABLED_APPLETS_KEY,
-                                                  lockdown);
 
         return obj;
 }
@@ -184,6 +171,10 @@ panel_lockdown_set_property (GObject      *object,
                                                      value,
                                                      "disable-switch-user");
                 break;
+        case PROP_DISABLED_APPLETS:
+                g_strfreev (lockdown->priv->disabled_applets);
+                lockdown->priv->disabled_applets = g_value_dup_boxed (value);
+                break;
         case PROP_PANELS_LOCKED_DOWN:
                 _panel_lockdown_set_property_helper (lockdown,
                                                      &lockdown->priv->panels_locked_down,
@@ -227,6 +218,9 @@ panel_lockdown_get_property (GObject    *object,
         case PROP_DISABLE_SWITCH_USER:
                 g_value_set_boolean (value, lockdown->priv->disable_switch_user);
                 break;
+        case PROP_DISABLED_APPLETS:
+                g_value_set_boxed (value, lockdown->priv->disabled_applets);
+                break;
         case PROP_PANELS_LOCKED_DOWN:
                 g_value_set_boolean (value, lockdown->priv->panels_locked_down);
                 break;
@@ -264,9 +258,7 @@ panel_lockdown_dispose (GObject *object)
 static void
 panel_lockdown_init (PanelLockdown *lockdown)
 {
-        lockdown->priv = G_TYPE_INSTANCE_GET_PRIVATE (lockdown,
-                                                      PANEL_TYPE_LOCKDOWN,
-                                                      PanelLockdownPrivate);
+        lockdown->priv = panel_lockdown_get_instance_private (lockdown);
 }
 
 static void
@@ -323,6 +315,16 @@ panel_lockdown_class_init (PanelLockdownClass *lockdown_class)
 
         g_object_class_install_property (
                 gobject_class,
+                PROP_DISABLED_APPLETS,
+                g_param_spec_boxed (
+                        "disabled-applets",
+                        "Disabled applets",
+                        "Applet IIDs to disable from loading",
+                        G_TYPE_STRV,
+                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+        g_object_class_install_property (
+                gobject_class,
                 PROP_PANELS_LOCKED_DOWN,
                 g_param_spec_boolean (
                         "panels-locked-down",
@@ -340,9 +342,6 @@ panel_lockdown_class_init (PanelLockdownClass *lockdown_class)
                         "Whether force quit is disabled or not",
                         TRUE,
                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
-
-        g_type_class_add_private (lockdown_class,
-                                  sizeof (PanelLockdownPrivate));
 }
 
 gboolean
@@ -369,43 +368,11 @@ panel_lockdown_get_disable_command_line (PanelLockdown *lockdown)
 }
 
 gboolean
-panel_lockdown_get_disable_lock_screen (PanelLockdown *lockdown)
-{
-        g_return_val_if_fail (PANEL_IS_LOCKDOWN (lockdown), TRUE);
-
-        return lockdown->priv->disable_lock_screen;
-}
-
-gboolean
-panel_lockdown_get_disable_log_out (PanelLockdown *lockdown)
-{
-        g_return_val_if_fail (PANEL_IS_LOCKDOWN (lockdown), TRUE);
-
-        return lockdown->priv->disable_log_out;
-}
-
-gboolean
-panel_lockdown_get_disable_switch_user (PanelLockdown *lockdown)
-{
-        g_return_val_if_fail (PANEL_IS_LOCKDOWN (lockdown), TRUE);
-
-        return lockdown->priv->disable_switch_user;
-}
-
-gboolean
 panel_lockdown_get_panels_locked_down (PanelLockdown *lockdown)
 {
         g_return_val_if_fail (PANEL_IS_LOCKDOWN (lockdown), TRUE);
 
         return lockdown->priv->panels_locked_down;
-}
-
-gboolean
-panel_lockdown_get_disable_force_quit (PanelLockdown *lockdown)
-{
-        g_return_val_if_fail (PANEL_IS_LOCKDOWN (lockdown), TRUE);
-
-        return lockdown->priv->disable_force_quit;
 }
 
 typedef struct {
@@ -504,37 +471,52 @@ panel_lockdown_get_disable_command_line_s (void)
 }
 
 gboolean
-panel_lockdown_get_disable_lock_screen_s (void)
-{
-        return panel_lockdown_get_disable_lock_screen (panel_lockdown_get ());
-}
-
-gboolean
-panel_lockdown_get_disable_log_out_s (void)
-{
-        return panel_lockdown_get_disable_log_out (panel_lockdown_get ());
-}
-
-gboolean
-panel_lockdown_get_disable_switch_user_s (void)
-{
-        return panel_lockdown_get_disable_switch_user (panel_lockdown_get ());
-}
-
-gboolean
 panel_lockdown_get_panels_locked_down_s (void)
 {
         return panel_lockdown_get_panels_locked_down (panel_lockdown_get ());
 }
 
-gboolean
-panel_lockdown_get_not_panels_locked_down_s (void)
+GpLockdownFlags
+panel_lockdown_get_flags (PanelLockdown *lockdown,
+                          const char    *iid)
 {
-        return !panel_lockdown_get_panels_locked_down (panel_lockdown_get ());
+        GpLockdownFlags flags;
+        int i;
+
+        g_return_val_if_fail (PANEL_IS_LOCKDOWN (lockdown), GP_LOCKDOWN_FLAGS_NONE);
+
+        flags = GP_LOCKDOWN_FLAGS_NONE;
+
+        for (i = 0; lockdown->priv->disabled_applets[i] != NULL; i++) {
+                if (g_strcmp0 (lockdown->priv->disabled_applets[i], iid) == 0) {
+                        flags |= GP_LOCKDOWN_FLAGS_APPLET;
+                        break;
+                }
+        }
+
+        if (lockdown->priv->disable_force_quit)
+                flags |= GP_LOCKDOWN_FLAGS_FORCE_QUIT;
+
+        if (lockdown->priv->panels_locked_down)
+                flags |= GP_LOCKDOWN_FLAGS_LOCKED_DOWN;
+
+        if (lockdown->priv->disable_command_line)
+                flags |= GP_LOCKDOWN_FLAGS_COMMAND_LINE;
+
+        if (lockdown->priv->disable_lock_screen)
+                flags |= GP_LOCKDOWN_FLAGS_LOCK_SCREEN;
+
+        if (lockdown->priv->disable_log_out)
+                flags |= GP_LOCKDOWN_FLAGS_LOG_OUT;
+
+        if (lockdown->priv->disable_switch_user)
+                flags |= GP_LOCKDOWN_FLAGS_USER_SWITCHING;
+
+        return flags;
 }
 
-gboolean
-panel_lockdown_get_disable_force_quit_s (void)
+GpLockdownFlags
+panel_lockdown_get_flags_s (const char *iid)
 {
-        return panel_lockdown_get_disable_force_quit (panel_lockdown_get ());
+        return panel_lockdown_get_flags (panel_lockdown_get (), iid);
 }

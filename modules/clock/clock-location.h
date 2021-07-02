@@ -5,6 +5,7 @@
 #include <glib.h>
 #include <glib-object.h>
 #include <libgweather/gweather.h>
+#include <libgnome-desktop/gnome-wall-clock.h>
 
 G_BEGIN_DECLS
 
@@ -15,9 +16,13 @@ G_BEGIN_DECLS
 #define IS_CLOCK_LOCATION_CLASS(c)  (G_TYPE_CHECK_CLASS_TYPE ((c), CLOCK_LOCATION_TYPE))
 #define CLOCK_LOCATION_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CLOCK_LOCATION_TYPE, ClockLocationClass))
 
+typedef struct _ClockLocationPrivate ClockLocationPrivate;
+
 typedef struct
 {
         GObject g_object;
+
+        ClockLocationPrivate *priv;
 } ClockLocation;
 
 typedef struct
@@ -31,12 +36,13 @@ typedef struct
 
 GType clock_location_get_type (void);
 
-ClockLocation *clock_location_new (GWeatherLocation *world,
-				   const gchar *name,
-				   const gchar *metar_code,
-				   gboolean override_latlon,
-				   gdouble  latitude,
-				   gdouble  longitude);
+ClockLocation *clock_location_new (GnomeWallClock   *wall_clock,
+                                   GWeatherLocation *world,
+                                   const gchar      *name,
+                                   const gchar      *metar_code,
+                                   gboolean          override_latlon,
+                                   gdouble           latitude,
+                                   gdouble           longitude);
 
 const gchar *clock_location_get_tzname (ClockLocation *loc);
 
@@ -44,6 +50,7 @@ const char *clock_location_get_name (ClockLocation *loc);
 void clock_location_set_name (ClockLocation *loc, const gchar *name);
 
 gchar *clock_location_get_city (ClockLocation *loc);
+GWeatherTimezone *clock_location_get_gweather_timezone (ClockLocation *loc);
 const gchar *clock_location_get_timezone (ClockLocation *loc);
 void clock_location_get_coords (ClockLocation *loc, gdouble *latitude, gdouble *longitude);
 

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<book xmlns="http://www.devhelp.net/book" title="GNOME Panel Reference Manual" link="index.html" author="" name="libgnome-panel" version="2" language="c" online="https://developer.gnome.org/libgnome-panel/unstable/">
+  <chapters>
+    <sub name="API Reference" link="ch01.html">
+      <sub name="GpApplet" link="GpApplet.html"/>
+      <sub name="GpAppletInfo" link="libgnome-panel-GpAppletInfo.html"/>
+      <sub name="GpImageMenuItem" link="GpImageMenuItem.html"/>
+      <sub name="GpLockdown" link="libgnome-panel-GpLockdown.html"/>
+      <sub name="Module" link="libgnome-panel-Module.html"/>
+    </sub>
+    <sub name="Object Hierarchy" link="object-tree.html"/>
+    <sub name="API Index" link="api-index-full.html"/>
+    <sub name="Index of deprecated API" link="deprecated-api-index.html"/>
+    <sub name="Annotation Glossary" link="annotation-glossary.html"/>
+  </chapters>
+  <functions>
+    <keyword type="function" name="gp_applet_get_locked_down ()" link="GpApplet.html#gp-applet-get-locked-down"/>
+    <keyword type="function" name="gp_applet_get_lockdowns ()" link="GpApplet.html#gp-applet-get-lockdowns"/>
+    <keyword type="function" name="gp_applet_get_orientation ()" link="GpApplet.html#gp-applet-get-orientation"/>
+    <keyword type="function" name="gp_applet_get_position ()" link="GpApplet.html#gp-applet-get-position"/>
+    <keyword type="function" name="gp_applet_set_flags ()" link="GpApplet.html#gp-applet-set-flags"/>
+    <keyword type="function" name="gp_applet_set_size_hints ()" link="GpApplet.html#gp-applet-set-size-hints"/>
+    <keyword type="function" name="gp_applet_settings_new ()" link="GpApplet.html#gp-applet-settings-new"/>
+    <keyword type="function" name="gp_applet_request_focus ()" link="GpApplet.html#gp-applet-request-focus"/>
+    <keyword type="function" name="gp_applet_setup_menu ()" link="GpApplet.html#gp-applet-setup-menu"/>
+    <keyword type="function" name="gp_applet_setup_menu_from_file ()" link="GpApplet.html#gp-applet-setup-menu-from-file"/>
+    <keyword type="function" name="gp_applet_setup_menu_from_resource ()" link="GpApplet.html#gp-applet-setup-menu-from-resource"/>
+    <keyword type="function" name="gp_applet_menu_lookup_action ()" link="GpApplet.html#gp-applet-menu-lookup-action"/>
+    <keyword type="function" name="gp_applet_get_prefer_symbolic_icons ()" link="GpApplet.html#gp-applet-get-prefer-symbolic-icons"/>
+    <keyword type="function" name="gp_applet_get_panel_icon_size ()" link="GpApplet.html#gp-applet-get-panel-icon-size"/>
+    <keyword type="function" name="gp_applet_get_menu_icon_size ()" link="GpApplet.html#gp-applet-get-menu-icon-size"/>
+    <keyword type="function" name="gp_applet_show_about ()" link="GpApplet.html#gp-applet-show-about"/>
+    <keyword type="function" name="gp_applet_show_help ()" link="GpApplet.html#gp-applet-show-help"/>
+    <keyword type="function" name="gp_applet_popup_menu_at_widget ()" link="GpApplet.html#gp-applet-popup-menu-at-widget"/>
+    <keyword type="macro" name="GP_TYPE_APPLET" link="GpApplet.html#GP-TYPE-APPLET:CAPS"/>
+    <keyword type="enum" name="enum GpAppletFlags" link="GpApplet.html#GpAppletFlags"/>
+    <keyword type="struct" name="struct GpAppletClass" link="GpApplet.html#GpAppletClass"/>
+    <keyword type="struct" name="GpApplet" link="GpApplet.html#GpApplet-struct"/>
+    <keyword type="property" name="The “enable-tooltips” property" link="GpApplet.html#GpApplet--enable-tooltips"/>
+    <keyword type="property" name="The “gettext-domain” property" link="GpApplet.html#GpApplet--gettext-domain"/>
+    <keyword type="property" name="The “id” property" link="GpApplet.html#GpApplet--id"/>
+    <keyword type="property" name="The “initial-settings” property" link="GpApplet.html#GpApplet--initial-settings"/>
+    <keyword type="property" name="The “lockdowns” property" link="GpApplet.html#GpApplet--lockdowns"/>
+    <keyword type="property" name="The “locked-down” property" link="GpApplet.html#GpApplet--locked-down"/>
+    <keyword type="property" name="The “menu-icon-size” property" link="GpApplet.html#GpApplet--menu-icon-size"/>
+    <keyword type="property" name="The “module” property" link="GpApplet.html#GpApplet--module"/>
+    <keyword type="property" name="The “orientation” property" link="GpApplet.html#GpApplet--orientation"/>
+    <keyword type="property" name="The “panel-icon-size” property" link="GpApplet.html#GpApplet--panel-icon-size"/>
+    <keyword type="property" name="The “position” property" link="GpApplet.html#GpApplet--position"/>
+    <keyword type="property" name="The “prefer-symbolic-icons” property" link="GpApplet.html#GpApplet--prefer-symbolic-icons"/>
+    <keyword type="property" name="The “settings-path” property" link="GpApplet.html#GpApplet--settings-path"/>
+    <keyword type="signal" name="The “flags-changed” signal" link="GpApplet.html#GpApplet-flags-changed"/>
+    <keyword type="signal" name="The “placement-changed” signal" link="GpApplet.html#GpApplet-placement-changed"/>
+    <keyword type="signal" name="The “size-hints-changed” signal" link="GpApplet.html#GpApplet-size-hints-changed"/>
+    <keyword type="function" name="GpGetAppletTypeFunc ()" link="libgnome-panel-GpAppletInfo.html#GpGetAppletTypeFunc"/>
+    <keyword type="function" name="GpInitialSetupDialogFunc ()" link="libgnome-panel-GpAppletInfo.html#GpInitialSetupDialogFunc"/>
+    <keyword type="function" name="GpAboutDialogFunc ()" link="libgnome-panel-GpAppletInfo.html#GpAboutDialogFunc"/>
+    <keyword type="function" name="GpIsDisabledFunc ()" link="libgnome-panel-GpAppletInfo.html#GpIsDisabledFunc"/>
+    <keyword type="function" name="gp_applet_info_new ()" link="libgnome-panel-GpAppletInfo.html#gp-applet-info-new"/>
+    <keyword type="function" name="gp_applet_info_set_initial_setup_dialog ()" link="libgnome-panel-GpAppletInfo.html#gp-applet-info-set-initial-setup-dialog"/>
+    <keyword type="function" name="gp_applet_info_set_help_uri ()" link="libgnome-panel-GpAppletInfo.html#gp-applet-info-set-help-uri"/>
+    <keyword type="function" name="gp_applet_info_set_about_dialog ()" link="libgnome-panel-GpAppletInfo.html#gp-applet-info-set-about-dialog"/>
+    <keyword type="function" name="gp_applet_info_set_backends ()" link="libgnome-panel-GpAppletInfo.html#gp-applet-info-set-backends"/>
+    <keyword type="function" name="gp_applet_info_set_is_disabled ()" link="libgnome-panel-GpAppletInfo.html#gp-applet-info-set-is-disabled"/>
+    <keyword type="struct" name="GpAppletInfo" link="libgnome-panel-GpAppletInfo.html#GpAppletInfo"/>
+    <keyword type="function" name="gp_image_menu_item_new ()" link="GpImageMenuItem.html#gp-image-menu-item-new"/>
+    <keyword type="function" name="gp_image_menu_item_new_with_label ()" link="GpImageMenuItem.html#gp-image-menu-item-new-with-label"/>
+    <keyword type="function" name="gp_image_menu_item_new_with_mnemonic ()" link="GpImageMenuItem.html#gp-image-menu-item-new-with-mnemonic"/>
+    <keyword type="function" name="gp_image_menu_item_set_image ()" link="GpImageMenuItem.html#gp-image-menu-item-set-image"/>
+    <keyword type="macro" name="GP_TYPE_IMAGE_MENU_ITEM" link="GpImageMenuItem.html#GP-TYPE-IMAGE-MENU-ITEM:CAPS"/>
+    <keyword type="struct" name="struct GpImageMenuItemClass" link="GpImageMenuItem.html#GpImageMenuItemClass"/>
+    <keyword type="struct" name="GpImageMenuItem" link="GpImageMenuItem.html#GpImageMenuItem-struct"/>
+    <keyword type="enum" name="enum GpLockdownFlags" link="libgnome-panel-GpLockdown.html#GpLockdownFlags"/>
+    <keyword type="function" name="GpGetAppletInfoFunc ()" link="libgnome-panel-Module.html#GpGetAppletInfoFunc"/>
+    <keyword type="function" name="GetAppletIdFromIidFunc ()" link="libgnome-panel-Module.html#GetAppletIdFromIidFunc"/>
+    <keyword type="function" name="GetStandaloneMenuFunc ()" link="libgnome-panel-Module.html#GetStandaloneMenuFunc"/>
+    <keyword type="function" name="gp_module_set_abi_version ()" link="libgnome-panel-Module.html#gp-module-set-abi-version"/>
+    <keyword type="function" name="gp_module_set_gettext_domain ()" link="libgnome-panel-Module.html#gp-module-set-gettext-domain"/>
+    <keyword type="function" name="gp_module_set_id ()" link="libgnome-panel-Module.html#gp-module-set-id"/>
+    <keyword type="function" name="gp_module_set_version ()" link="libgnome-panel-Module.html#gp-module-set-version"/>
+    <keyword type="function" name="gp_module_set_applet_ids ()" link="libgnome-panel-Module.html#gp-module-set-applet-ids"/>
+    <keyword type="function" name="gp_module_set_get_applet_info ()" link="libgnome-panel-Module.html#gp-module-set-get-applet-info"/>
+    <keyword type="function" name="gp_module_set_compatibility ()" link="libgnome-panel-Module.html#gp-module-set-compatibility"/>
+    <keyword type="function" name="gp_module_set_standalone_menu ()" link="libgnome-panel-Module.html#gp-module-set-standalone-menu"/>
+    <keyword type="function" name="gp_module_load ()" link="libgnome-panel-Module.html#gp-module-load"/>
+    <keyword type="macro" name="GP_MODULE_ABI_VERSION" link="libgnome-panel-Module.html#GP-MODULE-ABI-VERSION:CAPS"/>
+    <keyword type="macro" name="GP_TYPE_MODULE" link="libgnome-panel-Module.html#GP-TYPE-MODULE:CAPS"/>
+    <keyword type="struct" name="GpModule" link="libgnome-panel-Module.html#GpModule-struct"/>
+    <keyword type="constant" name="GP_APPLET_FLAGS_NONE" link="GpApplet.html#GP-APPLET-FLAGS-NONE:CAPS"/>
+    <keyword type="constant" name="GP_APPLET_FLAGS_EXPAND_MAJOR" link="GpApplet.html#GP-APPLET-FLAGS-EXPAND-MAJOR:CAPS"/>
+    <keyword type="constant" name="GP_APPLET_FLAGS_EXPAND_MINOR" link="GpApplet.html#GP-APPLET-FLAGS-EXPAND-MINOR:CAPS"/>
+    <keyword type="constant" name="GP_APPLET_FLAGS_HAS_HANDLE" link="GpApplet.html#GP-APPLET-FLAGS-HAS-HANDLE:CAPS"/>
+    <keyword type="constant" name="GP_LOCKDOWN_FLAGS_NONE" link="libgnome-panel-GpLockdown.html#GP-LOCKDOWN-FLAGS-NONE:CAPS"/>
+    <keyword type="constant" name="GP_LOCKDOWN_FLAGS_APPLET" link="libgnome-panel-GpLockdown.html#GP-LOCKDOWN-FLAGS-APPLET:CAPS"/>
+    <keyword type="constant" name="GP_LOCKDOWN_FLAGS_FORCE_QUIT" link="libgnome-panel-GpLockdown.html#GP-LOCKDOWN-FLAGS-FORCE-QUIT:CAPS"/>
+    <keyword type="constant" name="GP_LOCKDOWN_FLAGS_LOCKED_DOWN" link="libgnome-panel-GpLockdown.html#GP-LOCKDOWN-FLAGS-LOCKED-DOWN:CAPS"/>
+    <keyword type="constant" name="GP_LOCKDOWN_FLAGS_COMMAND_LINE" link="libgnome-panel-GpLockdown.html#GP-LOCKDOWN-FLAGS-COMMAND-LINE:CAPS"/>
+    <keyword type="constant" name="GP_LOCKDOWN_FLAGS_LOCK_SCREEN" link="libgnome-panel-GpLockdown.html#GP-LOCKDOWN-FLAGS-LOCK-SCREEN:CAPS"/>
+    <keyword type="constant" name="GP_LOCKDOWN_FLAGS_LOG_OUT" link="libgnome-panel-GpLockdown.html#GP-LOCKDOWN-FLAGS-LOG-OUT:CAPS"/>
+    <keyword type="constant" name="GP_LOCKDOWN_FLAGS_USER_SWITCHING" link="libgnome-panel-GpLockdown.html#GP-LOCKDOWN-FLAGS-USER-SWITCHING:CAPS"/>
+    <keyword type="member" name="GpAppletClass.initial-setup" link="GpApplet.html#GpAppletClass.initial-setup"/>
+    <keyword type="member" name="GpAppletClass.placement-changed" link="GpApplet.html#GpAppletClass.placement-changed"/>
+    <keyword type="member" name="GpAppletClass.remove-from-panel" link="GpApplet.html#GpAppletClass.remove-from-panel"/>
+  </functions>
+</book>

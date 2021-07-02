@@ -45,7 +45,7 @@
  *                                  "example1-icon");
  *
  *       gp_applet_info_set_about_dialog (info, example1_setup_about);
- *       gp_applet_info_set_help_uri (info, "help:example/example1");
+ *       gp_applet_info_set_help_uri (info, "help:example");
  *     }
  *   else if (g_strcmp0 (id, "example2") == 0)
  *     {
@@ -99,18 +99,18 @@
  * ]|
  */
 
+/**
+ * GpModule:
+ *
+ * #GpModule is an opaque data structure and can only be accessed using
+ * the following functions.
+ */
+
 #include "config.h"
 
+#include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 #include <stdarg.h>
-
-#ifdef GDK_WINDOWING_WAYLAND
-#include <gdk/gdkwayland.h>
-#endif
-
-#ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
-#endif
 
 #include "gp-applet-info-private.h"
 #include "gp-module-private.h"
@@ -137,6 +137,8 @@ struct _GpModule
 
   GetAppletIdFromIidFunc   compatibility_func;
 
+  GetStandaloneMenuFunc    standalone_menu_func;
+
   GHashTable              *applets;
 };
 
@@ -155,68 +157,6 @@ get_applets (va_list args)
   g_ptr_array_add (array, NULL);
 
   return (gchar **) g_ptr_array_free (array, FALSE);
-}
-
-static gboolean
-match_backend (GpAppletInfo *info)
-{
-  GdkDisplay *display;
-  gchar **backends;
-  gboolean match;
-  guint i;
-
-  if (info->backends == NULL)
-    return TRUE;
-
-  display = gdk_display_get_default ();
-  backends = g_strsplit (info->backends, ",", -1);
-  match = FALSE;
-
-  for (i = 0; backends[i] != NULL; i++)
-    {
-      if (g_strcmp0 (backends[i], "*") == 0)
-        {
-          match = TRUE;
-          break;
-        }
-
-#ifdef GDK_WINDOWING_WAYLAND
-      if (g_strcmp0 (backends[i], "wayland") == 0 &&
-          GDK_IS_WAYLAND_DISPLAY (display))
-        {
-          match = TRUE;
-          break;
-        }
-#endif
-
-#ifdef GDK_WINDOWING_X11
-      if (g_strcmp0 (backends[i], "x11") == 0 && GDK_IS_X11_DISPLAY (display))
-        {
-          match = TRUE;
-          break;
-        }
-#endif
-    }
-
-  g_strfreev (backends);
-
-  return match;
-}
-
-static const gchar *
-get_current_backend (void)
-{
-#ifdef GDK_WINDOWING_WAYLAND
-  if (GDK_IS_WAYLAND_DISPLAY (gdk_display_get_default ()))
-    return "wayland";
-#endif
-
-#ifdef GDK_WINDOWING_X11
-  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
-    return "x11";
-#endif
-
-  return "unknown";
 }
 
 static gboolean
@@ -383,11 +323,8 @@ gp_module_new_from_path (const gchar *path)
       return NULL;
     }
 
-  if (module->applet_ids == NULL || module->applet_ids[0] == NULL)
-    {
-      g_warning ("Module '%s' does not have valid applets", module->path);
-      return NULL;
-    }
+  if (module->applet_ids == NULL)
+    module->applet_ids = g_new0 (char *, 1);
 
   return module;
 }
@@ -460,8 +397,8 @@ gp_module_set_version (GpModule    *module,
 }
 
 /**
- * gp_module_info_set_applets:
- * @info: a #GpModuleInfo
+ * gp_module_set_applet_ids:
+ * @module: a #GpModuleInfo
  * @...: a %NULL-terminated list of applet ids in this module
  *
  * Sets the applets available in this module.
@@ -556,10 +493,39 @@ gp_module_get_applet_id_from_iid (GpModule    *module,
 }
 
 /**
+ * gp_module_set_standalone_menu:
+ * @module: a #GpModule
+ * @func: the function to call to create a menu
+ *
+ * Specifies a function to be used to create standalone menu.
+ */
+void
+gp_module_set_standalone_menu (GpModule              *module,
+                               GetStandaloneMenuFunc  func)
+{
+  module->standalone_menu_func = func;
+}
+
+GtkWidget *
+gp_module_get_standalone_menu (GpModule *module,
+                               gboolean  enable_tooltips,
+                               gboolean  locked_down,
+                               guint     menu_icon_size)
+{
+  if (module->standalone_menu_func == NULL)
+    return NULL;
+
+  return module->standalone_menu_func (enable_tooltips,
+                                       locked_down,
+                                       menu_icon_size);
+}
+
+/**
  * gp_module_applet_new:
  * @module: a #GpModule
  * @applet: the applet id
  * @settings_path: the #GSettings path to the per-instance settings
+ * @initial_settings: initial settings
  * @error: return location for a #GError, or %NULL
  *
  * Returns a newly allocated applet.
@@ -570,6 +536,7 @@ GpApplet *
 gp_module_applet_new (GpModule     *module,
                       const gchar  *applet,
                       const gchar  *settings_path,
+                      GVariant     *initial_settings,
                       GError      **error)
 {
   GpAppletInfo *info;
@@ -584,15 +551,6 @@ gp_module_applet_new (GpModule     *module,
   if (info == NULL)
     return NULL;
 
-  if (!match_backend (info))
-    {
-      g_set_error (error, GP_MODULE_ERROR, GP_MODULE_ERROR_MISSING_APPLET_TYPE,
-                   "Applet '%s' from module '%s' does not work with current backend '%s'",
-                   applet, module->id, get_current_backend ());
-
-      return NULL;
-    }
-
   type = info->get_applet_type_func ();
   if (type == G_TYPE_NONE)
     {
@@ -604,8 +562,156 @@ gp_module_applet_new (GpModule     *module,
     }
 
   return g_object_new (type,
+                       "module", module,
                        "id", applet,
                        "settings-path", settings_path,
+                       "initial-settings", initial_settings,
                        "gettext-domain", module->gettext_domain,
                        NULL);
+}
+
+GtkWidget *
+gp_module_create_about_dialog (GpModule   *module,
+                               GtkWindow  *parent,
+                               const char *applet)
+{
+  GpAppletInfo *info;
+  GtkAboutDialog *dialog;
+
+  info = get_applet_info (module, applet, NULL);
+  g_assert (info != NULL);
+
+  if (info->about_dialog_func == NULL)
+    return NULL;
+
+  dialog = GTK_ABOUT_DIALOG (gtk_about_dialog_new ());
+
+  gtk_about_dialog_set_program_name (dialog, info->name);
+  gtk_about_dialog_set_comments (dialog, info->description);
+  gtk_about_dialog_set_logo_icon_name (dialog, info->icon_name);
+  gtk_about_dialog_set_version (dialog, module->version);
+  info->about_dialog_func (dialog);
+
+  return GTK_WIDGET (dialog);
+}
+
+void
+gp_module_show_help (GpModule   *module,
+                     GtkWindow  *parent,
+                     const char *applet,
+                     const char *page)
+{
+  GpAppletInfo *info;
+  char *help_uri;
+  guint32 timestamp;
+  GError *error;
+  char *message;
+  GtkWidget *dialog;
+
+  info = get_applet_info (module, applet, NULL);
+  g_assert (info != NULL);
+
+  if (info->help_uri == NULL || *info->help_uri == '\0')
+    return;
+
+  if (page != NULL && *page != '\0')
+    help_uri = g_strdup_printf ("%s/%s", info->help_uri, page);
+  else
+    help_uri = g_strdup (info->help_uri);
+
+  timestamp = gtk_get_current_event_time ();
+
+  error = NULL;
+  gtk_show_uri_on_window (parent, help_uri, timestamp, &error);
+
+  if (error == NULL)
+    {
+      g_free (help_uri);
+      return;
+    }
+
+  if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+    {
+      g_error_free (error);
+      g_free (help_uri);
+      return;
+    }
+
+  message = g_markup_printf_escaped (_("Could not display help document '%s'"),
+                                     help_uri);
+
+  dialog = gtk_message_dialog_new (parent,
+                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   GTK_MESSAGE_ERROR,
+                                   GTK_BUTTONS_CLOSE,
+                                   "%s",
+                                   message);
+
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                            "%s",
+                                            error->message);
+
+  g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+
+  gtk_window_set_title (GTK_WINDOW (dialog),
+                        _("Error displaying help document"));
+
+  gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+  gtk_widget_show (dialog);
+
+  g_error_free (error);
+
+  g_free (help_uri);
+  g_free (message);
+}
+
+gboolean
+gp_module_is_applet_disabled (GpModule         *module,
+                              const char       *applet,
+                              const char       *backend,
+                              GpLockdownFlags   lockdowns,
+                              char            **reason)
+{
+  GpAppletInfo *info;
+  char *local_reason;
+  gboolean is_disabled;
+
+  g_return_val_if_fail (reason == NULL || *reason == NULL, FALSE);
+
+  info = get_applet_info (module, applet, NULL);
+  g_assert (info != NULL);
+
+  if (info->is_disabled_func == NULL)
+    return FALSE;
+
+  if (info->backends != NULL)
+    {
+      char **backends;
+
+      backends = g_strsplit (info->backends, ",", -1);
+
+      if (!g_strv_contains ((const char * const *) backends, backend))
+        {
+          if (reason != NULL)
+            {
+              *reason = g_strdup_printf (_("Backend “%s” is not supported."),
+                                         backend);
+            }
+
+          g_strfreev (backends);
+          return TRUE;
+        }
+
+      g_strfreev (backends);
+    }
+
+  local_reason = NULL;
+  is_disabled = info->is_disabled_func (lockdowns, &local_reason);
+
+  if (reason != NULL)
+    *reason = local_reason;
+  else
+    g_free (local_reason);
+
+  return is_disabled;
 }

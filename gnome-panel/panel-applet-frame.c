@@ -1,9 +1,9 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * panel-applet-frame.c: panel side container for applets
  *
  * Copyright (C) 2010 Carlos Garcia Campos <carlosgc@gnome.org>
  * Copyright (C) 2001 - 2003 Sun Microsystems, Inc.
+ * Copyright (C) 2016 - 2020 Alberts Muktupāvels
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -39,9 +39,7 @@
 #include "panel-lockdown.h"
 #include "panel-object-loader.h"
 #include "panel-schemas.h"
-#include "panel-stock-icons.h"
 
-#include <libpanel-applet-private/panel-applet-frame-dbus.h>
 #include "panel-applet-frame.h"
 
 #define PANEL_RESPONSE_DELETE      0
@@ -62,10 +60,6 @@ struct _PanelAppletFrameActivating {
 
 /* PanelAppletFrame implementation */
 
-G_DEFINE_TYPE (PanelAppletFrame, panel_applet_frame, GTK_TYPE_EVENT_BOX)
-
-#define PANEL_APPLET_FRAME_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), PANEL_TYPE_APPLET_FRAME, PanelAppletFramePrivate))
-
 #define HANDLE_SIZE 10
 
 struct _PanelAppletFramePrivate {
@@ -73,6 +67,8 @@ struct _PanelAppletFramePrivate {
 	AppletInfo      *applet_info;
 
 	PanelOrientation orientation;
+
+	GpApplet        *applet;
 
 	gchar           *iid;
 
@@ -90,6 +86,8 @@ enum {
 };
 
 static guint panel_applet_frame_signals [LAST_SIGNAL];
+
+G_DEFINE_TYPE_WITH_PRIVATE (PanelAppletFrame, panel_applet_frame, GTK_TYPE_EVENT_BOX)
 
 static gboolean
 panel_applet_frame_draw (GtkWidget *widget,
@@ -330,6 +328,103 @@ button_event_in_rect (GdkEventButton *event,
 	return FALSE;
 }
 
+static void
+popup_menu (GtkMenu  *menu,
+            GpApplet *applet)
+{
+  gtk_menu_attach_to_widget (menu, GTK_WIDGET (applet), NULL);
+
+  gp_applet_popup_menu_at_widget (applet,
+                                  menu,
+                                  GTK_WIDGET (applet),
+                                  NULL);
+}
+
+static void
+move_cb (GtkMenuItem      *menuitem,
+         PanelAppletFrame *self)
+{
+  GtkWidget *widget;
+  GtkWidget *parent;
+
+  widget = GTK_WIDGET (self);
+  parent = gtk_widget_get_parent (widget);
+
+  if (!PANEL_IS_WIDGET (parent))
+    return;
+
+  panel_widget_applet_drag_start (PANEL_WIDGET (parent),
+                                  widget,
+                                  GDK_CURRENT_TIME);
+}
+
+static void
+remove_cb (GtkMenuItem      *menuitem,
+           PanelAppletFrame *self)
+{
+  AppletInfo *info;
+
+  gp_applet_remove_from_panel (self->priv->applet);
+
+  if (self->priv->applet_info == NULL)
+    return;
+
+  info = self->priv->applet_info;
+  self->priv->applet_info = NULL;
+
+  panel_layout_delete_object (panel_applet_get_id (info));
+}
+
+static void
+frame_popup_edit_menu (PanelAppletFrame *self,
+                       guint             button,
+                       guint32           timestamp)
+{
+  GtkWidget *menu;
+  GtkWidget *menuitem;
+  gboolean movable;
+  gboolean removable;
+
+  menu = gtk_menu_new ();
+
+  movable = FALSE;
+  if (self->priv->applet_info != NULL)
+    movable = panel_applet_can_freely_move (self->priv->applet_info);
+
+  removable = panel_layout_is_writable ();
+
+  menuitem = gtk_menu_item_new_with_mnemonic (_("_Move"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+  gtk_widget_show (menuitem);
+
+  g_signal_connect (menuitem, "activate", G_CALLBACK (move_cb), self);
+  gtk_widget_set_sensitive (menuitem, movable);
+
+  menuitem = gtk_menu_item_new_with_mnemonic (_("_Remove From Panel"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+  gtk_widget_show (menuitem);
+
+  g_signal_connect (menuitem, "activate", G_CALLBACK (remove_cb), self);
+  gtk_widget_set_sensitive (menuitem, removable);
+
+  popup_menu (GTK_MENU (menu), self->priv->applet);
+}
+
+static void
+frame_popup_menu (PanelAppletFrame *self,
+                  guint             button,
+                  guint32           timestamp)
+{
+  GtkWidget *menu;
+
+  menu = gp_applet_get_menu (self->priv->applet);
+
+  if (menu == NULL)
+    return;
+
+  popup_menu (GTK_MENU (menu), self->priv->applet);
+}
+
 static gboolean
 panel_applet_frame_button_changed (GtkWidget      *widget,
 				   GdkEventButton *event)
@@ -338,14 +433,6 @@ panel_applet_frame_button_changed (GtkWidget      *widget,
 	guint             modifiers;
 
 	frame = PANEL_APPLET_FRAME (widget);
-
-	if (PANEL_IS_APPLET_FRAME_DBUS (frame)) {
-		if (!frame->priv->has_handle)
-			return FALSE;
-
-		if (event->window != gtk_widget_get_window (widget))
-			return FALSE;
-	}
 
 	modifiers = event->state & gtk_accelerator_get_default_mod_mask ();
 
@@ -377,13 +464,9 @@ panel_applet_frame_button_changed (GtkWidget      *widget,
 			gdk_seat_ungrab (seat);
 
 			if (modifiers == panel_bindings_get_mouse_button_modifier_keymask ())
-				PANEL_APPLET_FRAME_GET_CLASS (frame)->popup_edit_menu (frame,
-										       event->button,
-										       event->time);
+				frame_popup_edit_menu (frame, event->button, event->time);
 			else
-				PANEL_APPLET_FRAME_GET_CLASS (frame)->popup_menu (frame,
-										  event->button,
-										  event->time);
+				frame_popup_menu (frame, event->button, event->time);
 
 			return TRUE;
 		} else if (event->type == GDK_BUTTON_RELEASE)
@@ -483,8 +566,6 @@ panel_applet_frame_class_init (PanelAppletFrameClass *klass)
 	add_tab_bindings (binding_set, GDK_SHIFT_MASK, GTK_DIR_TAB_BACKWARD);
 	add_tab_bindings (binding_set, GDK_CONTROL_MASK, GTK_DIR_TAB_FORWARD);
 	add_tab_bindings (binding_set, GDK_CONTROL_MASK | GDK_SHIFT_MASK, GTK_DIR_TAB_BACKWARD);
-
-	g_type_class_add_private (klass, sizeof (PanelAppletFramePrivate));
 }
 
 static void
@@ -492,7 +573,7 @@ panel_applet_frame_init (PanelAppletFrame *frame)
 {
 	GtkStyleContext *context;
 
-	frame->priv = PANEL_APPLET_FRAME_GET_PRIVATE (frame);
+	frame->priv = panel_applet_frame_get_instance_private (frame);
 
 	frame->priv->panel       = NULL;
 	frame->priv->orientation = PANEL_ORIENTATION_TOP;
@@ -504,9 +585,56 @@ panel_applet_frame_init (PanelAppletFrame *frame)
 }
 
 static void
-panel_applet_frame_init_properties (PanelAppletFrame *frame)
+update_flags (PanelAppletFrame *self)
 {
-	PANEL_APPLET_FRAME_GET_CLASS (frame)->init_properties (frame);
+  GpAppletFlags flags;
+  gboolean major;
+  gboolean minor;
+
+  flags = gp_applet_get_flags (self->priv->applet);
+
+  major = (flags & GP_APPLET_FLAGS_EXPAND_MAJOR) != 0;
+  minor = (flags & GP_APPLET_FLAGS_EXPAND_MINOR) != 0;
+
+  self->priv->has_handle = (flags & GP_APPLET_FLAGS_HAS_HANDLE) != 0;
+
+  panel_widget_set_applet_expandable (self->priv->panel,
+                                      GTK_WIDGET (self),
+                                      major,
+                                      minor);
+}
+
+static void
+update_size_hints (PanelAppletFrame *self)
+{
+  guint n_elements;
+  gint *size_hints;
+
+  size_hints = gp_applet_get_size_hints (self->priv->applet, &n_elements);
+
+  if (self->priv->has_handle)
+    {
+      gint extra_size;
+      guint i;
+
+      extra_size = HANDLE_SIZE + 1;
+
+      for (i = 0; i < n_elements; i++)
+        size_hints[i] += extra_size;
+    }
+
+  /* It takes the ownership of size-hints array */
+  panel_widget_set_applet_size_hints (self->priv->panel,
+                                      GTK_WIDGET (self),
+                                      size_hints,
+                                      n_elements);
+}
+
+static void
+panel_applet_frame_init_properties (PanelAppletFrame *self)
+{
+  update_flags (self);
+  update_size_hints (self);
 }
 
 static void
@@ -515,14 +643,47 @@ panel_applet_frame_sync_menu_state (PanelLockdown *lockdown,
 {
 	PanelAppletFrame *frame = PANEL_APPLET_FRAME (user_data);
 	gboolean          locked_down;
-	gboolean          movable;
-	gboolean          removable;
+	GpLockdownFlags   lockdowns;
 
-	movable = panel_applet_can_freely_move (frame->priv->applet_info);
-	removable = panel_layout_is_writable ();
 	locked_down = panel_lockdown_get_panels_locked_down_s ();
+	lockdowns = panel_lockdown_get_flags_s (frame->priv->iid);
 
-	PANEL_APPLET_FRAME_GET_CLASS (frame)->sync_menu_state (frame, movable, removable, locked_down);
+	gp_applet_set_locked_down (frame->priv->applet, locked_down);
+	gp_applet_set_lockdowns (frame->priv->applet, lockdowns);
+}
+
+static void
+frame_change_orientation (PanelAppletFrame *self,
+                          PanelOrientation  panel_orientation)
+{
+  GtkOrientation orientation;
+  GtkPositionType position;
+
+  switch (panel_orientation)
+    {
+      case PANEL_ORIENTATION_BOTTOM:
+        orientation = GTK_ORIENTATION_HORIZONTAL;
+        position = GTK_POS_BOTTOM;
+        break;
+      case PANEL_ORIENTATION_LEFT:
+        orientation = GTK_ORIENTATION_VERTICAL;
+        position = GTK_POS_LEFT;
+        break;
+      case PANEL_ORIENTATION_RIGHT:
+        orientation = GTK_ORIENTATION_VERTICAL;
+        position = GTK_POS_RIGHT;
+        break;
+      case PANEL_ORIENTATION_TOP:
+        orientation = GTK_ORIENTATION_HORIZONTAL;
+        position = GTK_POS_TOP;
+      default:
+        break;
+    }
+
+  gp_applet_set_orientation (self->priv->applet, orientation);
+  gp_applet_set_position (self->priv->applet, position);
+
+  gtk_widget_queue_resize (GTK_WIDGET (self));
 }
 
 void
@@ -546,7 +707,7 @@ panel_applet_frame_change_orientation (PanelAppletFrame *frame,
 	}
 	gtk_widget_reset_style (GTK_WIDGET (frame));
 
-	PANEL_APPLET_FRAME_GET_CLASS (frame)->change_orientation (frame, orientation);
+	frame_change_orientation (frame, orientation);
 }
 
 void
@@ -557,6 +718,37 @@ panel_applet_frame_set_panel (PanelAppletFrame *frame,
 	g_return_if_fail (PANEL_IS_WIDGET (panel));
 
 	frame->priv->panel = panel;
+}
+
+static void
+flags_changed_cb (GpApplet         *applet,
+                  PanelAppletFrame *self)
+{
+  update_flags (self);
+}
+
+static void
+size_hints_changed_cb (GpApplet         *applet,
+                       PanelAppletFrame *self)
+{
+  update_size_hints (self);
+}
+
+void
+_panel_applet_frame_set_applet (PanelAppletFrame *self,
+                                GpApplet         *applet)
+{
+  self->priv->applet = applet;
+
+  g_signal_connect (applet,
+                    "flags-changed",
+                    G_CALLBACK (flags_changed_cb),
+                    self);
+
+  g_signal_connect (applet,
+                    "size-hints-changed",
+                    G_CALLBACK (size_hints_changed_cb),
+                    self);
 }
 
 void
@@ -594,15 +786,11 @@ _panel_applet_frame_activated (PanelAppletFrame           *frame,
 	frame->priv->panel = frame_act->panel;
 	gtk_widget_show (GTK_WIDGET (frame));
 
-	info = panel_applet_register (GTK_WIDGET (frame), frame->priv->panel,
-				      PANEL_OBJECT_APPLET, frame_act->id,
-				      frame_act->settings,
-				      GTK_WIDGET (frame), NULL);
+	info = panel_applet_register (GTK_WIDGET (frame),
+	                              frame->priv->panel,
+	                              frame_act->id,
+	                              frame_act->settings);
 	frame->priv->applet_info = info;
-
-	panel_widget_set_applet_size_constrained (frame->priv->panel,
-						  GTK_WIDGET (frame), TRUE);
-
 
 	panel_lockdown_on_notify (panel_lockdown_get (),
 				  NULL,
@@ -615,66 +803,6 @@ _panel_applet_frame_activated (PanelAppletFrame           *frame,
 
 	panel_object_loader_stop_loading (frame_act->id);
 	panel_applet_frame_activating_free (frame_act);
-}
-
-void
-_panel_applet_frame_update_flags (PanelAppletFrame *frame,
-				  gboolean          major,
-				  gboolean          minor,
-				  gboolean          has_handle)
-{
-	panel_widget_set_applet_expandable (
-		frame->priv->panel, GTK_WIDGET (frame), major, minor);
-
-	frame->priv->has_handle = has_handle;
-}
-
-void
-_panel_applet_frame_update_size_hints (PanelAppletFrame *frame,
-				       gint             *size_hints,
-				       guint             n_elements)
-{
-	if (frame->priv->has_handle) {
-		gint extra_size = HANDLE_SIZE + 1;
-		guint i;
-
-		for (i = 0; i < n_elements; i++)
-			size_hints[i] += extra_size;
-	}
-
-	/* It takes the ownership of size-hints array */
-	panel_widget_set_applet_size_hints (frame->priv->panel,
-					    GTK_WIDGET (frame),
-					    size_hints,
-					    n_elements);
-}
-
-void
-_panel_applet_frame_applet_remove (PanelAppletFrame *frame)
-{
-	AppletInfo *info;
-
-	if (!frame->priv->applet_info)
-		return;
-
-	info = frame->priv->applet_info;
-	frame->priv->applet_info = NULL;
-
-	panel_layout_delete_object (panel_applet_get_id (info));
-}
-
-void
-_panel_applet_frame_applet_move (PanelAppletFrame *frame)
-{
-	GtkWidget *widget = GTK_WIDGET (frame);
-	GtkWidget *parent = gtk_widget_get_parent (widget);
-
-	if (!PANEL_IS_WIDGET (parent))
-		return;
-
-	panel_widget_applet_drag_start (PANEL_WIDGET (parent),
-					widget,
-					GDK_CURRENT_TIME);
 }
 
 /* Generic methods */
@@ -718,6 +846,19 @@ panel_applet_frame_activating_get_settings_path (PanelAppletFrameActivating *fra
         g_free (path);
 
 	return path_instance;
+}
+
+gchar *
+panel_applet_frame_activating_get_initial_settings_path (PanelAppletFrameActivating *frame_act)
+{
+        char *path;
+        char *path_instance;
+
+        g_object_get (frame_act->settings, "path", &path, NULL);
+        path_instance = g_strdup_printf ("%sinitial-settings/", path);
+        g_free (path);
+
+        return path_instance;
 }
 
 static void
@@ -820,7 +961,12 @@ panel_applet_frame_load_helper (const gchar *iid,
 		return;
 	}
 
-	if (panel_lockdown_is_applet_disabled (panel_lockdown_get (), iid)) {
+	if (panel_applets_manager_get_applet_info (iid) == NULL) {
+		panel_applet_frame_loading_failed (iid, panel, id);
+		return;
+	}
+
+	if (panel_applets_manager_is_applet_disabled (iid, NULL)) {
 		panel_object_loader_stop_loading (id);
 		return;
 	}
@@ -869,21 +1015,13 @@ void
 panel_applet_frame_create (PanelToplevel       *toplevel,
 			   PanelObjectPackType  pack_type,
 			   int                  pack_index,
-			   const char          *iid)
+			   const char          *iid,
+			   GVariant            *initial_settings)
 {
 	g_return_if_fail (iid != NULL);
 
-	panel_layout_object_create (PANEL_OBJECT_APPLET,
-				    iid,
+	panel_layout_object_create (iid,
 				    panel_toplevel_get_id (toplevel),
-				    pack_type, pack_index);
-}
-
-gboolean
-_panel_applet_frame_get_can_move (PanelAppletFrame *frame)
-{
-	if (!frame->priv->applet_info)
-		return FALSE;
-
-	return panel_applet_can_freely_move (frame->priv->applet_info);
+				    pack_type, pack_index,
+				    initial_settings);
 }

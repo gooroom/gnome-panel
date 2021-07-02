@@ -13,11 +13,8 @@
 #include <gtk/gtk.h>
 #include <gtk/gtkx.h>
 
-#include <libpanel-util/panel-list.h>
-
 #include "applet.h"
 #include "panel-widget.h"
-#include "button-widget.h"
 #include "panel.h"
 #include "panel-bindings.h"
 #include "panel-util.h"
@@ -883,6 +880,35 @@ panel_widget_move_to_pack (PanelWidget         *panel,
  * Switch move
  */
 
+static GList *
+panel_g_list_swap_next (GList *list,
+                        GList *dl)
+{
+	GList *t;
+
+	if (!dl)
+		return list;
+
+	if (!dl->next)
+		return list;
+
+	if (dl->prev)
+		dl->prev->next = dl->next;
+	t = dl->prev;
+	dl->prev = dl->next;
+	dl->next->prev = t;
+	if (dl->next->next)
+		dl->next->next->prev = dl;
+	t = dl->next->next;
+	dl->next->next = dl;
+	dl->next = t;
+
+	if (list == dl)
+		return dl->prev;
+
+	return list;
+}
+
 /* if force_switch is set, moveby will be ignored */
 static gboolean
 panel_widget_switch_applet_right (PanelWidget *panel,
@@ -947,6 +973,35 @@ panel_widget_switch_applet_right (PanelWidget *panel,
 	}
 
 	return FALSE;
+}
+
+static GList *
+panel_g_list_swap_prev (GList *list,
+                        GList *dl)
+{
+	GList *t;
+
+	if (!dl)
+		return list;
+
+	if (!dl->prev)
+		return list;
+
+	if (dl->next)
+		dl->next->prev = dl->prev;
+	t = dl->next;
+	dl->next = dl->prev;
+	dl->prev->next = t;
+	if (dl->prev->prev)
+		dl->prev->prev->next = dl;
+	t = dl->prev->prev;
+	dl->prev->prev = dl;
+	dl->prev = t;
+
+	if (list == dl->next)
+		return dl;
+
+	return list;
 }
 
 /* if force_switch is set, moveby will be ignored */
@@ -1231,18 +1286,10 @@ panel_widget_size_request(GtkWidget *widget, GtkRequisition *requisition)
                 gtk_widget_get_preferred_size (ad->applet, &child_req, NULL);
 
 		if (panel->orient == GTK_ORIENTATION_HORIZONTAL) {
-			if (requisition->height < child_req.height &&
-			    !ad->size_constrained)
-				requisition->height = child_req.height;
-
 			if (panel->packed &&
 			    !(ad->expand_major && ad->size_hints))
 				requisition->width += child_req.width;
 		} else {
-			if (requisition->width < child_req.width &&
-			    !ad->size_constrained)
-				requisition->width = child_req.width;
-
 			if (panel->packed &&
 			    !(ad->expand_major && ad->size_hints))
 				requisition->height += child_req.height;
@@ -1691,21 +1738,19 @@ panel_widget_applet_drag_start (PanelWidget *panel,
 	window = gtk_widget_get_window (applet);
 	if (window) {
 		GdkGrabStatus  status;
-		GdkCursor     *fleur_cursor;
 		GdkDisplay    *display;
+		GdkCursor     *fleur_cursor;
 		GdkSeat       *seat;
 
-		fleur_cursor = gdk_cursor_new_for_display (gdk_display_get_default (),
-		                                           GDK_FLEUR);
-
-		display = gdk_window_get_display (window);
+		display = gdk_display_get_default ();
+		fleur_cursor = gdk_cursor_new_for_display (display, GDK_FLEUR);
 		seat = gdk_display_get_default_seat (display);
 
 		status = gdk_seat_grab (seat, window, GDK_SEAT_CAPABILITY_POINTER,
 		                        FALSE, fleur_cursor, NULL, NULL, NULL);
 
 		g_object_unref (fleur_cursor);
-		gdk_flush ();
+		gdk_display_flush (display);
 
 		if (status != GDK_GRAB_SUCCESS) {
 			g_warning (G_STRLOC ": failed to grab pointer (errorcode: %d)",
@@ -1733,7 +1778,7 @@ panel_widget_applet_drag_end (PanelWidget *panel)
 	gtk_grab_remove (panel->currently_dragged_applet->applet);
 	panel_widget_applet_drag_end_no_grab (panel);
 	panel_toplevel_pop_autohide_disabler (panel->toplevel);
-	gdk_flush ();
+	gdk_display_flush (display);
 }
 
 /*get pos of the cursor location in panel coordinates*/
@@ -1792,18 +1837,6 @@ panel_widget_get_insert_at_cursor (PanelWidget         *widget,
 		*pack_type = PANEL_OBJECT_PACK_END;
 
 	*pack_index = panel_widget_get_new_pack_index (widget, *pack_type);
-}
-
-/* get pack type for insertion at the cursor location in panel */
-PanelObjectPackType
-panel_widget_get_insert_pack_type_at_cursor (PanelWidget *panel)
-{
-	PanelObjectPackType ret = PANEL_OBJECT_PACK_START;
-	int                 pack_index = 0;
-
-	panel_widget_get_insert_at_cursor (panel, &ret, &pack_index);
-
-	return ret;
 }
 
 /* get index for insertion with pack type */
@@ -2279,7 +2312,6 @@ panel_widget_add (PanelWidget         *panel,
 		ad->pack_type = pack_type;
 		ad->pack_index = pack_index;
 		ad->constrained = 0;
-		ad->size_constrained = FALSE;
 		ad->expand_major = FALSE;
 		ad->expand_minor = FALSE;
 		ad->size_hints = NULL;
@@ -2314,6 +2346,7 @@ panel_widget_reparent (PanelWidget         *old_panel,
 	AppletData *ad;
 	GtkWidget *focus_widget = NULL;
 	AppletInfo* info;
+	GdkDisplay *display;
 
 	g_return_val_if_fail(PANEL_IS_WIDGET(old_panel), FALSE);
 	g_return_val_if_fail(PANEL_IS_WIDGET(new_panel), FALSE);
@@ -2348,7 +2381,7 @@ panel_widget_reparent (PanelWidget         *old_panel,
 	gtk_container_add (GTK_CONTAINER (new_panel), applet);
 	g_object_unref (applet);
 
-	if (info && info->type == PANEL_OBJECT_APPLET)
+	if (info != NULL)
 		panel_applet_frame_set_panel (PANEL_APPLET_FRAME (ad->applet), new_panel);
 
 	if (gtk_widget_get_can_focus (GTK_WIDGET (new_panel)))
@@ -2364,7 +2397,8 @@ panel_widget_reparent (PanelWidget         *old_panel,
 	}
  	gtk_window_present (GTK_WINDOW (new_panel->toplevel));
 
-	gdk_flush();
+	display = gdk_display_get_default ();
+	gdk_display_flush (display);
 
 	emit_applet_moved (new_panel, ad);
 
@@ -2563,27 +2597,6 @@ panel_widget_get_applet_orientation (PanelWidget *panel)
 	g_return_val_if_fail (PANEL_IS_TOPLEVEL (panel->toplevel), PANEL_ORIENTATION_TOP);
 
 	return panel_toplevel_get_orientation (panel->toplevel);
-}
-
-void
-panel_widget_set_applet_size_constrained (PanelWidget *panel,
-					  GtkWidget   *applet,
-					  gboolean     size_constrained)
-{
-	AppletData *ad;
-
-	ad = g_object_get_data (G_OBJECT (applet), PANEL_APPLET_DATA);
-	if (!ad)
-		return;
-
-	size_constrained = size_constrained != FALSE;
-
-	if (ad->size_constrained == size_constrained)
-		return;
-
-	ad->size_constrained = size_constrained;
-
-	gtk_widget_queue_resize (GTK_WIDGET (panel));
 }
 
 void

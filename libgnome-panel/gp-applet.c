@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2001 Sun Microsystems, Inc.
  * Copyright (c) 2010 Carlos Garcia Campos
- * Copyright (C) 2016-2018 Alberts Muktupāvels
+ * Copyright (C) 2016-2020 Alberts Muktupāvels
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -45,9 +45,10 @@
  */
 
 #include "config.h"
-
 #include "gp-applet-private.h"
+
 #include "gp-enum-types.h"
+#include "gp-module-private.h"
 
 typedef struct
  {
@@ -60,10 +61,14 @@ typedef struct
   GtkBuilder         *builder;
   GSimpleActionGroup *action_group;
 
+  GpModule           *module;
+
   gchar              *id;
   gchar              *settings_path;
+  GVariant           *initial_settings;
   gchar              *gettext_domain;
   gboolean            locked_down;
+  GpLockdownFlags     lockdowns;
   GtkOrientation      orientation;
   GtkPositionType     position;
 
@@ -76,22 +81,32 @@ typedef struct
 
   gboolean            enable_tooltips;
 
+  gboolean            prefer_symbolic_icons;
+
   guint               panel_icon_size;
   guint               menu_icon_size;
+
+  GtkWidget          *about_dialog;
 } GpAppletPrivate;
 
 enum
 {
   PROP_0,
 
+  PROP_MODULE,
+
   PROP_ID,
   PROP_SETTINGS_PATH,
+  PROP_INITIAL_SETTINGS,
   PROP_GETTEXT_DOMAIN,
   PROP_LOCKED_DOWN,
+  PROP_LOCKDOWNS,
   PROP_ORIENTATION,
   PROP_POSITION,
 
   PROP_ENABLE_TOOLTIPS,
+
+  PROP_PREFER_SYMBOLIC_ICONS,
 
   PROP_PANEL_ICON_SIZE,
   PROP_MENU_ICON_SIZE,
@@ -132,6 +147,25 @@ update_enable_tooltips (GpApplet *applet)
 
   g_object_notify_by_pspec (G_OBJECT (applet),
                             properties[PROP_ENABLE_TOOLTIPS]);
+}
+
+static void
+update_prefer_symbolic_icons (GpApplet *applet)
+{
+  GpAppletPrivate *priv;
+  gboolean prefer_symbolic_icons;
+
+  priv = gp_applet_get_instance_private (applet);
+  prefer_symbolic_icons = g_settings_get_boolean (priv->general_settings,
+                                                  "prefer-symbolic-icons");
+
+  if (priv->prefer_symbolic_icons == prefer_symbolic_icons)
+    return;
+
+  priv->prefer_symbolic_icons = prefer_symbolic_icons;
+
+  g_object_notify_by_pspec (G_OBJECT (applet),
+                            properties[PROP_PREFER_SYMBOLIC_ICONS]);
 }
 
 static void
@@ -215,6 +249,9 @@ general_settings_changed_cb (GSettings   *settings,
   if (key == NULL || g_strcmp0 (key, "enable-tooltips") == 0)
     update_enable_tooltips (applet);
 
+  if (key == NULL || g_strcmp0 (key, "prefer-symbolic-icons") == 0)
+    update_prefer_symbolic_icons (applet);
+
   if (key == NULL || g_strcmp0 (key, "menu-icon-size") == 0)
     update_menu_icon_size (applet);
 
@@ -272,7 +309,10 @@ size_hints_changed (GpAppletPrivate *priv,
 {
   guint i;
 
-  if ((!priv->size_hints && size_hints) || (priv->size_hints && !size_hints))
+  if (priv->size_hints == NULL && size_hints == NULL)
+    return FALSE;
+
+  if (priv->size_hints == NULL || size_hints == NULL)
     return TRUE;
 
   if (priv->size_hints->n_elements != n_elements)
@@ -291,6 +331,7 @@ static void
 gp_applet_constructed (GObject *object)
 {
   GpApplet *applet;
+  GpAppletClass *applet_class;
   GpAppletPrivate *priv;
   GActionGroup *group;
   GtkStyleContext *context;
@@ -298,7 +339,12 @@ gp_applet_constructed (GObject *object)
   G_OBJECT_CLASS (gp_applet_parent_class)->constructed (object);
 
   applet = GP_APPLET (object);
+  applet_class = GP_APPLET_GET_CLASS (applet);
   priv = gp_applet_get_instance_private (applet);
+
+  if (applet_class->initial_setup != NULL && priv->initial_settings != NULL)
+    applet_class->initial_setup (applet, priv->initial_settings);
+  g_clear_pointer (&priv->initial_settings, g_variant_unref);
 
   gtk_builder_set_translation_domain (priv->builder, priv->gettext_domain);
 
@@ -321,13 +367,18 @@ gp_applet_dispose (GObject *object)
   g_clear_object (&priv->builder);
   g_clear_object (&priv->action_group);
 
+  g_clear_object (&priv->module);
+
   if (priv->size_hints_idle != 0)
     {
       g_source_remove (priv->size_hints_idle);
       priv->size_hints_idle = 0;
     }
 
+  g_clear_pointer (&priv->initial_settings, g_variant_unref);
   g_clear_object (&priv->general_settings);
+
+  g_clear_pointer (&priv->about_dialog, gtk_widget_destroy);
 
   G_OBJECT_CLASS (gp_applet_parent_class)->dispose (object);
 }
@@ -363,6 +414,9 @@ gp_applet_get_property (GObject    *object,
 
   switch (property_id)
     {
+      case PROP_MODULE:
+        break;
+
       case PROP_ID:
         g_value_set_string (value, priv->id);
         break;
@@ -371,12 +425,20 @@ gp_applet_get_property (GObject    *object,
         g_value_set_string (value, priv->settings_path);
         break;
 
+      case PROP_INITIAL_SETTINGS:
+        g_value_set_variant (value, priv->initial_settings);
+        break;
+
       case PROP_GETTEXT_DOMAIN:
         g_value_set_string (value, priv->gettext_domain);
         break;
 
       case PROP_LOCKED_DOWN:
         g_value_set_boolean (value, priv->locked_down);
+        break;
+
+      case PROP_LOCKDOWNS:
+        g_value_set_flags (value, priv->lockdowns);
         break;
 
       case PROP_ORIENTATION:
@@ -389,6 +451,10 @@ gp_applet_get_property (GObject    *object,
 
       case PROP_ENABLE_TOOLTIPS:
         g_value_set_boolean (value, priv->enable_tooltips);
+        break;
+
+      case PROP_PREFER_SYMBOLIC_ICONS:
+        g_value_set_boolean (value, priv->prefer_symbolic_icons);
         break;
 
       case PROP_PANEL_ICON_SIZE:
@@ -419,6 +485,11 @@ gp_applet_set_property (GObject      *object,
 
   switch (property_id)
     {
+      case PROP_MODULE:
+        g_assert (priv->module == NULL);
+        priv->module = g_value_dup_object (value);
+        break;
+
       case PROP_ID:
         g_assert (priv->id == NULL);
         priv->id = g_value_dup_string (value);
@@ -427,6 +498,11 @@ gp_applet_set_property (GObject      *object,
       case PROP_SETTINGS_PATH:
         g_assert (priv->settings_path == NULL);
         priv->settings_path = g_value_dup_string (value);
+        break;
+
+      case PROP_INITIAL_SETTINGS:
+        g_assert (priv->initial_settings == NULL);
+        priv->initial_settings = g_value_dup_variant (value);
         break;
 
       case PROP_GETTEXT_DOMAIN:
@@ -438,6 +514,10 @@ gp_applet_set_property (GObject      *object,
         gp_applet_set_locked_down (applet, g_value_get_boolean (value));
         break;
 
+      case PROP_LOCKDOWNS:
+        gp_applet_set_lockdowns (applet, g_value_get_flags (value));
+        break;
+
       case PROP_ORIENTATION:
         gp_applet_set_orientation (applet, g_value_get_enum (value));
         break;
@@ -447,6 +527,9 @@ gp_applet_set_property (GObject      *object,
         break;
 
       case PROP_ENABLE_TOOLTIPS:
+        break;
+
+      case PROP_PREFER_SYMBOLIC_ICONS:
         break;
 
       case PROP_PANEL_ICON_SIZE:
@@ -552,6 +635,19 @@ static void
 install_properties (GObjectClass *object_class)
 {
   /**
+   * GpApplet:module:
+   *
+   * The applet module.
+   */
+  properties[PROP_MODULE] =
+    g_param_spec_object ("module",
+                         "Module",
+                         "Module",
+                         GP_TYPE_MODULE,
+                         G_PARAM_CONSTRUCT_ONLY | G_PARAM_WRITABLE |
+                         G_PARAM_STATIC_STRINGS);
+
+  /**
    * GpApplet:id:
    *
    * The applet id.
@@ -573,6 +669,17 @@ install_properties (GObjectClass *object_class)
                          G_PARAM_STATIC_STRINGS);
 
   /**
+   * GpApplet:initial-settings:
+   *
+   * The GVariant with initial settings.
+   */
+  properties[PROP_INITIAL_SETTINGS] =
+    g_param_spec_variant ("initial-settings", "Initial Settings", "Initial Settings",
+                          G_VARIANT_TYPE ("a{sv}"), NULL,
+                          G_PARAM_CONSTRUCT_ONLY | G_PARAM_WRITABLE |
+                          G_PARAM_STATIC_STRINGS);
+
+  /**
    * GpApplet:gettext-domain:
    *
    * The gettext domain.
@@ -587,12 +694,28 @@ install_properties (GObjectClass *object_class)
    * GpApplet:locked-down:
    *
    * Whether the applet is on locked down panel.
+   *
+   * Deprecated: 3.38: Use #GpApplet:lockdowns instead
    */
   properties[PROP_LOCKED_DOWN] =
     g_param_spec_boolean ("locked-down", "Locked Down", "Locked Down",
                           FALSE,
                           G_PARAM_READABLE | G_PARAM_EXPLICIT_NOTIFY |
-                          G_PARAM_STATIC_STRINGS);
+                          G_PARAM_STATIC_STRINGS | G_PARAM_DEPRECATED);
+
+  /**
+   * GpApplet:lockdowns:
+   *
+   * Active lockdowns.
+   */
+  properties[PROP_LOCKDOWNS] =
+    g_param_spec_flags ("lockdowns",
+                        "Lockdowns",
+                        "Lockdowns",
+                        GP_TYPE_LOCKDOWN_FLAGS,
+                        GP_LOCKDOWN_FLAGS_NONE,
+                        G_PARAM_READABLE | G_PARAM_EXPLICIT_NOTIFY |
+                        G_PARAM_STATIC_STRINGS);
 
   /**
    * GpApplet:orientation:
@@ -628,6 +751,20 @@ install_properties (GObjectClass *object_class)
                           G_PARAM_STATIC_STRINGS);
 
   /**
+   * GpApplet:prefer-symbolic-icons:
+   *
+   * Whether the applet should prefer symbolic icons in panels.
+   */
+  properties[PROP_PREFER_SYMBOLIC_ICONS] =
+    g_param_spec_boolean ("prefer-symbolic-icons",
+                          "Prefer symbolic icons",
+                          "Prefer symbolic icons",
+                          FALSE,
+                          G_PARAM_READABLE |
+                          G_PARAM_EXPLICIT_NOTIFY |
+                          G_PARAM_STATIC_STRINGS);
+
+  /**
    * GpApplet:panel-icon-size:
    *
    * The size of icons in panels.
@@ -641,7 +778,7 @@ install_properties (GObjectClass *object_class)
   /**
    * GpApplet:menu-icon-size:
    *
-   * The size of icons in panels.
+   * The size of icons in menus.
    */
   properties[PROP_MENU_ICON_SIZE] =
     g_param_spec_uint ("menu-icon-size", "Menu Icon Size", "Menu Icon Size",
@@ -772,6 +909,41 @@ gp_applet_set_locked_down (GpApplet *applet,
   priv->locked_down = locked_down;
 
   g_object_notify_by_pspec (G_OBJECT (applet), properties[PROP_LOCKED_DOWN]);
+}
+
+/**
+ * gp_applet_get_lockdowns:
+ * @applet: a #GpApplet
+ *
+ * Gets active lockdowns.
+ *
+ * Returns: the #GpLockdownFlags of @applet.
+ */
+GpLockdownFlags
+gp_applet_get_lockdowns (GpApplet *applet)
+{
+  GpAppletPrivate *priv;
+
+  g_return_val_if_fail (GP_IS_APPLET (applet), GP_LOCKDOWN_FLAGS_NONE);
+  priv = gp_applet_get_instance_private (applet);
+
+  return priv->lockdowns;
+}
+
+void
+gp_applet_set_lockdowns (GpApplet        *applet,
+                         GpLockdownFlags  lockdowns)
+{
+  GpAppletPrivate *priv;
+
+  priv = gp_applet_get_instance_private (applet);
+
+  if (priv->lockdowns == lockdowns)
+    return;
+
+  priv->lockdowns = lockdowns;
+
+  g_object_notify_by_pspec (G_OBJECT (applet), properties[PROP_LOCKDOWNS]);
 }
 
 /**
@@ -1217,6 +1389,34 @@ gp_applet_get_menu (GpApplet *applet)
   return gtk_menu_new_from_model (G_MENU_MODEL (object));
 }
 
+void
+gp_applet_remove_from_panel (GpApplet *self)
+{
+  if (GP_APPLET_GET_CLASS (self)->remove_from_panel == NULL)
+    return;
+
+  GP_APPLET_GET_CLASS (self)->remove_from_panel (self);
+}
+
+/**
+ * gp_applet_get_prefer_symbolic_icons:
+ * @applet: a #GpApplet
+ *
+ * Returns whether the applet should prefer symbolic icons in panels.
+ *
+ * Returns: whether the applet should prefer symbolic icons in panels.
+ */
+gboolean
+gp_applet_get_prefer_symbolic_icons (GpApplet *applet)
+{
+  GpAppletPrivate *priv;
+
+  g_return_val_if_fail (GP_IS_APPLET (applet), FALSE);
+  priv = gp_applet_get_instance_private (applet);
+
+  return priv->prefer_symbolic_icons;
+}
+
 /**
  * gp_applet_get_panel_icon_size:
  * @applet: a #GpApplet
@@ -1253,4 +1453,111 @@ gp_applet_get_menu_icon_size (GpApplet *applet)
   priv = gp_applet_get_instance_private (applet);
 
   return priv->menu_icon_size;
+}
+
+/**
+ * gp_applet_show_about:
+ * @applet: a #GpApplet
+ *
+ * Show about dialog. #GpAboutDialogFunc must be set with
+ * gp_applet_info_set_about_dialog().
+ */
+void
+gp_applet_show_about (GpApplet *applet)
+{
+  GpAppletPrivate *priv;
+
+  g_return_if_fail (GP_IS_APPLET (applet));
+  priv = gp_applet_get_instance_private (applet);
+
+  if (priv->about_dialog != NULL)
+    {
+      gtk_window_present (GTK_WINDOW (priv->about_dialog));
+      return;
+    }
+
+  priv->about_dialog = gp_module_create_about_dialog (priv->module,
+                                                      NULL,
+                                                      priv->id);
+
+  if (priv->about_dialog == NULL)
+    return;
+
+  g_object_add_weak_pointer (G_OBJECT (priv->about_dialog),
+                             (gpointer *) &priv->about_dialog);
+
+  gtk_window_present (GTK_WINDOW (priv->about_dialog));
+}
+
+/**
+ * gp_applet_show_help:
+ * @applet: a #GpApplet
+ * @page: the optional page identifier
+ *
+ * Show help. Help URI must be set with gp_applet_info_set_help_uri().
+ *
+ * The optional @page indentifier may include options and anchor if needed.
+ */
+void
+gp_applet_show_help (GpApplet   *applet,
+                     const char *page)
+{
+  GpAppletPrivate *priv;
+
+  g_return_if_fail (GP_IS_APPLET (applet));
+  priv = gp_applet_get_instance_private (applet);
+
+  gp_module_show_help (priv->module, NULL, priv->id, page);
+}
+
+/**
+ * gp_applet_popup_menu_at_widget:
+ * @applet: a #GpApplet
+ * @menu: the #GtkMenu to pop up.
+ * @widget: the #GtkWidget to align menu with.
+ * @event: the #GdkEvent that initiated this request or NULL if it's the current event.
+ *
+ * Displays menu and makes it available for selection. This is convenience function
+ * around gtk_menu_popup_at_widget() that automatically computes the widget_anchor and
+ * menu_anchor parameters based on the current applet position.
+ */
+void
+gp_applet_popup_menu_at_widget (GpApplet  *applet,
+                                GtkMenu   *menu,
+                                GtkWidget *widget,
+                                GdkEvent  *event)
+{
+  GdkGravity widget_anchor;
+  GdkGravity menu_anchor;
+
+  switch (gp_applet_get_position (GP_APPLET (applet)))
+    {
+      case GTK_POS_TOP:
+        widget_anchor = GDK_GRAVITY_SOUTH_WEST;
+        menu_anchor = GDK_GRAVITY_NORTH_WEST;
+        break;
+
+      case GTK_POS_LEFT:
+        widget_anchor = GDK_GRAVITY_NORTH_EAST;
+        menu_anchor = GDK_GRAVITY_NORTH_WEST;
+        break;
+
+      case GTK_POS_RIGHT:
+        widget_anchor = GDK_GRAVITY_NORTH_WEST;
+        menu_anchor = GDK_GRAVITY_NORTH_EAST;
+        break;
+
+      case GTK_POS_BOTTOM:
+        widget_anchor = GDK_GRAVITY_NORTH_WEST;
+        menu_anchor = GDK_GRAVITY_SOUTH_WEST;
+        break;
+
+      default:
+        g_assert_not_reached ();
+        break;
+    }
+
+  gtk_menu_popup_at_widget (menu, GTK_WIDGET (widget),
+                            widget_anchor, menu_anchor,
+                            event);
 }

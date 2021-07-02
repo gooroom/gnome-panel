@@ -1,0 +1,457 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GpAppletInfo: GNOME Panel Reference Manual</title>
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
+<link rel="home" href="index.html" title="GNOME Panel Reference Manual">
+<link rel="up" href="ch01.html" title="API Reference">
+<link rel="prev" href="GpApplet.html" title="GpApplet">
+<link rel="next" href="GpImageMenuItem.html" title="GpImageMenuItem">
+<meta name="generator" content="GTK-Doc V1.99 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts">
+<a href="#" class="shortcut">Top</a><span id="nav_description">  <span class="dim">|</span> 
+                  <a href="#libgnome-panel-GpAppletInfo.description" class="shortcut">Description</a></span>
+</td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="GpApplet.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="GpImageMenuItem.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="refentry">
+<a name="libgnome-panel-GpAppletInfo"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libgnome-panel-GpAppletInfo.top_of_page"></a>GpAppletInfo</span></h2>
+<p>GpAppletInfo — the applet info</p>
+</td>
+<td class="gallery_image" valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsect1">
+<a name="libgnome-panel-GpAppletInfo.functions"></a><h2>Functions</h2>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="functions_proto_type">
+<col class="functions_proto_name">
+</colgroup>
+<tbody>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GType</span>
+</td>
+<td class="function_name">
+<span class="c_punctuation">(</span><a class="link" href="libgnome-panel-GpAppletInfo.html#GpGetAppletTypeFunc" title="GpGetAppletTypeFunc ()">*GpGetAppletTypeFunc</a><span class="c_punctuation">)</span> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<span class="c_punctuation">(</span><a class="link" href="libgnome-panel-GpAppletInfo.html#GpInitialSetupDialogFunc" title="GpInitialSetupDialogFunc ()">*GpInitialSetupDialogFunc</a><span class="c_punctuation">)</span> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<span class="c_punctuation">(</span><a class="link" href="libgnome-panel-GpAppletInfo.html#GpAboutDialogFunc" title="GpAboutDialogFunc ()">*GpAboutDialogFunc</a><span class="c_punctuation">)</span> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">gboolean</span>
+</td>
+<td class="function_name">
+<span class="c_punctuation">(</span><a class="link" href="libgnome-panel-GpAppletInfo.html#GpIsDisabledFunc" title="GpIsDisabledFunc ()">*GpIsDisabledFunc</a><span class="c_punctuation">)</span> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo"><span class="returnvalue">GpAppletInfo</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="libgnome-panel-GpAppletInfo.html#gp-applet-info-new" title="gp_applet_info_new ()">gp_applet_info_new</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="libgnome-panel-GpAppletInfo.html#gp-applet-info-set-initial-setup-dialog" title="gp_applet_info_set_initial_setup_dialog ()">gp_applet_info_set_initial_setup_dialog</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="libgnome-panel-GpAppletInfo.html#gp-applet-info-set-help-uri" title="gp_applet_info_set_help_uri ()">gp_applet_info_set_help_uri</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="libgnome-panel-GpAppletInfo.html#gp-applet-info-set-about-dialog" title="gp_applet_info_set_about_dialog ()">gp_applet_info_set_about_dialog</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="libgnome-panel-GpAppletInfo.html#gp-applet-info-set-backends" title="gp_applet_info_set_backends ()">gp_applet_info_set_backends</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="libgnome-panel-GpAppletInfo.html#gp-applet-info-set-is-disabled" title="gp_applet_info_set_is_disabled ()">gp_applet_info_set_is_disabled</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="libgnome-panel-GpAppletInfo.other"></a><h2>Types and Values</h2>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="other_proto_type">
+<col class="other_proto_name">
+</colgroup>
+<tbody><tr>
+<td class="datatype_keyword"> </td>
+<td class="function_name"><a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo">GpAppletInfo</a></td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="libgnome-panel-GpAppletInfo.includes"></a><h2>Includes</h2>
+<pre class="synopsis">#include &lt;libngome-panel/gp-module.h&gt;
+</pre>
+</div>
+<div class="refsect1">
+<a name="libgnome-panel-GpAppletInfo.description"></a><h2>Description</h2>
+<p><a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo"><span class="type">GpAppletInfo</span></a> is used to provide full info about applet.</p>
+</div>
+<div class="refsect1">
+<a name="libgnome-panel-GpAppletInfo.functions_details"></a><h2>Functions</h2>
+<div class="refsect2">
+<a name="GpGetAppletTypeFunc"></a><h3>GpGetAppletTypeFunc ()</h3>
+<pre class="programlisting"><span class="returnvalue">GType</span>
+<span class="c_punctuation">(</span>*GpGetAppletTypeFunc<span class="c_punctuation">)</span> (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>Function for getting <span class="type">GType</span> of applet.</p>
+<div class="refsect3">
+<a name="GpGetAppletTypeFunc.returns"></a><h4>Returns</h4>
+<p> the <span class="type">GType</span> of applet.</p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpInitialSetupDialogFunc"></a><h3>GpInitialSetupDialogFunc ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+<span class="c_punctuation">(</span>*GpInitialSetupDialogFunc<span class="c_punctuation">)</span> (<em class="parameter"><code><span class="type">GpInitialSetupDialog</span> *dialog</code></em>);</pre>
+<p>Function for setting up initial setup dialog.</p>
+<div class="refsect3">
+<a name="GpInitialSetupDialogFunc.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>dialog</p></td>
+<td class="parameter_description"><p>a <span class="type">GtkAboutDialog</span></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpAboutDialogFunc"></a><h3>GpAboutDialogFunc ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+<span class="c_punctuation">(</span>*GpAboutDialogFunc<span class="c_punctuation">)</span> (<em class="parameter"><code><span class="type">GtkAboutDialog</span> *dialog</code></em>);</pre>
+<p>Function for setting up about dialog.</p>
+<p>The dialog will be already filled in with following information - version
+program name, comments and logo icon name.</p>
+<p>Version will be same that was set with <a class="link" href="libgnome-panel-Module.html#gp-module-set-version" title="gp_module_set_version ()"><code class="function">gp_module_set_version()</code></a>. Other
+three fields are information from <a class="link" href="libgnome-panel-GpAppletInfo.html#gp-applet-info-new" title="gp_applet_info_new ()"><code class="function">gp_applet_info_new()</code></a>.</p>
+<div class="refsect3">
+<a name="GpAboutDialogFunc.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>dialog</p></td>
+<td class="parameter_description"><p>a <span class="type">GtkAboutDialog</span></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GpIsDisabledFunc"></a><h3>GpIsDisabledFunc ()</h3>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>
+<span class="c_punctuation">(</span>*GpIsDisabledFunc<span class="c_punctuation">)</span> (<em class="parameter"><code><a class="link" href="libgnome-panel-GpLockdown.html#GpLockdownFlags" title="enum GpLockdownFlags"><span class="type">GpLockdownFlags</span></a> flags</code></em>,
+                     <em class="parameter"><code><span class="type">char</span> **reason</code></em>);</pre>
+<p>This function must return <code class="literal">TRUE</code> if applet must be fully disabled (applet
+will not be loaded nor user will be able to add it to panel). Function also
+should return reason why applet is disabled.</p>
+<p>If applet is usable with some active lockdowns it should return <code class="literal">FALSE</code> and
+use <span class="type">“lockdows”</span> property to adjust behaviour/functionality.</p>
+<div class="refsect3">
+<a name="GpIsDisabledFunc.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>flags</p></td>
+<td class="parameter_description"><p>a <a class="link" href="libgnome-panel-GpLockdown.html#GpLockdownFlags" title="enum GpLockdownFlags"><span class="type">GpLockdownFlags</span></a> with active lockdowns</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>reason</p></td>
+<td class="parameter_description"><p>return location for reason. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="GpIsDisabledFunc.returns"></a><h4>Returns</h4>
+<p> <code class="literal">TRUE</code> if applet should be disabled.</p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-info-new"></a><h3>gp_applet_info_new ()</h3>
+<pre class="programlisting"><a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo"><span class="returnvalue">GpAppletInfo</span></a> *
+gp_applet_info_new (<em class="parameter"><code><a class="link" href="libgnome-panel-GpAppletInfo.html#GpGetAppletTypeFunc" title="GpGetAppletTypeFunc ()"><span class="type">GpGetAppletTypeFunc</span></a> func</code></em>,
+                    <em class="parameter"><code>const <span class="type">gchar</span> *name</code></em>,
+                    <em class="parameter"><code>const <span class="type">gchar</span> *description</code></em>,
+                    <em class="parameter"><code>const <span class="type">gchar</span> *icon_name</code></em>);</pre>
+<p>Creates a new <a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo"><span class="type">GpAppletInfo</span></a>.</p>
+<div class="refsect3">
+<a name="gp-applet-info-new.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>func</p></td>
+<td class="parameter_description"><p>the function to call to get <span class="type">GType</span> of this applet</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>name</p></td>
+<td class="parameter_description"><p>the name of this applet</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>description</p></td>
+<td class="parameter_description"><p>the description of this applet</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>icon_name</p></td>
+<td class="parameter_description"><p>the icon name for this applet</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="gp-applet-info-new.returns"></a><h4>Returns</h4>
+<p>a newly created <a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo"><span class="type">GpAppletInfo</span></a>. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-info-set-initial-setup-dialog"></a><h3>gp_applet_info_set_initial_setup_dialog ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gp_applet_info_set_initial_setup_dialog
+                               (<em class="parameter"><code><a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo"><span class="type">GpAppletInfo</span></a> *info</code></em>,
+                                <em class="parameter"><code><a class="link" href="libgnome-panel-GpAppletInfo.html#GpInitialSetupDialogFunc" title="GpInitialSetupDialogFunc ()"><span class="type">GpInitialSetupDialogFunc</span></a> func</code></em>);</pre>
+<p>Specifies a function to be used to setup initial setup dialog.</p>
+<div class="refsect3">
+<a name="gp-applet-info-set-initial-setup-dialog.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>info</p></td>
+<td class="parameter_description"><p>a <a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo"><span class="type">GpAppletInfo</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>func</p></td>
+<td class="parameter_description"><p>the function to call to setup initial setup dialog</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-info-set-help-uri"></a><h3>gp_applet_info_set_help_uri ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gp_applet_info_set_help_uri (<em class="parameter"><code><a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo"><span class="type">GpAppletInfo</span></a> *info</code></em>,
+                             <em class="parameter"><code>const <span class="type">gchar</span> *help_uri</code></em>);</pre>
+<p>Sets the help uri. Must be in <code class="literal">help:&lt;document&gt;</code> format. Optional page
+identifier with options and anchor can be passed to <a class="link" href="GpApplet.html#gp-applet-show-help" title="gp_applet_show_help ()"><code class="function">gp_applet_show_help()</code></a>.</p>
+<div class="refsect3">
+<a name="gp-applet-info-set-help-uri.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>info</p></td>
+<td class="parameter_description"><p>a <a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo"><span class="type">GpAppletInfo</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>help_uri</p></td>
+<td class="parameter_description"><p>the help uri</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-info-set-about-dialog"></a><h3>gp_applet_info_set_about_dialog ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gp_applet_info_set_about_dialog (<em class="parameter"><code><a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo"><span class="type">GpAppletInfo</span></a> *info</code></em>,
+                                 <em class="parameter"><code><a class="link" href="libgnome-panel-GpAppletInfo.html#GpAboutDialogFunc" title="GpAboutDialogFunc ()"><span class="type">GpAboutDialogFunc</span></a> func</code></em>);</pre>
+<p>Specifies a function to be used to setup about dialog.</p>
+<div class="refsect3">
+<a name="gp-applet-info-set-about-dialog.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>info</p></td>
+<td class="parameter_description"><p>a <a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo"><span class="type">GpAppletInfo</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>func</p></td>
+<td class="parameter_description"><p>the function to call to setup about dialog</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-info-set-backends"></a><h3>gp_applet_info_set_backends ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gp_applet_info_set_backends (<em class="parameter"><code><a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo"><span class="type">GpAppletInfo</span></a> *info</code></em>,
+                             <em class="parameter"><code>const <span class="type">gchar</span> *backends</code></em>);</pre>
+<p>Sets a list of backends that this applet supports.</p>
+<div class="refsect3">
+<a name="gp-applet-info-set-backends.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>info</p></td>
+<td class="parameter_description"><p>a <a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo"><span class="type">GpAppletInfo</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>backends</p></td>
+<td class="parameter_description"><p>a comma-separated list of backends. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gp-applet-info-set-is-disabled"></a><h3>gp_applet_info_set_is_disabled ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gp_applet_info_set_is_disabled (<em class="parameter"><code><a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo"><span class="type">GpAppletInfo</span></a> *info</code></em>,
+                                <em class="parameter"><code><a class="link" href="libgnome-panel-GpAppletInfo.html#GpIsDisabledFunc" title="GpIsDisabledFunc ()"><span class="type">GpIsDisabledFunc</span></a> func</code></em>);</pre>
+<p>Specifies a function to be used to check if applet should be disabled.</p>
+<div class="refsect3">
+<a name="gp-applet-info-set-is-disabled.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>info</p></td>
+<td class="parameter_description"><p>a <a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo"><span class="type">GpAppletInfo</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>func</p></td>
+<td class="parameter_description"><p>the function to call to check if applet should be disabled</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="refsect1">
+<a name="libgnome-panel-GpAppletInfo.other_details"></a><h2>Types and Values</h2>
+<div class="refsect2">
+<a name="GpAppletInfo"></a><h3>GpAppletInfo</h3>
+<pre class="programlisting">typedef struct _GpAppletInfo GpAppletInfo;</pre>
+<p>The <a class="link" href="libgnome-panel-GpAppletInfo.html#GpAppletInfo" title="GpAppletInfo"><span class="type">GpAppletInfo</span></a> struct is an opaque data structure.</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>Generated by GTK-Doc V1.99</div>
+</body>
+</html>

@@ -20,6 +20,7 @@
 #include <glib/gi18n-lib.h>
 #include <libgnome-panel/gp-action.h>
 #include <libgnome-panel/gp-image-menu-item.h>
+#include <libgnome-panel/gp-utils.h>
 
 #include "gp-menu-bar-applet.h"
 #include "gp-menu-bar.h"
@@ -79,18 +80,6 @@ button_press_event_cb (GtkWidget      *widget,
 }
 
 static gchar *
-get_applications_menu (void)
-{
-  const gchar *xdg_menu_prefx;
-
-  xdg_menu_prefx = g_getenv ("XDG_MENU_PREFIX");
-  if (!xdg_menu_prefx || *xdg_menu_prefx == '\0')
-    return g_strdup ("gnome-applications.menu");
-
-  return g_strdup_printf ("%sapplications.menu", xdg_menu_prefx);
-}
-
-static gchar *
 get_settings_menu (void)
 {
   const gchar *xdg_menu_prefx;
@@ -103,30 +92,55 @@ get_settings_menu (void)
 }
 
 static void
+update_icon (GpApplet  *applet,
+             GtkWidget *icon)
+{
+  const char *icon_name;
+  guint icon_size;
+
+  icon_name = "start-here";
+  if (gp_applet_get_prefer_symbolic_icons (applet))
+    icon_name = "start-here-symbolic";
+
+  icon_size = gp_applet_get_panel_icon_size (applet);
+
+  gtk_image_set_from_icon_name (GTK_IMAGE (icon), icon_name, GTK_ICON_SIZE_MENU);
+  gtk_image_set_pixel_size (GTK_IMAGE (icon), icon_size);
+}
+
+static void
+prefer_symbolic_icons_cb (GpApplet   *applet,
+                          GParamSpec *pspec,
+                          GtkWidget  *icon)
+{
+  update_icon (applet, icon);
+}
+
+static void
 panel_icon_size_cb (GpApplet   *applet,
                     GParamSpec *pspec,
                     GtkWidget  *icon)
 {
-  guint icon_size;
-
-  icon_size = gp_applet_get_panel_icon_size (applet);
-  gtk_image_set_pixel_size (GTK_IMAGE (icon), icon_size);
+  update_icon (applet, icon);
 }
 
 static void
 append_applications_item (GpMenuBarApplet *applet)
 {
-  guint icon_size;
   GtkWidget *icon;
   const gchar *tooltip;
   gchar *menu;
 
-  icon_size = gp_applet_get_panel_icon_size (GP_APPLET (applet));
-  icon = gtk_image_new_from_icon_name ("start-here", GTK_ICON_SIZE_MENU);
-  gtk_image_set_pixel_size (GTK_IMAGE (icon), icon_size);
+  icon = gtk_image_new ();
+  gp_add_text_color_class (icon);
+
+  g_signal_connect (applet, "notify::prefer-symbolic-icons",
+                    G_CALLBACK (prefer_symbolic_icons_cb), icon);
 
   g_signal_connect (applet, "notify::panel-icon-size",
                     G_CALLBACK (panel_icon_size_cb), icon);
+
+  update_icon (GP_APPLET (applet), icon);
 
   applet->applications_item = gp_image_menu_item_new_with_label (_("Applications"));
   gtk_menu_shell_append (GTK_MENU_SHELL (applet->menu_bar), applet->applications_item);
@@ -136,10 +150,25 @@ append_applications_item (GpMenuBarApplet *applet)
   tooltip = _("Browse and run installed applications");
   gtk_widget_set_tooltip_text (applet->applications_item, tooltip);
 
-  menu = get_applications_menu ();
+  menu = gp_menu_utils_get_applications_menu ();
 
-  applet->applications_menu = gp_menu_new (GP_APPLET (applet), menu, TRUE);
+  applet->applications_menu = gp_menu_new (menu, TRUE);
   g_free (menu);
+
+  g_object_bind_property (applet, "enable-tooltips",
+                          applet->applications_menu, "enable-tooltips",
+                          G_BINDING_DEFAULT |
+                          G_BINDING_SYNC_CREATE);
+
+  g_object_bind_property (applet, "locked-down",
+                          applet->applications_menu, "locked-down",
+                          G_BINDING_DEFAULT |
+                          G_BINDING_SYNC_CREATE);
+
+  g_object_bind_property (applet, "menu-icon-size",
+                          applet->applications_menu, "menu-icon-size",
+                          G_BINDING_DEFAULT |
+                          G_BINDING_SYNC_CREATE);
 
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (applet->applications_item),
                              applet->applications_menu);
@@ -160,9 +189,24 @@ append_places_item (GpMenuBarApplet *applet)
   tooltip = _("Access documents, folders and network places");
   gtk_widget_set_tooltip_text (applet->places_item, tooltip);
 
-  applet->places_menu = gp_places_menu_new (GP_APPLET (applet));
+  applet->places_menu = gp_places_menu_new ();
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (applet->places_item),
                              applet->places_menu);
+
+  g_object_bind_property (applet, "enable-tooltips",
+                          applet->places_menu, "enable-tooltips",
+                          G_BINDING_DEFAULT |
+                          G_BINDING_SYNC_CREATE);
+
+  g_object_bind_property (applet, "locked-down",
+                          applet->places_menu, "locked-down",
+                          G_BINDING_DEFAULT |
+                          G_BINDING_SYNC_CREATE);
+
+  g_object_bind_property (applet, "menu-icon-size",
+                          applet->places_menu, "menu-icon-size",
+                          G_BINDING_DEFAULT |
+                          G_BINDING_SYNC_CREATE);
 
   g_signal_connect (applet->places_menu, "button-press-event",
                     G_CALLBACK (button_press_event_cb), NULL);
@@ -185,8 +229,23 @@ append_system_item (GpMenuBarApplet *applet)
   tooltip = _("Change system appearance and behavior, or get help");
   gtk_widget_set_tooltip_text (applet->system_item, tooltip);
 
-  applet->system_menu = gp_menu_new (GP_APPLET (applet), menu, FALSE);
+  applet->system_menu = gp_menu_new (menu, FALSE);
   g_free (menu);
+
+  g_object_bind_property (applet, "enable-tooltips",
+                          applet->system_menu, "enable-tooltips",
+                          G_BINDING_DEFAULT |
+                          G_BINDING_SYNC_CREATE);
+
+  g_object_bind_property (applet, "locked-down",
+                          applet->system_menu, "locked-down",
+                          G_BINDING_DEFAULT |
+                          G_BINDING_SYNC_CREATE);
+
+  g_object_bind_property (applet, "menu-icon-size",
+                          applet->system_menu, "menu-icon-size",
+                          G_BINDING_DEFAULT |
+                          G_BINDING_SYNC_CREATE);
 
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (applet->system_item),
                              applet->system_menu);

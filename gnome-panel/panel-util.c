@@ -36,58 +36,8 @@
 
 #include "applet.h"
 #include "panel-bindings.h"
-#include "launcher.h"
 #include "panel-icon-names.h"
 #include "panel-schemas.h"
-
-char *
-panel_util_make_exec_uri_for_desktop (const char *exec)
-{
-	GString    *str;
-	const char *c;
-
-	if (!exec)
-		return g_strdup ("");
-
-	if (!strchr (exec, ' '))
-		return g_strdup (exec);
-
-	str = g_string_new_len (NULL, strlen (exec));
-
-	str = g_string_append_c (str, '"');
-	for (c = exec; *c != '\0'; c++) {
-		/* FIXME: GKeyFile will add an additional backslach so we'll
-		 * end up with toto\\" instead of toto\"
-		 * We could use g_key_file_set_value(), but then we don't
-		 * benefit from the other escaping that glib is doing...
-		 */
-		if (*c == '"')
-			str = g_string_append (str, "\\\"");
-		else
-			str = g_string_append_c (str, *c);
-	}
-	str = g_string_append_c (str, '"');
-
-	return g_string_free (str, FALSE);
-}
-
-int
-panel_find_applet_index (GtkWidget *widget)
-{
-	GSList *applet_list, *l;
-	int     i;
-
-	applet_list = panel_applet_list_applets ();
-
-	for (i = 0, l = applet_list; l; i++, l = l->next) {
-		AppletInfo *info = l->data;
-
-		if (info->widget == widget)
-			return i;
-	}
-
-	return i;
-}
 
 void
 panel_push_window_busy (GtkWidget *window)
@@ -104,11 +54,15 @@ panel_push_window_busy (GtkWidget *window)
 
 		win = gtk_widget_get_window (window);
 		if (win != NULL) {
-			GdkCursor *cursor = gdk_cursor_new_for_display (gdk_display_get_default (),
-			                                                GDK_WATCH);
+			GdkDisplay *display;
+			GdkCursor *cursor;
+
+			display = gdk_display_get_default ();
+			cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
+
 			gdk_window_set_cursor (win, cursor);
 			g_object_unref (cursor);
-			gdk_flush ();
+			gdk_display_flush (display);
 		}
 	}
 
@@ -137,18 +91,6 @@ panel_pop_window_busy (GtkWidget *window)
 	} else {
 		g_object_set_data (G_OBJECT (window), "Panel:WindowBusy",
 				   GINT_TO_POINTER (busy));
-	}
-}
-
-gboolean
-panel_is_program_in_path (const char *program)
-{
-	char *tmp = g_find_program_in_path (program);
-	if (tmp != NULL) {
-		g_free (tmp);
-		return TRUE;
-	} else {
-		return FALSE;
 	}
 }
 
@@ -192,62 +134,7 @@ panel_ensure_dir (const char *dirname)
 	return TRUE;
 }
 
-gboolean
-panel_is_uri_writable (const char *uri)
-{
-	GFile     *file;
-	GFileInfo *info;
-	gboolean   retval;
-
-	g_return_val_if_fail (uri != NULL, FALSE);
-
-	retval = FALSE;
-
-	file = g_file_new_for_uri (uri);
-
-	if (!g_file_query_exists (file, NULL)) {
-		GFile *parent;
-
-		parent = g_file_get_parent (file);
-		g_object_unref (file);
-
-		if (!g_file_query_exists (parent, NULL)) {
-			g_object_unref (parent);
-			return FALSE;
-		}
-
-		file = parent;
-	}
-
-	info = g_file_query_info (file, "access::*",
-				  G_FILE_QUERY_INFO_NONE, NULL, NULL);
-	g_object_unref (file);
-
-	if (info) {
-		retval = g_file_info_get_attribute_boolean (info,
-							    G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE);
-		g_object_unref (info);
-	}
-
-	return retval;
-}
-
-gboolean
-panel_uri_exists (const char *uri)
-{
-	GFile *suri;
-	gboolean ret;
-
-	g_return_val_if_fail (uri != NULL, FALSE);
-
-	suri = g_file_new_for_uri (uri);
-	ret = g_file_query_exists (suri, NULL);
-	g_object_unref (suri);
-
-	return ret;
-}
-
-char *
+static char *
 panel_find_icon (GtkIconTheme  *icon_theme,
 		 const char    *icon_name,
 		 gint           size)
@@ -292,46 +179,7 @@ panel_find_icon (GtkIconTheme  *icon_theme,
 	return retval;
 }
 
-GdkPixbuf *
-panel_load_icon (GtkIconTheme  *icon_theme,
-		 const char    *icon_name,
-		 int            size,
-		 int            desired_width,
-		 int            desired_height,
-		 char         **error_msg)
-{
-	GdkPixbuf *retval;
-	char      *file;
-	GError    *error;
-
-	g_return_val_if_fail (error_msg == NULL || *error_msg == NULL, NULL);
-
-	file = panel_find_icon (icon_theme, icon_name, size);
-	if (!file) {
-		if (error_msg)
-			*error_msg = g_strdup_printf (_("Icon '%s' not found"),
-						      icon_name);
-
-		return NULL;
-	}
-
-	error = NULL;
-	retval = gdk_pixbuf_new_from_file_at_size (file,
-						   desired_width,
-						   desired_height,
-						   &error);
-	if (error) {
-		if (error_msg)
-			*error_msg = g_strdup (error->message);
-		g_error_free (error);
-	}
-
-	g_free (file);
-
-	return retval;
-}
-
-char *
+static char *
 panel_util_get_from_personal_path (const char *file)
 {
 	return g_build_filename (g_get_user_config_dir (),
@@ -344,32 +192,7 @@ panel_launcher_get_personal_path (void)
 	return panel_util_get_from_personal_path ("launchers");
 }
 
-gboolean
-panel_launcher_is_in_personal_path (const char *location)
-{
-	GFile    *file;
-	GFile    *launchers_dir;
-	char     *launchers_path;
-	gboolean  retval;
-
-	if (!location)
-		return FALSE;
-
-	launchers_path = panel_launcher_get_personal_path ();
-	launchers_dir = g_file_new_for_path (launchers_path);
-	g_free (launchers_path);
-
-	file = panel_launcher_get_gfile (location);
-
-	retval = g_file_has_prefix (file, launchers_dir);
-
-	g_object_unref (file);
-	g_object_unref (launchers_dir);
-
-	return retval;
-}
-
-GFile *
+static GFile *
 panel_launcher_get_gfile (const char *location)
 {
 	char  *path;
@@ -386,26 +209,6 @@ panel_launcher_get_gfile (const char *location)
 	g_free (path);
 
 	return file;
-}
-
-char *
-panel_launcher_get_uri (const char *location)
-{
-	char *path;
-	char *uri;
-
-	if (!g_ascii_strncasecmp (location, "file:", strlen ("file:")))
-		return g_strdup (location);
-
-	if (!g_path_is_absolute (location))
-		path = panel_make_full_path (NULL, location);
-	else
-		path = g_strdup (location);
-
-	uri = g_filename_to_uri (path, NULL, NULL);
-	g_free (path);
-
-	return uri;
 }
 
 char *
@@ -460,7 +263,7 @@ panel_make_full_path (const char *dir,
 	return retval;
 }
 
-char *
+static char *
 panel_make_unique_desktop_path_from_name (const char *dir,
 					  const char *name)
 {
@@ -562,62 +365,6 @@ panel_make_unique_desktop_uri (const char *dir,
 	g_free (path);
 
 	return uri;
-}
-
-GdkPixbuf *
-panel_util_cairo_rgbdata_to_pixbuf (unsigned char *data,
-				    int            width,
-				    int            height)
-{
-	GdkPixbuf     *retval;
-	unsigned char *dstptr;
-	unsigned char *srcptr;
-	int            align;
-
-	g_assert (width > 0 && height > 0);
-
-	if (!data)
-		return NULL;
-
-	retval = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, width, height);
-	if (!retval)
-		return NULL;
-
-	dstptr = gdk_pixbuf_get_pixels (retval);
-	srcptr = data;
-	align  = gdk_pixbuf_get_rowstride (retval) - (width * 3);
-
-#if G_BYTE_ORDER == G_LITTLE_ENDIAN
-/* cairo == 00RRGGBB */
-#define CAIRO_RED 2
-#define CAIRO_GREEN 1
-#define CAIRO_BLUE 0
-#else
-/* cairo == BBGGRR00 */
-#define CAIRO_RED 1
-#define CAIRO_GREEN 2
-#define CAIRO_BLUE 3
-#endif
-
-	while (height--) {
-		int x = width;
-		while (x--) {
-			/* pixbuf == BBGGRR */
-			dstptr[0] = srcptr[CAIRO_RED];
-			dstptr[1] = srcptr[CAIRO_GREEN];
-			dstptr[2] = srcptr[CAIRO_BLUE];
-
-			dstptr += 3;
-			srcptr += 4;
-		}
-
-		dstptr += align;
-	}
-#undef CAIRO_RED
-#undef CAIRO_GREEN
-#undef CAIRO_BLUE
-
-	return retval;
 }
 
 char *
@@ -1016,50 +763,6 @@ panel_util_get_icon_for_uri (const char *text_uri)
 	return retval;
 }
 
-static gboolean
-panel_util_query_tooltip_cb (GtkWidget  *widget,
-			     gint        x,
-			     gint        y,
-			     gboolean    keyboard_tip,
-			     GtkTooltip *tooltip,
-			     const char *text)
-{
-	GSettings *gsettings;
-	gboolean   enable_tooltips;
-
-	gsettings = g_settings_new (PANEL_GENERAL_SCHEMA);
-	enable_tooltips = g_settings_get_boolean (gsettings,
-						  PANEL_GENERAL_ENABLE_TOOLTIPS_KEY);
-	g_object_unref (gsettings);
-
-	if (!enable_tooltips)
-		return FALSE;
-
-	gtk_tooltip_set_text (tooltip, text);
-	return TRUE;
-}
-
-void
-panel_util_set_tooltip_text (GtkWidget  *widget,
-			     const char *text)
-{
-        g_signal_handlers_disconnect_matched (widget,
-					      G_SIGNAL_MATCH_FUNC,
-					      0, 0, NULL,
-					      panel_util_query_tooltip_cb,
-					      NULL);
-
-	if (PANEL_GLIB_STR_EMPTY (text)) {
-		g_object_set (widget, "has-tooltip", FALSE, NULL);
-		return;
-	}
-
-	g_object_set (widget, "has-tooltip", TRUE, NULL);
-	g_signal_connect_data (widget, "query-tooltip",
-			       G_CALLBACK (panel_util_query_tooltip_cb),
-			       g_strdup (text), (GClosureNotify) g_free, 0);
-}
-
 /* This is similar to what g_file_new_for_commandline_arg() does, but
  * we end up with something relative to $HOME instead of the current working
  * directory */
@@ -1162,22 +865,4 @@ panel_util_key_event_is_popup_panel (GdkEventKey *event,
 {
 	panel_util_key_event_is_binding (event, PANEL_TYPE_TOPLEVEL, "popup-panel-menu",
 					 is_popup, is_popup_modifier);
-}
-
-char *
-panel_util_get_user_name (void)
-{
-	char *name;
-
-	name = g_locale_to_utf8 (g_get_real_name (), -1, NULL, NULL, NULL);
-
-	if (PANEL_GLIB_STR_EMPTY (name) || g_strcmp0 (name, "Unknown") == 0) {
-		g_free (name);
-		name = g_locale_to_utf8 (g_get_user_name (), -1 , NULL, NULL, NULL);
-	}
-
-	if (!name)
-		name = g_strdup (g_get_user_name ());
-
-	return name;
 }

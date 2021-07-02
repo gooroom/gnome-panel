@@ -31,15 +31,12 @@
 
 #include <libpanel-util/panel-glib.h>
 
-#include "panel-enums.h"
+#include "panel-enums-gsettings.h"
 #include "panel-schemas.h"
 #include "panel-toplevel.h"
 
 /* Includes for objects we can load */
-#include "launcher.h"
-#include "panel-action-button.h"
 #include "panel-applet-frame.h"
-#include "panel-menu-button.h"
 
 #include "panel-object-loader.h"
 
@@ -137,6 +134,18 @@ panel_object_loader_stop_loading (const char *id)
 }
 
 static gboolean
+is_valid_iid (const char *iid)
+{
+        const char *instance_id;
+
+        instance_id = g_strrstr (iid, "::");
+        if (!instance_id)
+                return FALSE;
+
+        return TRUE;
+}
+
+static gboolean
 panel_object_loader_idle_handler (gpointer dummy)
 {
         PanelObjectToLoad *object = NULL;
@@ -144,9 +153,6 @@ panel_object_loader_idle_handler (gpointer dummy)
         PanelWidget       *panel_widget;
         GSList            *l;
         char              *iid = NULL;
-        PanelObjectType    object_type;
-        char              *object_type_detail = NULL;
-        gboolean           ret;
 
         if (!panel_objects_to_load) {
                 panel_object_loader_have_idle = FALSE;
@@ -183,9 +189,8 @@ panel_object_loader_idle_handler (gpointer dummy)
         panel_widget = panel_toplevel_get_panel_widget (toplevel);
 
         iid = g_settings_get_string (object->settings, PANEL_OBJECT_IID_KEY);
-        ret = panel_object_iid_to_type (iid, &object_type, &object_type_detail);
 
-        if (!ret) {
+        if (!is_valid_iid (iid)) {
                 g_printerr ("Object '%s' has an invalid iid ('%s')\n",
                             object->id, iid);
                 panel_object_loader_stop_loading (object->id);
@@ -195,37 +200,7 @@ panel_object_loader_idle_handler (gpointer dummy)
 
         g_free (iid);
 
-        switch (object_type) {
-        case PANEL_OBJECT_APPLET:
-                panel_applet_frame_load (panel_widget,
-                                         object->id,
-                                         object->settings);
-                break;
-        case PANEL_OBJECT_MENU:
-                panel_menu_button_load (panel_widget,
-                                        object->id,
-                                        object->settings);
-                break;
-        case PANEL_OBJECT_LAUNCHER:
-                launcher_load (panel_widget,
-                               object->id,
-                               object->settings);
-                break;
-        case PANEL_OBJECT_ACTION:
-                panel_action_button_load (panel_widget,
-                                          object->id,
-                                          object->settings,
-                                          object_type_detail);
-                break;
-        default:
-                g_assert_not_reached ();
-                break;
-        }
-
-        /* We load applets asynchronously, so we specifically don't call
-         * panel_object_loader_stop_loading() for this type. */
-        if (object_type != PANEL_OBJECT_APPLET)
-                panel_object_loader_stop_loading (object->id);
+        panel_applet_frame_load (panel_widget, object->id, object->settings);
 
         return TRUE;
 }
@@ -337,118 +312,4 @@ panel_object_loader_is_queued (const char *id)
                         return TRUE;
         }
         return FALSE;
-}
-
-
-/*******************************\
- * iid <=> object type mapping *
-\*******************************/
-
-#define PANEL_INTERNAL_FACTORY "PanelInternalFactory"
-
-static struct {
-        PanelObjectType  type;
-        const char      *id;
-        gboolean         has_detail;
-} panel_object_iid_map[] = {
-        { PANEL_OBJECT_ACTION,    "ActionButton" , TRUE  },
-        { PANEL_OBJECT_MENU,      "MenuButton"   , FALSE },
-        { PANEL_OBJECT_LAUNCHER,  "Launcher"     , FALSE }
-};
-
-char *
-panel_object_type_to_iid (PanelObjectType  type,
-                          const char      *detail)
-{
-        int i;
-
-        if (type == PANEL_OBJECT_APPLET)
-                return g_strdup (detail);
-
-        for (i = 0; i < G_N_ELEMENTS (panel_object_iid_map); i++) {
-                if (panel_object_iid_map[i].type != type)
-                        continue;
-
-                if (panel_object_iid_map[i].has_detail &&
-                    PANEL_GLIB_STR_EMPTY (detail))
-                        return NULL;
-
-                if (panel_object_iid_map[i].has_detail)
-                        return g_strdup_printf ("%s::%s:%s",
-                                                PANEL_INTERNAL_FACTORY,
-                                                panel_object_iid_map[i].id,
-                                                detail);
-                else
-                        return g_strdup_printf ("%s::%s",
-                                                PANEL_INTERNAL_FACTORY,
-                                                panel_object_iid_map[i].id);
-        }
-
-        return NULL;
-}
-
-gboolean
-panel_object_iid_to_type (const char       *iid,
-                          PanelObjectType  *type,
-                          char            **detail)
-{
-	const char *instance_id;
-	char       *factory_id;
-	gboolean    is_applet;;
-        int         i;
-
-        if (detail)
-                *detail = NULL;
-
-	instance_id = g_strrstr (iid, "::");
-        if (!instance_id)
-                return FALSE;
-
-	factory_id = g_strndup (iid, strlen (iid) - strlen (instance_id));
-        is_applet = (g_strcmp0 (factory_id, PANEL_INTERNAL_FACTORY) != 0);
-        g_free (factory_id);
-
-        if (is_applet) {
-                *type = PANEL_OBJECT_APPLET;
-                return TRUE;
-        }
-
-	instance_id += 2;
-
-        for (i = 0; i < G_N_ELEMENTS (panel_object_iid_map); i++) {
-                if (!panel_object_iid_map[i].has_detail &&
-                    g_strcmp0 (panel_object_iid_map[i].id,
-                               instance_id) == 0) {
-                        *type = panel_object_iid_map[i].type;
-                        return TRUE;
-                }
-
-                if (panel_object_iid_map[i].has_detail) {
-                        const char *d;
-
-                        if (!g_str_has_prefix (instance_id,
-                                               panel_object_iid_map[i].id))
-                                continue;
-
-                        d = instance_id + strlen (panel_object_iid_map[i].id);
-                        if (d[0] != ':')
-                                return FALSE;
-
-                        d += 1;
-                        if (d[0] == '\0')
-                                return FALSE;
-
-                        *type = panel_object_iid_map[i].type;
-                        if (detail)
-                                *detail = g_strdup (d);
-
-                        return TRUE;
-                }
-        }
-
-        /* We don't know this id; it could be provided by an applet now (for
-         * features that moved from being internal to the panel to applets, and
-         * that provide compatibility with the same id). So let's try it.  */
-        *type = PANEL_OBJECT_APPLET;
-        return TRUE;
 }

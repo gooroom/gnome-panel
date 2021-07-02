@@ -1,8 +1,10 @@
 NULL =
 
 SUBDIRS = \
+	action-button \
 	clock \
 	fish \
+	launcher \
 	menu \
 	notification-area \
 	separator \

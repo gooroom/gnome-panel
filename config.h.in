@@ -82,10 +82,6 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
-/* dnl Define when zoneinfo directory has been present during configuration.
-   */
-#undef HAVE_ZONEINFO
-
 /* Define to the sub-directory where libtool stores uninstalled libraries. */
 #undef LT_OBJDIR
 
@@ -115,9 +111,6 @@
 
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
-
-/* Configuration time zoneinfo directory. */
-#undef TZDIR
 
 /* Version number of package */
 #undef VERSION

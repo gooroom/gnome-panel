@@ -23,68 +23,35 @@
 
 #include <glib-object.h>
 
+#include "gp-module-manager.h"
+#include "libgnome-panel/gp-initial-setup-dialog-private.h"
 #include "panel-applet-frame.h"
-#include "panel-applet-info.h"
 
 G_BEGIN_DECLS
 
-#define PANEL_TYPE_APPLETS_MANAGER		(panel_applets_manager_get_type ())
-#define PANEL_APPLETS_MANAGER(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), PANEL_TYPE_APPLETS_MANAGER, PanelAppletsManager))
-#define PANEL_APPLETS_MANAGER_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), PANEL_TYPE_APPLETS_MANAGER, PanelAppletsManagerClass))
-#define PANEL_IS_APPLETS_MANAGER(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), PANEL_TYPE_APPLETS_MANAGER))
-#define PANEL_IS_APPLETS_MANAGER_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), PANEL_TYPE_APPLETS_MANAGER))
-#define PANEL_APPLETS_MANAGER_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS((obj), PANEL_TYPE_APPLETS_MANAGER, PanelAppletsManagerClass))
+GpModuleManager *panel_applets_manager_get_module_manager        (void);
 
-typedef struct _PanelAppletsManager		PanelAppletsManager;
-typedef struct _PanelAppletsManagerClass	PanelAppletsManagerClass;
+gboolean         panel_applets_manager_factory_activate          (const gchar                 *iid);
+void             panel_applets_manager_factory_deactivate        (const gchar                 *iid);
 
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (PanelAppletsManager, g_object_unref)
+GpAppletInfo    *panel_applets_manager_get_applet_info           (const gchar                 *iid);
 
-struct _PanelAppletsManagerClass {
-	GObjectClass parent_class;
+gboolean         panel_applets_manager_load_applet               (const gchar                 *iid,
+                                                                  PanelAppletFrameActivating  *frame_act);
 
-	GList *            (*get_applets)           (PanelAppletsManager  *manager);
+gchar           *panel_applets_manager_get_new_iid               (const gchar                 *old_iid);
 
-	gboolean           (*factory_activate)      (PanelAppletsManager  *manager,
-						     const gchar          *iid);
-	gboolean           (*factory_deactivate)    (PanelAppletsManager  *manager,
-						     const gchar          *iid);
+gboolean         panel_applets_manager_open_initial_setup_dialog (const gchar                 *iid,
+                                                                  GVariant                    *settings,
+                                                                  GtkWindow                   *parent,
+                                                                  GpInitialSetupCallback       callback,
+                                                                  gpointer                     user_data,
+                                                                  GDestroyNotify               free_func);
 
-	PanelAppletInfo  * (*get_applet_info)       (PanelAppletsManager  *manager,
-						     const gchar          *iid);
+GtkWidget       *panel_applets_manager_get_standalone_menu       (void);
 
-	gboolean           (*load_applet)           (PanelAppletsManager         *manager,
-						     const gchar                 *iid,
-						     PanelAppletFrameActivating  *frame_act);
-
-	GtkWidget        * (*get_applet_widget)     (PanelAppletsManager         *manager,
-	                                             const gchar                 *iid,
-	                                             guint                        uid);
-
-	gchar            * (*get_new_iid)           (PanelAppletsManager         *manager,
-	                                             const gchar                 *old_iid);
-};
-
-struct _PanelAppletsManager {
-	GObject parent;
-};
-
-GType             panel_applets_manager_get_type                    (void);
-
-GList            *panel_applets_manager_get_applets                 (void);
-
-gboolean          panel_applets_manager_factory_activate            (const gchar     *iid);
-void              panel_applets_manager_factory_deactivate          (const gchar     *iid);
-
-PanelAppletInfo  *panel_applets_manager_get_applet_info             (const gchar     *iid);
-
-gboolean          panel_applets_manager_load_applet                 (const gchar                *iid,
-								     PanelAppletFrameActivating *frame_act);
-
-GtkWidget        *panel_applets_manager_get_applet_widget           (const gchar     *iid,
-                                                                     guint            uid);
-
-gchar            *panel_applets_manager_get_new_iid                 (const gchar     *old_iid);
+gboolean         panel_applets_manager_is_applet_disabled        (const char                  *iid,
+                                                                  char                       **reason);
 
 G_END_DECLS
 

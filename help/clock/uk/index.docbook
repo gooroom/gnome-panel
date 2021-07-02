@@ -20,21 +20,9 @@
 <!-- appropriate code -->
   <articleinfo> 
 	 <title>Посібник з аплету Годинник</title> 
-	 <copyright lang="en"> 
-		<year>2009</year> 
-		<year>2010</year>
-		<holder>Paul Cutler</holder> 
-	 </copyright>
-	 <copyright lang="en"> 
-		<year>2002</year>
-		<year>2003</year>  
-		<year>2004</year>  
-		<holder>Sun Microsystems</holder> 
-	 </copyright> 
-	 <copyright lang="en"> 
-		<year>2000</year> 
-		<holder>Dan Mueth</holder> 
-	 </copyright>
+	 <copyright><year>2009</year> <year>2010</year> <holder>Paul Cutler</holder></copyright>
+	 <copyright><year>2002</year> <year>2003</year> <year>2004</year> <holder>Sun Microsystems</holder></copyright> 
+	 <copyright><year>2000</year> <holder>Dan Mueth</holder></copyright>
 <!-- translators: uncomment this:
 
   <copyright>
@@ -52,55 +40,16 @@
 
 
 <legalnotice id="legalnotice">
-<para lang="en">
-Permission is granted to copy, distribute and/or modify this document under the 
-terms of the GNU Free DocumentationLicense (GFDL), Version 1.1 or any later 
-version published by the Free Software Foundation with no Invariant Sections, 	  no Front-Cover Texts, and
-no Back-Cover Texts. You can find a copy of the GFDL at this 
-
-		<ulink url="help:fdl" type="help">link</ulink> 
-
-or in the file COPYING-DOCS distributed with this manual.</para>
+<para>Дозволяється копіювати, розповсюджувати та/або змінювати цей документ на умовах ліцензії GNU Free Documentation License (GFDL), версії 1.1 або будь-якої старшої версії, що опублікована Free Software Foundation без інваріантних розділів, тексту титульної сторінки, та тексту фінальної сторінки. Копію GFDL можна знайти <ulink url="help:fdl" type="help">за адресою</ulink> або у файлі COPYING-DOCS, що постачається з цією довідкою.</para>
 <para>Ця довідка є частиною збірки документації GNOME, що постачається на умовах ліцензії GFDL. Якщо ви бажаєте розповсюджувати її окремо від збірки, ви можете це робити, якщо додасте копію ліцензії до документу, як описано у розділі 6 цієї ліцензії.</para>
 <para>Більшість назв, що використовуються компаніями для розповсюдження їх продуктів та послуг є торговими марками. Якщо такі назви зустрічаються у документації з GNOME та учасникам проекту документування GNOME відомо, що вони є торговими марками, тоді ці назви пишуться великими літерами або починаються з великої літери.</para>
-<para lang="en">
-DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS OF 
-THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT:  	  
-<orderedlist><listitem>
-<para lang="en">
-DOCUMENT IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER 
-EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE 
-DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS MERCHANTABLE,
-FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE RISK AS TO THE 
-QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR MODIFIED VERSION OF THE 
-DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT,                     YOU (NOT THE INITIAL
-WRITER, AUTHOR OR ANY CONTRIBUTOR) ASSUME THE COST OF
-ANY NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER
-OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS    
-LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED              
-VERSION OF THE DOCUMENT IS AUTHORIZED HEREUNDER                    
-EXCEPT UNDER THIS DISCLAIMER; AND
-</para>
+<para>ДОКУМЕНТ ТА ЗМІНЕНІ ВЕРСІЇ ЦЬОГО ДОКУМЕНТУ ПОСТАЧАЮТЬСЯ НА УМОВАХ ВІЛЬНОЇ ЛІЦЕНЗІЇ ДЛЯ ДОКУМЕНТАЦІЇ GNU З ПОДАЛЬШИМ РОЗУМІННЯМ ЩО: <orderedlist><listitem>
+<para>ДОКУМЕНТ НАДАЄТЬСЯ "ЯК Є", БЕЗ БУДЬ-ЯКИХ ГАРАНТІЇ, ЯВНИХ ЧИ НЕЯВНИХ, ВКЛЮЧАЮЧИ, АЛЕ НЕ ОБМЕЖУЮЧИСЬ, ГАРАНТІЙ ЩО ЦЕЙ ДОКУМЕНТ ЧИ ЗМІНЕНА ВЕРСІЯ ДОКУМЕНТА ВІЛЬНІ ВІД ДЕФЕКТІВ, ПРИДАТНІ ДО ПРОДАЖУ, ВІДПОВІДАЮТЬ ПЕВНІЙ МЕТІ АБО НЕ ПОРУШУЮТЬ ЧИЇСЬ ПРАВА. ВЕСЬ РИЗИК ЗА ЯКІСТЬ, ТОЧНІСТЬ, ТА ЧИННІСТЬ ЦЬОГО ДОКУМЕНТУ АБО ЙОГО ЗМІНЕНИХ ВЕРСІЙ ЛЕЖИТЬ НА ВАС.  ЯКЩО БУДЬ-ЯКИЙ ДОКУМЕНТ ЧИ ЗМІНЕНА ВЕРСІЯ БУДУТЬ ВИЗНАНІ ДЕФЕКТНИМИ У БУДЬ-ЯКОМУ ВІДНОШЕННІ, ВИ (НЕ ПОЧАТКОВИЙ УКЛАДАЧ, АВТОР АБО БУДЬ-ЯКИЙ СПІВАВТОР) БЕРЕТЕ НА СЕБЕ ВИТРАТИ ЗА БУДЬ-ЯКЕ НЕОБХІДНЕ ОБСЛУГОВУВАННЯ, РЕМОНТ ЧИ ВИПРАВЛЕННЯ. ЦЯ ВІДМОВА ВІД ГАРАНТІЙ СКЛАДАЄ ВАЖЛИВУ ЧАСТИНУ ЦІЄЇ ЛІЦЕНЗІЇ. НЕ ДОПУСКАЄТЬСЯ ВИКОРИСТАННЯ ЦЬОГО ДОКУМЕНТУ АБО ЙОГО ЗМІНЕНОЇ ВЕРСІЇ БЕЗ ПРИЙНЯТТЯ ЦІЄЇ ВІДМОВИ; ТА</para>
 </listitem>
 <listitem>
-<para lang="en">UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER
-IN TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE,
-SHALL THE AUTHOR, INITIAL WRITER, ANY CONTRIBUTOR,
-OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION
- OF THE DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH   
-PARTIES, BE LIABLE TO ANY PERSON FOR ANY             
-DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR         
-CONSEQUENTIAL DAMAGES OF ANY CHARACTER                     
-  INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF
-GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION,
-OR ANY AND ALL OTHER DAMAGES OR LOSSES ARISING OUT
-OF OR RELATING TO USE OF THE DOCUMENT AND MODIFIED
-VERSIONS OF THE DOCUMENT, EVEN IF SUCH PARTY SHALL
-HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES.
-</para>
+<para>НІ ЗА ЯКИХ ОБСТАВИН ТА ЗА БУДЬ-ЯКОГО ЗАКОНОДАВСТВА, ЧИ ТО ГРОМАДЯНСЬКОЇ ВІДПОВІДАЛЬНОСТІ (ВКЛЮЧАЮЧИ ХАЛАТНІСТЬ), ДОГОВОРУ, ЧИ ЧОГОСЬ ІНШОГО, АВТОР, ПОЧАТКОВИЙ УКЛАДАЧ, БУДЬ-ЯКИЙ СПІВАВТОР, АБО ДИСТРИБ'ЮТОР ДОКУМЕНТУ ЧИ ЗМІНЕНОЇ ВЕРСІЇ ДОКУМЕНТУ, АБО БУДЬ-ЯКИЙ ПОСТАЧАЛЬНИК БУДЬ-ЯКОЇ З ЦИХ СТОРІН, НЕ НЕСЕ ВІДПОВІДАЛЬНІСТЬ ПЕРЕД БУДЬ-ЯКОЮ ОСОБОЮ ЗА БУДЬ-ЯКІ ПРЯМІ, НЕПРЯМІ, ОСОБЛИВІ, ВИПАДКОВІ, АБО ІСТОТНІ ЗБИТКИ БУДЬ-ЯКОГО ХАРАКТЕРУ ВКЛЮЧАЮЧИ, АЛЕ НЕ ОБМЕЖУЮЧИСЬ, ЗБИТКАМИ ВІД ВТРАТИ ПРЕСТИЖУ, ЗУПИНКИ РОБОТИ, ЗБОЇВ АБО НЕСПРАВНОСТЕЙ КОМП'ЮТЕРА, АБО БУДЬ-ЯКІ ІНШІ ЗБИТКИ АБО ВТРАТИ ЩО ВИНИКЛИ БЕЗВІДНОСНО АБО ВНАСЛІДОК ВИКОРИСТАННЯ ЦЬОГО ДОКУМЕНТУ ТА ЗМІНЕНИХ ВЕРСІЙ ЦЬОГО ДОКУМЕНТУ, НАВІТЬ ЯКЩО ЦІ СТОРОНИ, МОЖЛИВО, БУЛИ ПРОІНФОРМОВАНІ ПРО МОЖЛИВІСТЬ ТАКИХ ЗБИТКІВ.</para>
 </listitem>
-</orderedlist> 	
-</para>
+</orderedlist></para>
 </legalnotice>
 
 
@@ -109,30 +58,9 @@ HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES.
      any of this. -->
 
 	 <authorgroup> 
-		<author lang="en"> 
-		  <firstname>Paul </firstname> 
-		  <surname> Cutler</surname> 
-		  <affiliation> 
-			 <orgname>GNOME Documentation Project</orgname> 
-			 <address> <email>pcutler@gnome.org</email> </address> 
-		  </affiliation> 
-		</author> 
-		<author lang="en"> 
-		  <firstname>Sun </firstname> 
-		  <surname>Microsystems</surname> 
-		  <affiliation> 
-			 <orgname>GNOME Documentation Project</orgname> 
-			 <address/> 
-		  </affiliation> 
-		</author> 
-		<author lang="en"> 
-		  <firstname>Dan </firstname> 
-		  <surname> Mueth</surname> 
-		  <affiliation> 
-			 <orgname>GNOME Documentation Project</orgname> 
-			 <address> <email>d-mueth@uchicago.edu</email> </address> 
-		  </affiliation> 
-		</author> 
+		<author><firstname>Paul</firstname> <surname>Cutler</surname> <affiliation> <orgname>Проєкт з документування GNOME</orgname> <address> <email>pcutler@gnome.org</email> </address> </affiliation></author> 
+		<author><firstname>Sun </firstname> <surname>Microsystems</surname> <affiliation> <orgname>Проєкт з документування GNOME</orgname> <address/> </affiliation></author> 
+		<author><firstname>Dan </firstname> <surname> Mueth</surname> <affiliation> <orgname>Проєкт з документування GNOME</orgname> <address> <email>d-mueth@uchicago.edu</email> </address> </affiliation></author> 
       <!-- This is appropriate place for other contributors: translators,
            maintainers,  etc. Commented out by default.
            <othercredit role="translator">
@@ -152,93 +80,82 @@ HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES.
   
 	 <revhistory>
 	 
-		<revision lang="en"> 
-		  <revnumber>Clock Applet Manual V2.7</revnumber> 
-		  <date>January 2010</date> 
-		  <revdescription> 
-			 <para role="author" lang="en">Paul Cutler</para> 
-			 <para role="publisher" lang="en">GNOME Documentation Project</para> 
-		  </revdescription> 
-		</revision>
-		<revision lang="en"> 
-		  <revnumber>Clock Applet Manual V2.6</revnumber> 
-		  <date>January 2010</date> 
-		  <revdescription> 
-			 <para role="author" lang="en">Paul Cutler</para> 
-			 <para role="publisher" lang="en">GNOME Documentation Project</para> 
-		  </revdescription> 
-		</revision>
-		<revision lang="en"> 
-		  <revnumber>Clock Applet Manual V2.5</revnumber> 
-		  <date>February 2004</date> 
-		  <revdescription> 
-			 <para role="author" lang="en">Sun Microsystems</para> 
-			 <para role="publisher" lang="en">GNOME Documentation Project</para> 
-		  </revdescription> 
-		</revision>
-		<revision lang="en"> 
-		  <revnumber>Clock Applet Manual V2.4</revnumber> 
-		  <date>September 2003</date> 
-		  <revdescription> 
-			 <para role="author" lang="en">Sun Microsystems</para> 
-			 <para role="publisher" lang="en">GNOME Documentation Project</para> 
-		  </revdescription> 
-		</revision>
-		<revision lang="en"> 
-		  <revnumber>Clock Applet Manual V2.3</revnumber> 
-		  <date>January 2003</date> 
-		  <revdescription> 
-			 <para role="author" lang="en">Sun Microsystems</para> 
-			 <para role="publisher" lang="en">GNOME Documentation Project</para> 
-		  </revdescription> 
-		</revision>
-		<revision lang="en"> 
-		  <revnumber>Clock Applet Manual V2.2</revnumber> 
-		  <date>August 2002</date> 
-		  <revdescription> 
-			 <para role="author" lang="en">Sun Microsystems</para> 
-			 <para role="publisher" lang="en">GNOME Documentation Project</para> 
-		  </revdescription> 
-		</revision>
-		<revision lang="en"> 
-		  <revnumber>Clock Applet Manual V2.1</revnumber> 
-		  <date>June 2002</date> 
-		  <revdescription> 
-			 <para role="author" lang="en">Sun Microsystems</para> 
-			 <para role="publisher" lang="en">GNOME Documentation Project</para> 
-		  </revdescription> 
-		</revision>
-		<revision lang="en"> 
-		  <revnumber>Clock Applet Manual V2.0</revnumber> 
-		  <date>March 2002</date> 
-		  <revdescription> 
-			 <para role="author" lang="en">Sun Microsystems</para> 
-			 <para role="publisher" lang="en">GNOME Documentation Project</para> 
-		  </revdescription> 
-		</revision> 
-		<revision lang="en"> 
-		  <revnumber>Clock Applet Manual</revnumber> 
-		  <date>April 2000</date> 
-		  <revdescription> 
-			 <para role="author" lang="en">Dan Mueth
-				<email>d-mueth@uchicago.edu</email></para> 
-			 <para role="publisher" lang="en">GNOME Documentation Project</para> 
-		  </revdescription> 
-		</revision> 
+		<revision><revnumber>Підручник з аплету «Годинник» версії 2.7</revnumber> <date>січень 2010 року</date> <revdescription> 
+			 <para role="author">Paul Cutler</para> 
+			 <para role="publisher">Проект документування GNOME</para> 
+		  </revdescription></revision>
+		<revision><revnumber>Підручник з аплету «Годинник» версії 2.6</revnumber> <date>січень 2010 року</date> <revdescription> 
+			 <para role="author">Paul Cutler</para> 
+			 <para role="publisher">Проект документування GNOME</para> 
+		  </revdescription></revision>
+		<revision><revnumber>Підручник з аплету «Годинник» версії 2.5</revnumber> <date>лютий 2004 року</date> <revdescription> 
+			 <para role="author">Sun Microsystems</para> 
+			 <para role="publisher">Проект документування GNOME</para> 
+		  </revdescription></revision>
+		<revision><revnumber>Підручник з аплету «Годинник» версії 2.4</revnumber> <date>вересень 2003 року</date> <revdescription> 
+			 <para role="author">Sun Microsystems</para> 
+			 <para role="publisher">Проект документування GNOME</para> 
+		  </revdescription></revision>
+		<revision><revnumber>Підручник з аплету «Годинник» версії 2.3</revnumber> <date>січень 2003 року</date> <revdescription> 
+			 <para role="author">Sun Microsystems</para> 
+			 <para role="publisher">Проект документування GNOME</para> 
+		  </revdescription></revision>
+		<revision><revnumber>Підручник з аплету «Годинник» версії 2.2</revnumber> <date>серпень 2002 року</date> <revdescription> 
+			 <para role="author">Sun Microsystems</para> 
+			 <para role="publisher">Проект документування GNOME</para> 
+		  </revdescription></revision>
+		<revision><revnumber>Підручник з аплету «Годинник» версії 2.1</revnumber> <date>червень 2002 року</date> <revdescription> 
+			 <para role="author">Sun Microsystems</para> 
+			 <para role="publisher">Проект документування GNOME</para> 
+		  </revdescription></revision>
+		<revision><revnumber>Підручник з аплету «Годинник» версії 2.0</revnumber> <date>березень 2002 року</date> <revdescription> 
+			 <para role="author">Sun Microsystems</para> 
+			 <para role="publisher">Проект документування GNOME</para> 
+		  </revdescription></revision> 
+		<revision><revnumber>Підручник з аплету «Годинник»</revnumber> <date>квітень 2000 року</date> <revdescription> 
+			 <para role="author">Dan Mueth <email>d-mueth@uchicago.edu</email></para> 
+			 <para role="publisher">Проект документування GNOME</para> 
+		  </revdescription></revision> 
 	 </revhistory> 
 	 <releaseinfo>У цьому посібнику описується аплет Годинник версії 2.5.3.1.</releaseinfo> 
 	 <legalnotice> 
 		<title>Зворотний зв'язок</title> 
-		<para lang="en"> To report a bug or make a suggestion regarding the Clock applet or this manual, follow the directions in the <ulink url="help:gnome-feedback" type="help">GNOME Feedback Page</ulink>. </para>
+		<para>Щоб сповістити про помилку або внести пропозицію відносно аплету Годинник або цієї довідки, дотримуйтесь інструкцій на сторінці <ulink url="help:gnome-feedback" type="help">Зворотний зв'язок GNOME</ulink>.</para>
 		
 	 </legalnotice> 
 	 <abstract role="description">
 	 	<para>Аплет <application>Годинник</application> показує дату та час, а під час натискання на нього вказівником миші, ще й календар. <application>Годинник</application> можна налаштувати до показу секунд або часу у 12 чи 24 годинному форматі.</para>
 	 </abstract>
+  
+    <othercredit class="translator">
+      <personname>
+        <firstname>Максим Дзюманенко</firstname>
+      </personname>
+      <email>dziumanenko@gmail.com</email>
+    </othercredit>
+    <copyright>
+      
+        <year>2003</year>
+      
+        <year>2007</year>
+      
+      <holder>Максим Дзюманенко</holder>
+    </copyright>
+  
+    <othercredit class="translator">
+      <personname>
+        <firstname>Сергій Гаврилов</firstname>
+      </personname>
+      <email>sergiovana@bigmir.net</email>
+    </othercredit>
+    <copyright>
+      
+        <year>2010.</year>
+      
+      <holder>Сергій Гаврилов</holder>
+    </copyright>
   </articleinfo> 
-  <indexterm lang="en"> 
-	 <primary>Clock</primary> 
-  </indexterm>  
+  <indexterm><primary>Годинник</primary></indexterm>  
 <!-- ============= Document Body ============================= -->
 
 <!-- ============= Introduction ============================== -->
@@ -250,13 +167,7 @@ HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES.
 	 <figure id="clock-fig"> 
 		<title>Аплет Годинник</title> 
 		<screenshot> 
-		  <mediaobject lang="en"> 
-			 <imageobject><imagedata fileref="figures/clock_applet.png" format="PNG"/> 
-			 </imageobject>
-			 <textobject> 
-				<phrase>Shows Clock applet.</phrase> 
-			 </textobject> 
-		  </mediaobject> 
+		  <mediaobject><imageobject><imagedata fileref="figures/clock_applet.png" format="PNG"/> </imageobject> <textobject> <phrase>Аплет годинника.</phrase> </textobject></mediaobject> 
 		</screenshot> 
 	 </figure> 
     <!-- ==== End of Figure ======================================= -->
@@ -309,14 +220,10 @@ HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES.
 			<para>Виберіть один з наступних пунктів контекстного меню аплету:</para>
 			<itemizedlist>
 				<listitem>
-					<para lang="en">
-					<guimenuitem>Copy Time</guimenuitem>
-					</para>
+					<para><guimenuitem>Копіювати час</guimenuitem></para>
 				</listitem>
 				<listitem>
-					<para lang="en">
-					<guimenuitem>Copy Date</guimenuitem>
-					</para>
+					<para><guimenuitem>Копіювати дату</guimenuitem></para>
 				</listitem>
 			</itemizedlist>
 		</listitem>
@@ -324,9 +231,7 @@ HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES.
 			<para>Вкажіть місце у програмі, де ви бажаєте вставити час.</para>
 		</listitem>
 		<listitem>
-			<para lang="en">
-			Choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Paste</guimenuitem> </menuchoice> or middle-click to insert the item.
-			</para>
+			<para>Виберіть <menuchoice><guimenu>Зміни</guimenu><guimenuitem>Вставити</guimenuitem></menuchoice> або клацніть середньою кнопкою миші.</para>
 		</listitem>
 		</orderedlist>
 	</sect2>
@@ -342,7 +247,7 @@ HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES.
 			<para>Введіть пароль користувача <literal>root</literal>, потім натисніть <guibutton>Гаразд</guibutton>.</para>
 	</listitem>
 	<listitem>
-			<para>Запуститься системна утиліта встановлення дати та часу. Користуючись утилітою встановіть дату та час.</para>
+			<para>Аплет <application>Годинник</application> запустить системну утиліту встановлення дати та часу. Користуючись утилітою, встановіть дату та час.</para>
 	</listitem>
 	</orderedlist>
 	</sect2>
@@ -360,43 +265,42 @@ HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES.
 	<title>Загальні параметри</title>	
 	<variablelist> 
 		  <varlistentry> 
-			 <term lang="en"><guilabel>Clock Format</guilabel></term> 
+			 <term><guilabel>Формат годинника</guilabel></term> 
 			 <listitem> 
 			 <para>Виберіть один з таких параметрів:</para> 
 			 <itemizedlist>
 			 <listitem>
-			 <para lang="en"><guilabel>12 hour</guilabel></para>
+			 <para><guilabel>12-годинний</guilabel></para>
 			 <para>Показує час у 12-годинному форматі.</para>
 			 <note><para>Цей параметр не виводиться, якщо для вашої мови не використовується 12-годинний формат.</para></note>
 			 </listitem>
 			 <listitem>
-			 <para lang="en"><guilabel>24 hour</guilabel></para>
+			 <para><guilabel>24-годинний</guilabel></para>
 			 <para>Показує час у форматі від 00.00 до 24.00.</para>
 			 </listitem>
 			 </itemizedlist>
 			 </listitem> 
 		  </varlistentry>
 		  <varlistentry> 
-			 <term lang="en"><guilabel>Show the date</guilabel></term>
+			 <term><guilabel>Показувати дату</guilabel></term>
 			 <listitem> 
 			 <para>Виберіть цей параметр, щоб аплет показував дату.</para> 
 			 </listitem> 
 		  </varlistentry> 
 		  <varlistentry> 
-			 <term lang="en"><guilabel>Show seconds</guilabel></term>
+			 <term><guilabel>Показувати секунди</guilabel></term>
 			 <listitem> 
 			 <para>Виберіть цей параметр, щоб аплет показував час з секундами.</para> 
 			 </listitem> 
 		  </varlistentry>
 		  <varlistentry> 
-			 <term lang="en"><guilabel>Show the weather</guilabel></term>
+			 <term><guilabel>Показувати погоду</guilabel></term>
 			 <listitem> 
-			 <para lang="en">Select this option to display the current weather forecast at your location.
-			The weather will be displayed as an icon for sunny, cloudy, rain or more.</para> 
+			 <para>Виберіть цей параметр, щоб відобразити поточний прогноз погоди у вашому регіоні. Прогноз буде показаний як піктограма для сонячної погоди, хмарної, дощу тощо.</para> 
 			 </listitem> 
 		  </varlistentry>
 		  <varlistentry> 
-			 <term lang="en"><guilabel>Show temperature</guilabel></term>
+			 <term><guilabel>Показувати температуру</guilabel></term>
 			 <listitem> 
 			 <para>Позначте цей параметр, щоб аплет показував температуру у вашому регіоні.</para> 
 			 </listitem> 
@@ -411,7 +315,7 @@ HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES.
 
 	<variablelist> 
 		  <varlistentry> 
-			 <term lang="en"><guilabel>Locations</guilabel></term> 
+			 <term><guilabel>Місця</guilabel></term> 
 			 <listitem> 
 			 <para>Ви можете додати одну або більше адрес та їх місцевий час, який буде відображений в Годиннику. Щоб додати адресу:</para> 
 			 <itemizedlist>
@@ -434,7 +338,7 @@ HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES.
 
 	<variablelist> 
 		  <varlistentry> 
-			 <term lang="en"><guilabel>Weather</guilabel></term> 
+			 <term><guilabel>Погода</guilabel></term> 
 			 <listitem> 
 			 <para>Ви можете вибрати зі спадного списку один з таких варіантів показу одиниць температури:</para> 
 			 <itemizedlist>
@@ -454,15 +358,15 @@ HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES.
 			 </listitem> 
 		  </varlistentry>
 		  <varlistentry> 
-			 <term lang="en"><guilabel>Wind speed unit</guilabel></term> 
+			 <term><guilabel>Одиниця швидкості вітру</guilabel></term> 
 			 <listitem> 
 			 <para>Ви можете вибрати зі спадного списку один з таких варіантів показу одиниць швидкості вітру:</para> 
 			 <itemizedlist>
 			 <listitem>
-			 <para lang="en"><guilabel>Beaufort scale</guilabel></para>
+			 <para><guilabel>Шкала Бофорта</guilabel></para>
 			</listitem>
 			 <listitem>
-			 <para lang="en"><guilabel>Knots</guilabel></para>
+			 <para><guilabel>вузли</guilabel></para>
 			</listitem>
 			 <listitem>
 			 <para><guilabel>миль/год</guilabel> (миль на годину)</para>
@@ -471,7 +375,7 @@ HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES.
 			 <para><guilabel>км/год</guilabel> (кілометрів на годину)</para>
 			</listitem>
 			 <listitem>
-			 <para lang="en"><guilabel>m/s</guilabel> (meters per second)</para>
+			 <para><guilabel>м/с</guilabel> (метрів в секунду)</para>
 			</listitem>
 			 <listitem>
 			 <para><guilabel>Типово</guilabel> Типове значення для вашого регіону.</para>

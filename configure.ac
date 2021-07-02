@@ -3,7 +3,7 @@ dnl Define version info
 dnl **************************************************************************
 
 m4_define([gp_major_version], [3])
-m4_define([gp_minor_version], [30])
+m4_define([gp_minor_version], [38])
 m4_define([gp_micro_version], [0])
 m4_define([gp_version], [gp_major_version.gp_minor_version.gp_micro_version])
 
@@ -18,7 +18,7 @@ dnl **************************************************************************
 dnl Initialize autoconf
 dnl **************************************************************************
 
-AC_INIT([gnome-panel], [gp_version], [gp_bugzilla_url])
+AC_INIT([gnome-panel], gp_version, [gp_bugzilla_url])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
@@ -78,7 +78,8 @@ dnl Internationalization
 dnl **************************************************************************
 
 AM_GNU_GETTEXT([external])
-AM_GNU_GETTEXT_VERSION([0.19.4])
+AM_GNU_GETTEXT_VERSION([0.19.8])
+AM_GNU_GETTEXT_REQUIRE_VERSION([0.19.8])
 
 GETTEXT_PACKAGE=gnome-panel
 AC_SUBST([GETTEXT_PACKAGE])
@@ -91,19 +92,29 @@ dnl **************************************************************************
 
 GLIB_GSETTINGS
 
-# Before making a release, the LT_VERSION string should be modified.
-# The string is of the form C:R:A.
-# - If interfaces have been changed or added, but binary compatibility has
-#   been preserved, change to C+1:0:A+1
-# - If binary compatibility has been broken (eg removed or changed interfaces)
-#   change to C+1:0:0
-# - If the interface is the same as the previous version, change to C:R+1:A
+dnl **************************************************************************
+dnl Library version information
+dnl **************************************************************************
 
-LIB_PANEL_APPLET_LT_VERSION=3:0:0
-AC_SUBST(LIB_PANEL_APPLET_LT_VERSION)
+dnl Before making a release, the library version should be modified. Follow
+dnl these instructions sequentially:
+dnl 1. If the library source code has changed at all since the last update,
+dnl    then increment lt_revision.
+dnl 2. If any interfaces have been added, removed, or changed since the last
+dnl    update, increment lt_current, and set lt_revision to 0.
+dnl 3. If any interfaces have been added since the last public release, then
+dnl    increment lt_age.
+dnl 4. If any interfaces have been removed or changed since the last public
+dnl    release, then set lt_age to 0.
 
-LIBGNOME_PANEL_LT_VERSION=0:0:0
-AC_SUBST([LIBGNOME_PANEL_LT_VERSION])
+m4_define([lt_current], [1])
+m4_define([lt_revision], [0])
+m4_define([lt_age], [1])
+m4_define([lt_version_info], [lt_current:lt_revision:lt_age])
+
+AC_SUBST([LT_VERSION_INFO], [lt_version_info])
+
+dnl **************************************************************************
 
 AC_ARG_ENABLE([documentation],
 	AS_HELP_STRING([--enable-documentation], [enable man pages and HTML]),
@@ -117,11 +128,11 @@ GLIB_REQUIRED=2.45.3
 GTK_REQUIRED=3.22.0
 LIBWNCK_REQUIRED=3.4.6
 LIBGNOME_MENU_REQUIRED=3.7.90
-LIBECAL_REQUIRED=3.5.3
+LIBECAL_REQUIRED=3.33.2
 LIBEDATASERVER_REQUIRED=3.5.3
 LIBSYSTEMD_REQUIRED=230
 CAIRO_REQUIRED=1.0.0
-GWEATHER_REQUIRED=3.17.1
+GWEATHER_REQUIRED=3.28.0
 DCONF_REQUIRED=0.13.4
 XRANDR_REQUIRED=1.3.0
 
@@ -142,6 +153,7 @@ PKG_CHECK_MODULES([PANEL], [
   libgnome-menu-3.0 >= $LIBGNOME_MENU_REQUIRED
   dconf >= $DCONF_REQUIRED
   x11
+  xi
   xrandr >= $XRANDR_REQUIRED
 ])
 
@@ -151,18 +163,23 @@ PKG_CHECK_MODULES([LIBGNOME_PANEL], [
   gtk+-3.0 >= $GTK_REQUIRED
 ])
 
-PKG_CHECK_MODULES([LIBPANEL_APPLET], [
-  gtk+-3.0 >= $GTK_REQUIRED
-  cairo-xlib
-  cairo-gobject
-  gio-2.0 >= $GLIB_REQUIRED
+PKG_CHECK_MODULES([ACTION_BUTTON], [
   gio-unix-2.0 >= $GLIB_REQUIRED
+  gtk+-3.0 >= $GTK_REQUIRED
+  libsystemd >= $LIBSYSTEMD_REQUIRED
   x11
 ])
 
 PKG_CHECK_MODULES(FISH, gtk+-3.0 >= $GTK_REQUIRED cairo >= $CAIRO_REQUIRED)
 AC_SUBST(FISH_CFLAGS)
 AC_SUBST(FISH_LIBS)
+
+PKG_CHECK_MODULES([LAUNCHER], [
+  gio-unix-2.0 >= $GLIB_REQUIRED
+  gtk+-3.0 >= $GTK_REQUIRED
+  libgnome-menu-3.0 >= $LIBGNOME_MENU_REQUIRED
+  libsystemd >= $LIBSYSTEMD_REQUIRED
+])
 
 PKG_CHECK_MODULES([MENU], [
   gdm
@@ -196,6 +213,7 @@ AC_CHECK_FUNCS(nl_langinfo)
 PKG_CHECK_MODULES([CLOCK], [
   dconf >= $DCONF_REQUIRED
   gio-2.0 >= $GLIB_REQUIRED
+  gio-unix-2.0 >= $GLIB_REQUIRED
   glib-2.0 >= $GLIB_REQUIRED
   gnome-desktop-3.0 >= $LIBGNOME_DESKTOP_REQUIRED
   gtk+-3.0 >= $GTK_REQUIRED
@@ -213,7 +231,7 @@ AC_MSG_RESULT([$enable_eds])
 CLOCK_EDS_ICONDIR=
 if test "$enable_eds" != "no"; then
     PKG_CHECK_MODULES(CLOCK_EDS,[
-        libecal-1.2 >= $LIBECAL_REQUIRED
+        libecal-2.0 >= $LIBECAL_REQUIRED
         libedataserver-1.2 >= $LIBEDATASERVER_REQUIRED
      ], [have_eds=yes], [have_eds=no])
 
@@ -237,10 +255,6 @@ dnl **************************************************************************
 
 AC_STRUCT_DIRENT_D_TYPE
 
-dnl Applets dir
-AC_SUBST([appletsdir],"\$(datadir)/gnome-panel/applets")
-AC_SUBST([appletsdir_pkgconfig],"\${datadir}/gnome-panel/applets")
-
 dnl gtk-doc stuff
 
 GTK_DOC_CHECK([1.25], [--flavour no-tmpl])
@@ -248,12 +262,6 @@ GTK_DOC_CHECK([1.25], [--flavour no-tmpl])
 dnl yelp-tools stuff
 
 YELP_HELP_INIT
-
-dnl **************************************************************************
-dnl Find zoneinfo directory
-dnl **************************************************************************
-
-AX_ZONEINFO
 
 dnl **************************************************************************
 dnl Process .in files
@@ -276,19 +284,16 @@ AC_CONFIG_FILES([
   data/theme/Makefile
   data/theme/Adwaita/Makefile
   data/theme/HighContrast/Makefile
+  data/theme/Yaru/Makefile
 
   gnome-panel/Makefile
-  gnome-panel/libpanel-applet-private/Makefile
   gnome-panel/libpanel-util/Makefile
 
   libgnome-panel/Makefile
 
-  libpanel-applet/Makefile
-  libpanel-applet/libpanel-applet.pc
-
-  doc/Makefile
-  doc/reference/Makefile
-  doc/reference/libpanel-applet/Makefile
+  docs/Makefile
+  docs/reference/Makefile
+  docs/reference/libgnome-panel/Makefile
 
   help/Makefile
   help/clock/Makefile
@@ -297,9 +302,11 @@ AC_CONFIG_FILES([
   man/Makefile
 
   modules/Makefile
+  modules/action-button/Makefile
   modules/clock/Makefile
   modules/clock/pixmaps/Makefile
   modules/fish/Makefile
+  modules/launcher/Makefile
   modules/menu/Makefile
   modules/notification-area/Makefile
   modules/separator/Makefile

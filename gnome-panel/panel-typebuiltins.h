@@ -20,12 +20,6 @@ GType panel_background_image_style_get_type (void);
 #define PANEL_TYPE_THEME_VARIANT panel_theme_variant_get_type()
 GType panel_theme_variant_get_type (void);
 
-/* --- ../gnome-panel/panel-enums.h --- */
-#define PANEL_TYPE_OBJECT_TYPE panel_object_type_get_type()
-GType panel_object_type_get_type (void);
-#define PANEL_TYPE_ACTION_BUTTON_TYPE panel_action_button_type_get_type()
-GType panel_action_button_type_get_type (void);
-
 /* --- ../gnome-panel/panel-types.h --- */
 #define PANEL_TYPE_SPEED panel_speed_get_type()
 GType panel_speed_get_type (void);

@@ -4,8 +4,7 @@ SUBDIRS = \
 	libgnome-panel \
 	modules \
 	gnome-panel \
-	libpanel-applet \
-	doc \
+	docs \
 	help \
 	data \
 	man \
@@ -19,6 +18,7 @@ AM_DISTCHECK_CONFIGURE_FLAGS = \
 EXTRA_DIST = \
 	COPYING-DOCS \
 	HACKING \
+	README.md \
 	$(NULL)
 
 MAINTAINERCLEANFILES = \

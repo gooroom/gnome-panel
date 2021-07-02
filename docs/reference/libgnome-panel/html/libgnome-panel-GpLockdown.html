@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GpLockdown: GNOME Panel Reference Manual</title>
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
+<link rel="home" href="index.html" title="GNOME Panel Reference Manual">
+<link rel="up" href="ch01.html" title="API Reference">
+<link rel="prev" href="GpImageMenuItem.html" title="GpImageMenuItem">
+<link rel="next" href="libgnome-panel-Module.html" title="Module">
+<meta name="generator" content="GTK-Doc V1.99 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts">
+<a href="#" class="shortcut">Top</a><span id="nav_description">  <span class="dim">|</span> 
+                  <a href="#libgnome-panel-GpLockdown.description" class="shortcut">Description</a></span>
+</td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="GpImageMenuItem.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="libgnome-panel-Module.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="refentry">
+<a name="libgnome-panel-GpLockdown"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libgnome-panel-GpLockdown.top_of_page"></a>GpLockdown</span></h2>
+<p>GpLockdown — lockdown enum</p>
+</td>
+<td class="gallery_image" valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsect1">
+<a name="libgnome-panel-GpLockdown.other"></a><h2>Types and Values</h2>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="other_proto_type">
+<col class="other_proto_name">
+</colgroup>
+<tbody><tr>
+<td class="datatype_keyword">enum</td>
+<td class="function_name"><a class="link" href="libgnome-panel-GpLockdown.html#GpLockdownFlags" title="enum GpLockdownFlags">GpLockdownFlags</a></td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="libgnome-panel-GpLockdown.includes"></a><h2>Includes</h2>
+<pre class="synopsis">#include &lt;libgnome-panel/gp-lockdown.h&gt;
+</pre>
+</div>
+<div class="refsect1">
+<a name="libgnome-panel-GpLockdown.description"></a><h2>Description</h2>
+<p>A <a class="link" href="libgnome-panel-GpLockdown.html#GpLockdownFlags" title="enum GpLockdownFlags"><span class="type">GpLockdownFlags</span></a>.</p>
+</div>
+<div class="refsect1">
+<a name="libgnome-panel-GpLockdown.functions_details"></a><h2>Functions</h2>
+<p></p>
+</div>
+<div class="refsect1">
+<a name="libgnome-panel-GpLockdown.other_details"></a><h2>Types and Values</h2>
+<div class="refsect2">
+<a name="GpLockdownFlags"></a><h3>enum GpLockdownFlags</h3>
+<p>Flags indicating active lockdowns.</p>
+<div class="refsect3">
+<a name="GpLockdownFlags.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="300px" class="enum_members_name">
+<col class="enum_members_description">
+<col width="200px" class="enum_members_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="enum_member_name"><p><a name="GP-LOCKDOWN-FLAGS-NONE:CAPS"></a>GP_LOCKDOWN_FLAGS_NONE</p></td>
+<td class="enum_member_description">
+<p>No flags set.</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="GP-LOCKDOWN-FLAGS-APPLET:CAPS"></a>GP_LOCKDOWN_FLAGS_APPLET</p></td>
+<td class="enum_member_description">
+<p>Applet is disabled.</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="GP-LOCKDOWN-FLAGS-FORCE-QUIT:CAPS"></a>GP_LOCKDOWN_FLAGS_FORCE_QUIT</p></td>
+<td class="enum_member_description">
+<p>Force quit is disabled.</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="GP-LOCKDOWN-FLAGS-LOCKED-DOWN:CAPS"></a>GP_LOCKDOWN_FLAGS_LOCKED_DOWN</p></td>
+<td class="enum_member_description">
+<p>Panel is lockded down.</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="GP-LOCKDOWN-FLAGS-COMMAND-LINE:CAPS"></a>GP_LOCKDOWN_FLAGS_COMMAND_LINE</p></td>
+<td class="enum_member_description">
+<p>Command line is disabled.</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="GP-LOCKDOWN-FLAGS-LOCK-SCREEN:CAPS"></a>GP_LOCKDOWN_FLAGS_LOCK_SCREEN</p></td>
+<td class="enum_member_description">
+<p>Lock screen is disabled.</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="GP-LOCKDOWN-FLAGS-LOG-OUT:CAPS"></a>GP_LOCKDOWN_FLAGS_LOG_OUT</p></td>
+<td class="enum_member_description">
+<p>Log out is disabled.</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="GP-LOCKDOWN-FLAGS-USER-SWITCHING:CAPS"></a>GP_LOCKDOWN_FLAGS_USER_SWITCHING</p></td>
+<td class="enum_member_description">
+<p>User switching is disabled.</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>Generated by GTK-Doc V1.99</div>
+</body>
+</html>

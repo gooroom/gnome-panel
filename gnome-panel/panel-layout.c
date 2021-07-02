@@ -38,7 +38,6 @@
 #include "panel-object-loader.h"
 #include "panel-schemas.h"
 #include "panel-toplevel.h"
-#include "panel-util.h"
 
 #include "panel-layout.h"
 
@@ -46,7 +45,7 @@ static GSettings *layout_settings = NULL;
 
 #define PANEL_LAYOUT_ERROR panel_layout_error_quark ()
 
-#define PANEL_LAYOUT_DEFAULT_LAYOUT_FILE "panel-default-layout.layout"
+#define DEFAULT_LAYOUT_FILE "default.layout"
 #define PANEL_LAYOUT_INSTANCE_CONFIG_SUBPATH "@instance-config/"
 
 static void panel_layout_load_toplevel    (const char *toplevel_id);
@@ -220,7 +219,6 @@ panel_layout_find_free_id (const char *id_list_key,
                         if (g_strcmp0 (unique_id,
                                        existing_dirs[i]) == 0)
                                 existing = TRUE;
-                                break;
                 }
 
                 if (existing)
@@ -323,14 +321,14 @@ panel_layout_maybe_append_object_instance_config (GKeyFile    *keyfile,
 
                 g_strfreev (tokens);
         } else {
-                char *key;
+                char *tmp;
 
-                key = g_strdup_printf ("%s%s/%s%s",
+                tmp = g_strdup_printf ("%s%s/%s%s",
                                        path_prefix, unique_id,
                                        PANEL_LAYOUT_OBJECT_CONFIG_SUFFIX,
                                        keyname);
-                panel_dconf_write_sync (key, variant, NULL);
-                g_free (key);
+                panel_dconf_write_sync (tmp, variant, NULL);
+                g_free (tmp);
         }
 
         g_variant_unref (variant);
@@ -543,7 +541,7 @@ panel_layout_append_group (GKeyFile    *keyfile,
         return FALSE;
 }
 
-void
+static void
 panel_layout_append_from_file (const char *layout_file)
 {
         GError    *error = NULL;
@@ -642,17 +640,17 @@ panel_layout_toplevel_create (GdkScreen *screen)
 }
 
 void
-panel_layout_object_create (PanelObjectType      type,
-                            const char          *type_detail,
+panel_layout_object_create (const char          *iid,
                             const char          *toplevel_id,
                             PanelObjectPackType  pack_type,
-                            int                  pack_index)
+                            int                  pack_index,
+                            GVariant            *initial_settings)
 {
         char *id;
 
-        id = panel_layout_object_create_start (type, type_detail,
+        id = panel_layout_object_create_start (iid,
                                                toplevel_id, pack_type, pack_index,
-                                               NULL);
+                                               initial_settings);
 
         if (!id)
                 return;
@@ -660,27 +658,6 @@ panel_layout_object_create (PanelObjectType      type,
         panel_layout_object_create_finish (id);
 
         g_free (id);
-}
-
-GSettings *
-panel_layout_get_instance_settings (GSettings  *settings_object,
-                                    const char *schema)
-{
-        char      *path;
-        char      *path_instance;
-        GSettings *settings_instance;
-
-        g_return_val_if_fail (G_IS_SETTINGS (settings_object), NULL);
-
-        g_object_get (settings_object, "path", &path, NULL);
-        path_instance = g_strdup_printf ("%s%s", path,
-                                         PANEL_LAYOUT_OBJECT_CONFIG_SUFFIX);
-        g_free (path);
-
-        settings_instance = g_settings_new_with_path (schema, path_instance);
-        g_free (path_instance);
-
-        return settings_instance;
 }
 
 static char *
@@ -714,23 +691,17 @@ panel_layout_object_generate_id (const char *iid)
 }
 
 char *
-panel_layout_object_create_start (PanelObjectType       type,
-                                  const char           *type_detail,
+panel_layout_object_create_start (const char           *iid,
                                   const char           *toplevel_id,
                                   PanelObjectPackType   pack_type,
                                   int                   pack_index,
-                                  GSettings           **settings)
+                                  GVariant             *initial_settings)
 {
         char      *unique_id;
         char      *path;
         GSettings *settings_object;
-        char      *iid;
         char      *try_id;
 
-        if (settings)
-                *settings = NULL;
-
-        iid = panel_object_type_to_iid (type, type_detail);
         if (!iid)
                 return NULL;
 
@@ -757,13 +728,20 @@ panel_layout_object_create_start (PanelObjectType       type,
                             PANEL_OBJECT_PACK_INDEX_KEY,
                             pack_index);
 
-        g_free (try_id);
-        g_free (iid);
+        if (initial_settings != NULL) {
+                GSettings *tmp;
 
-        if (settings)
-                *settings = settings_object;
-        else
-                g_object_unref (settings_object);
+                path = g_strdup_printf ("%s%s/initial-settings/", PANEL_LAYOUT_OBJECT_PATH, unique_id);
+                tmp = g_settings_new_with_path ("org.gnome.gnome-panel.applet.initial-settings", path);
+                g_free (path);
+
+                g_settings_set_value (tmp, "settings", initial_settings);
+                g_object_unref (tmp);
+        }
+
+        g_free (try_id);
+
+        g_object_unref (settings_object);
 
         return unique_id;
 }
@@ -1067,17 +1045,44 @@ panel_layout_load_object (const char *object_id)
 static char *
 panel_layout_get_default_layout_file (void)
 {
-        char *user_file;
+        GSettings *settings;
+        char *default_layout;
+        char *layout_name;
+        char *filename;
 
-        user_file = panel_util_get_from_personal_path (PANEL_LAYOUT_DEFAULT_LAYOUT_FILE);
+        settings = g_settings_new ("org.gnome.gnome-panel.general");
+        default_layout = g_settings_get_string (settings, "default-layout");
+        g_object_unref (settings);
 
-        if (g_file_test (user_file, G_FILE_TEST_IS_REGULAR))
-                return user_file;
+        layout_name = g_strdup_printf ("%s.layout", default_layout);
+        g_free (default_layout);
 
-        g_free (user_file);
+        filename = g_build_filename (g_get_user_config_dir (),
+                                     "gnome-panel",
+                                     "layouts",
+                                     layout_name,
+                                     NULL);
 
-        return g_build_filename (PANELDATADIR,
-                                 PANEL_LAYOUT_DEFAULT_LAYOUT_FILE,
+        if (g_file_test (filename, G_FILE_TEST_IS_REGULAR)) {
+                g_free (layout_name);
+                return filename;
+        }
+
+        g_free (filename);
+        filename = g_build_filename (LAYOUTSDIR,
+                                     layout_name,
+                                     NULL);
+
+        if (g_file_test (filename, G_FILE_TEST_IS_REGULAR)) {
+                g_free (layout_name);
+                return filename;
+        }
+
+        g_free (layout_name);
+        g_free (filename);
+
+        return g_build_filename (LAYOUTSDIR,
+                                 DEFAULT_LAYOUT_FILE,
                                  NULL);
 }
 

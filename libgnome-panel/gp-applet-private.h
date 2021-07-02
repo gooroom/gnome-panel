@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2001 Sun Microsystems, Inc.
- * Copyright (C) 2016 Alberts Muktupāvels
+ * Copyright (C) 2016-2020 Alberts Muktupāvels
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -27,21 +27,26 @@
 
 G_BEGIN_DECLS
 
-void           gp_applet_set_locked_down (GpApplet        *applet,
-                                          gboolean         locked_down);
+void           gp_applet_set_locked_down   (GpApplet        *applet,
+                                            gboolean         locked_down);
 
-void           gp_applet_set_orientation (GpApplet        *applet,
-                                          GtkOrientation   orientation);
+void           gp_applet_set_lockdowns     (GpApplet        *applet,
+                                            GpLockdownFlags  lockdowns);
 
-void           gp_applet_set_position    (GpApplet        *applet,
-                                          GtkPositionType  position);
+void           gp_applet_set_orientation   (GpApplet        *applet,
+                                            GtkOrientation   orientation);
 
-GpAppletFlags  gp_applet_get_flags       (GpApplet        *applet);
+void           gp_applet_set_position      (GpApplet        *applet,
+                                            GtkPositionType  position);
 
-gint          *gp_applet_get_size_hints  (GpApplet        *applet,
-                                          guint           *n_elements);
+GpAppletFlags  gp_applet_get_flags         (GpApplet        *applet);
 
-GtkWidget     *gp_applet_get_menu        (GpApplet        *applet);
+gint          *gp_applet_get_size_hints    (GpApplet        *applet,
+                                            guint           *n_elements);
+
+GtkWidget     *gp_applet_get_menu          (GpApplet        *applet);
+
+void           gp_applet_remove_from_panel (GpApplet        *self);
 
 G_END_DECLS
 

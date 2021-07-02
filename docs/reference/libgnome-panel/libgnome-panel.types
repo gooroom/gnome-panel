@@ -1,0 +1,3 @@
+gp_applet_get_type
+gp_image_menu_item_get_type
+gp_module_get_type
