@@ -1,0 +1,14 @@
+diff --git a/gnome-panel/panel-applet-frame.c b/gnome-panel/panel-applet-frame.c
+index 60698e9..3ef865f 100644
+--- a/gnome-panel/panel-applet-frame.c
++++ b/gnome-panel/panel-applet-frame.c
+@@ -407,7 +407,8 @@ frame_popup_edit_menu (PanelAppletFrame *self,
+   g_signal_connect (menuitem, "activate", G_CALLBACK (remove_cb), self);
+   gtk_widget_set_sensitive (menuitem, removable);
+
+-  popup_menu (GTK_MENU (menu), self->priv->applet);
++  if (movable)
++    popup_menu (GTK_MENU (menu), self->priv->applet);
+ }
+
+ static void
