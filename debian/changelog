@@ -1,3 +1,10 @@
+gnome-panel (3.38.0-1+grm3u1) unstable; urgency=medium
+
+  [ subin.kim ]
+  * [ea1d9c7f] [Bug:3973] Hide popup edit menu when panel is locked down
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Sun, 27 Feb 2022 14:39:20 +0900
+
 gnome-panel (3.38.0-1) unstable; urgency=medium
 
   * New upstream release.
